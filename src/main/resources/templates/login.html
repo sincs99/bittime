@@ -5,27 +5,62 @@
 
 <head>
   <title>BitTime Login</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+	
+	<table width="200" border="1" align="center">
+  <tbody>
+    <tr>
+      <td>&nbsp;</td>
+      <td><p> <img src="images/Logo_tsp.png" alt="Logo" width="300" height="300" class="img-responsive center-block" th:src="@{/images/Logo_tsp.png}"></p></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+	    <p class="loginTitle">Please Sign in with your given Login credentials if you dont have any Login Data Please contact BitTime Admin</p></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="text" id="user_name" name="user_name" placeholder="User Name"
+           class="form-control"/> <br/></td>
+      <td>&nbsp;</td>
+    </tr>
+	  <tr>
+      <td>&nbsp;</td>
+      <td>    <input type="password" th:placeholder="Password"
+           id="password" name="password" class="form-control"/> <br/></td>
+      <td>&nbsp;</td>
+    </tr>
+	  <tr>
+	  <td>
+		  </td>
+		  <td><form th:action="@{/login}" method="POST" >
+			  </form>
+			  <button name="Submit" value="Login" type="submit"></button>
+		      <button name="Submit" value="Login" type="Submit" th:text="Login"></button>
+		  </td>
+		  <td></td>	  
+	  </tr>
+  </tbody>
+</table>
+
 <form th:action="@{/registration}" method="get">
   <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
 </form>
 
 <div class="container">
-  <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo"/>
-  <form th:action="@{/login}" method="POST" class="form-signin">
-    <h3 class="form-signin-heading" th:text="Welcome"></h3>
+<form th:action="@{/login}" method="POST" class="form-signin">
+    <h3 class="loginTitle" th:text="Welcome"></h3>
     <br/>
 
-    <input type="text" id="user_name" name="user_name" placeholder="User Name"
-           class="form-control"/> <br/>
-    <input type="password" th:placeholder="Password"
-           id="password" name="password" class="form-control"/> <br/>
+    
+
 
     <div align="center" th:if="${param.error}">
       <p style="font-size: 20; color: #FF1C19;">User Name or Password invalid, please verify</p>
