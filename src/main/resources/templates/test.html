@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Test Site</title>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
-  <p>Jeder kann diese site sehen</p>
+<head>
+    <title>TestSite</title>
+
 </head>
 <body>
+<p>Jeder kann diese site sehen im user/test/</p>
+
+<tr th:utext="${messageController}"></tr>
 
 </body>
 </html>
