@@ -3,6 +3,7 @@ package ch.bittime.bittime.mvc.login;
 
 import ch.bittime.bittime.login.User;
 import ch.bittime.bittime.login.UserService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,6 +34,9 @@ public class LoginController {
         return modelAndView;
     }
 
+
+
+
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView createNewUser(User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
@@ -55,13 +59,25 @@ public class LoginController {
     }
 
     @RequestMapping(value="/admin/home", method = RequestMethod.GET)
-    public ModelAndView home(){
+    public ModelAndView adminHome(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         modelAndView.addObject("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+        modelAndView.addObject("adminMessage","Nur für Admin ersichtlich");
         modelAndView.setViewName("admin/home");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/user/home", method = RequestMethod.GET)
+    public ModelAndView userHome(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication userAuth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(userAuth.getName());
+        modelAndView.addObject("userName", "Willkommen zurück "+ user.getUserName() + " / ");
+        modelAndView.addObject("userMessage", "Nur für Standart Benutzer ersichtlich");
+        modelAndView.setViewName("user/home");
         return modelAndView;
     }
 }

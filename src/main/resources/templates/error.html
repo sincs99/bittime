@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>This is an error</title>
+    <title>Registration Form</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<form th:action="@{/login}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
+</form>
+
+<div class="container">
+    <h1>Wilkommen im Benutzerzentrum</h1>
+    <p>
+        Das ist das Benutzerzentrum hier kommt man nur mit Benutzerrechten hin
+    </p>
+</div>
 
 </body>
 </html>
