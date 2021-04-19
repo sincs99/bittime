@@ -15,7 +15,7 @@ public class TestController {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ModelAndView test (){
         ModelAndView modelAndView =new ModelAndView();
-        modelAndView.setViewName("/test");
+        modelAndView.setViewName("/test/test");
         modelAndView.addObject("messageController", "Wilkommen auf dem Testbenutzerprofil");
         return modelAndView;
     }

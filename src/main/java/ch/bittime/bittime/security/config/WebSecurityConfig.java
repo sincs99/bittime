@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
@@ -23,11 +24,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Bean
-//    public PasswordEncoder passwordEncoder(){
+//    public BCryptPasswordEncoder passwordEncoder(){
 //        return new BCryptPasswordEncoder();
 //    }
-
-
 
 
     @Autowired
@@ -42,25 +41,40 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
-    @Override
-    protected void configure (HttpSecurity http) throws Exception{
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/registration").permitAll()
-                .antMatchers("/test").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-                .authenticated().and().csrf().disable().formLogin()
-                .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/admin/home")
-                .usernameParameter("user_name")
-                .passwordParameter("password")
-                .and().logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login").and().exceptionHandling()
-                .accessDeniedPage("/access-denied");
-    }
+//    @Override
+//    protected void configure (HttpSecurity http) throws Exception{
+//        http.authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/login").permitAll()
+//                .antMatchers("/registration").permitAll()
+////                .antMatchers("/user/**").hasAnyAuthority("USER")
+//                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+//                .authenticated().and().csrf().disable().formLogin()
+//                .loginPage("/login").failureUrl("/login?error=true")
+//                .defaultSuccessUrl("/admin/home")
+//                .usernameParameter("user_name")
+//                .passwordParameter("password")
+//                .and().logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/login").and().exceptionHandling()
+//                .accessDeniedPage("/access-denied");
+//    }
 
+        @Override
+        protected void configure (HttpSecurity http) throws Exception{
+       http.authorizeRequests()
+               .antMatchers("/admin/**").hasAuthority("ADMIN")//admin home is secured
+               .antMatchers("/user/**").hasAuthority("USER")
+               .anyRequest().authenticated()
+               .and().csrf().disable()
+               .formLogin()
+               .loginPage("/login")
+               .usernameParameter("user_name")
+               .passwordParameter("password")
+               .defaultSuccessUrl("/default") //https://stackoverflow.com/questions/31524426/securityconfig-2-success-url-for-different-roles
+               .permitAll()
+               .and().logout().logoutSuccessUrl("/login").permitAll();
+    }
 
 
 
