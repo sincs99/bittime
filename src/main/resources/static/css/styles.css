@@ -14,8 +14,8 @@ Pascal
 	color: crimson;
 }
 
-.button {
-	background-color: #4CAF50; /* Green */
+.loginButton {
+	background-color: #ff11ac;
 	border: none;
 	color: white;
 	padding: 15px 32px;
@@ -23,5 +23,15 @@ Pascal
 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	border-radius: 6px;
 }
+
+.loginButton:hover{
+	background-color: #d21dff;
+
+}
+
 
