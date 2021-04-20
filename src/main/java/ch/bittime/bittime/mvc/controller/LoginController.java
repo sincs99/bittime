@@ -1,4 +1,4 @@
-package ch.bittime.bittime.mvc.login;
+package ch.bittime.bittime.mvc.controller;
 
 
 import ch.bittime.bittime.login.User;
@@ -79,10 +79,10 @@ public class LoginController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/admin/userPanel")
-    public String showUserPanel(){
-        return "/admin/userPanel";
-    }
+//    @GetMapping(value = "/admin/userPanel")
+//    public String showUserPanel(){
+//        return "/admin/userPanel";
+//    }
 
 
     @GetMapping(value = "/user/home")
