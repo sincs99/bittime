@@ -2,7 +2,6 @@ package ch.bittime.bittime.mvc.login;
 
 
 import ch.bittime.bittime.login.User;
-import ch.bittime.bittime.login.UserRole;
 import ch.bittime.bittime.login.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,6 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+Pascal
+#
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 @Controller
 public class LoginController {
