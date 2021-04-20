@@ -62,11 +62,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure (HttpSecurity http) throws Exception{
+
+//        String[] staticResources = {
+//                "/css/**",
+//                "/images/**",
+//                "/fonts/**",
+//                "/scripts/**",
+//        };
        http.authorizeRequests()
+
+               .antMatchers("/").permitAll()
+//               .antMatchers(staticResources).permitAll()
+               .antMatchers("/default").permitAll()
+               .antMatchers("/login").permitAll()
                .antMatchers("/admin/**").hasAuthority("ADMIN")//admin home is secured
                .antMatchers("/user/**").hasAuthority("USER")
                .anyRequest().authenticated()
-               .and().csrf().disable()
+               .and()
                .formLogin()
                .loginPage("/login")
                .usernameParameter("user_name")
