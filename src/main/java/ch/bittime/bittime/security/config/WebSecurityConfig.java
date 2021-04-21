@@ -18,12 +18,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#
-Pascal
-#
- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @author Pascal
+ */
 
 
 @Configuration
@@ -92,7 +89,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                .passwordParameter("password")
                .defaultSuccessUrl("/default") //https://stackoverflow.com/questions/31524426/securityconfig-2-success-url-for-different-roles
                .permitAll()
-               .and().logout().logoutSuccessUrl("/login").permitAll();
+               .and().logout()
+               .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+               .logoutSuccessUrl("/login").permitAll();
     }
 
 

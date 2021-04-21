@@ -22,6 +22,10 @@ Pascal
 @Entity
 @Table(name = "roles")
 
+/**
+ * @author Pascal
+ */
+
 public class UserRole {
 
 

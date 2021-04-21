@@ -15,11 +15,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#
-Pascal
-#
- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/**
+ * @author Pascal
+ */
 
 @Service
 public class MyUserDetailService implements UserDetailsService {

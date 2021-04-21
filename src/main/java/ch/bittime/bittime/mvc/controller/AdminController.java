@@ -1,10 +1,8 @@
 package ch.bittime.bittime.mvc.controller;
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#
-Pascal
-#
- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/**
+ * @author Pascal
+ */
 
 import ch.bittime.bittime.login.User;
 import ch.bittime.bittime.login.UserService;
