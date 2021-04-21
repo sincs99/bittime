@@ -1,14 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>This is the UserPanel</title>
+    <title>BitTime Admin Panel</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="author" content="Pascal">
 </head>
+
 <body>
+<div class="container">
 
-<p>Admin Userpanel</p>
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
+    </form>
 
-<a th:href="@{/admin/home}"><button>Back to Home</button></a>
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:utext="${userName}"></span>
+            </div>
+            <div class="panel-body">
+                <div class="topnav">
+                    <a th:href="@{/admin/home}">Home</a>
+                    <a class ="active" th:href="@{/admin/userPanel}">Users</a>
+                    <a href="#contact">Time Recording</a>
+                    <a href="#about">TestNav</a>
+                </div>
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>User ID</th>
+                        <th>Vorname</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user: ${listUser}">
+                        <td th:text="${user.id}"></td>
+                        <td th:text="${user.name}"></td>
+                        <td th:text="${user.lastName}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.roles}"></td>
 
+                    </tr>
+                    </tbody>
+
+
+
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

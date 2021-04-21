@@ -1,4 +1,4 @@
-package ch.bittime.bittime.mvc.login;
+package ch.bittime.bittime.mvc.controller;
 
 
 import ch.bittime.bittime.login.User;
@@ -16,11 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#
-Pascal
-#
- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/**
+ * @author Pascal
+ */
 
 @Controller
 public class LoginController {
@@ -79,10 +77,10 @@ public class LoginController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/admin/userPanel")
-    public String showUserPanel(){
-        return "/admin/userPanel";
-    }
+//    @GetMapping(value = "/admin/userPanel")
+//    public String showUserPanel(){
+//        return "/admin/userPanel";
+//    }
 
 
     @GetMapping(value = "/user/home")
