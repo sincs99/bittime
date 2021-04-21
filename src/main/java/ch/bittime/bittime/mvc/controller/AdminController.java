@@ -7,6 +7,8 @@ package ch.bittime.bittime.mvc.controller;
 import ch.bittime.bittime.login.User;
 import ch.bittime.bittime.login.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,11 @@ public class AdminController {
         List<User> listUser = userRepo.findAll();
         model.addAttribute("listUser", listUser);
         System.out.println(listUser);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+
         return "/admin/userPanel";
 
 
