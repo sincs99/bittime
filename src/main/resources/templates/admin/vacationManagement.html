@@ -2,13 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
+
 <head>
   <title>BitTime Admin Panel</title>
   <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <meta name="author" content="Pascal">
+  <meta name="author" content="Andre">
 </head>
 
 <body>
@@ -27,8 +28,8 @@
       </div>
       <div class="panel-body">
         <div class="topnav">
-          <a class="active" href="#home">Home</a>
-          <a th:href="@{/admin/userPanel}">Users</a>
+          <a th:href="@{/admin/home}">Home</a>
+          <a class ="active" th:href="@{/admin/userPanel}">Users</a>
           <a href="#contact">Time Recording</a>
           <a href="#about">Reporting</a>
           <a href="#about">Vacation Management</a>
@@ -36,12 +37,45 @@
           <a href="#about">Extra2</a>
         </div>
 
-        <img th:src="@{/images/Logotsp.png}" class="img-responsive center-block" width="400" height="400"
-             alt="Logo"/>
+        <p></p>
+        <p>Search vacation requests</p>
+
+        <form>
+          <input type="text" name="userName">
+          <input type="submit">
+        </form>
+
+        <table class="table table-striped table-bordered">
+          <thead class="thead-dark">
+          <tr>
+            <th>User ID</th>
+            <th>Vorname</th>
+            <th>Name</th>
+            <th>Vacation Request</th>
+            <th>Accept / Decline</th>
+          </tr>
+          </thead>
+
+          <!-- todo -->
+          <tbody>
+          <tr th:each="user: ${listUser}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.roles}"></td>
+
+          </tr>
+          <-- todo -->
+
+          </tbody>
+
+
+
+
+        </table>
       </div>
-      <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
-      <p>Userpanel:</p>
-      <a th:href="@{/admin/userPanel}"><button>Weiterleitung mit Adminberechtigung Klick!</button></a>
+
     </div>
   </div>
 
