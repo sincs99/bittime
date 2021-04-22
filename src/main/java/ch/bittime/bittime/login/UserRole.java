@@ -8,12 +8,23 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+Pascal
+#
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "roles")
+
+/**
+ * @author Pascal
+ */
 
 public class UserRole {
 

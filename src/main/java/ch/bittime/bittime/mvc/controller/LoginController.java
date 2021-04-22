@@ -1,17 +1,24 @@
-package ch.bittime.bittime.mvc.login;
+package ch.bittime.bittime.mvc.controller;
 
 
 import ch.bittime.bittime.login.User;
 import ch.bittime.bittime.login.UserService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * @author Pascal
+ */
 
 @Controller
 public class LoginController {
@@ -23,6 +30,7 @@ public class LoginController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
+
 
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -69,15 +77,34 @@ public class LoginController {
         return modelAndView;
     }
 
+//    @GetMapping(value = "/admin/userPanel")
+//    public String showUserPanel(){
+//        return "/admin/userPanel";
+//    }
 
-    @RequestMapping(value = "/user/home", method = RequestMethod.GET)
-    public ModelAndView userHome(){
+
+    @GetMapping(value = "/user/home")
+    public  ModelAndView showUserHome(){
         ModelAndView modelAndView = new ModelAndView();
-        Authentication userAuth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(userAuth.getName());
-        modelAndView.addObject("userName", "Willkommen zurück "+ user.getUserName() + " / ");
-        modelAndView.addObject("userMessage", "Nur für Standart Benutzer ersichtlich");
-        modelAndView.setViewName("user/home");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        modelAndView.addObject("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        modelAndView.addObject("userMessage", "Diese Nachricht ist nur für den User");
+
+
+
         return modelAndView;
+    }
+
+    @GetMapping(value = "/default")
+    public  String defaultAfterLogin(HttpServletRequest request, HttpServletResponse response){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String role = auth.getAuthorities().toString();
+
+        if (role.contains("ADMIN")){
+            System.out.println("default Login Method");
+            return "redirect:/admin/home/";
+        }
+        return "redirect:/user/home";
     }
 }

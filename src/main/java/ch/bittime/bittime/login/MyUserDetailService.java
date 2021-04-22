@@ -15,8 +15,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author Pascal
+ */
+
 @Service
-public class UserDetailService implements UserDetailsService {
+public class MyUserDetailService implements UserDetailsService {
 
     @Autowired
     private UserService userService;
@@ -24,7 +28,7 @@ public class UserDetailService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        ch.bittime.bittime.login.User user = userService.findUserByUserName(userName);
+        User user = userService.findUserByUserName(userName);
         List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
         return buildUserForAuthentication(user, authorities);
     }
