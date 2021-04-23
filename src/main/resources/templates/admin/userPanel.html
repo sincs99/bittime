@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-
 <head>
     <title>BitTime Admin Panel</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
@@ -29,13 +28,14 @@
             <div class="panel-body">
                 <div class="topnav">
                     <a th:href="@{/admin/home}">Home</a>
-                    <a class ="active" th:href="@{/admin/userPanel}">Users</a>
-                    <a href="#contact">Time Recording</a>
-                    <a href="#about">Reporting</a>
-                    <a href="#about">Vacation Management</a>
-                    <a href="#about">Extra1</a>
-                    <a href="#about">Extra2</a>
+                    <a th:href="@{/admin/registration}">Registration</a>
+                    <a class="active" th:href="@{/admin/userPanel}">Users</a>
+                    <a th:href="@{/admin/timeRecording}">Time Recording</a>
+                    <a th:href="@{/admin/reportingView}">Reporting</a>
+                    <a th:href="@{/admin/vacationManagement}">Vacation Management</a>
+                    <a th:href="@{/admin/profileView}">Profile</a>
                 </div>
+            </div>
 
                 <p></p>
                 <p>Search active users</p>

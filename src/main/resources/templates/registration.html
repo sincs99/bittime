@@ -9,11 +9,28 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <meta name="author" content="Pascal">
 </head>
+
 <body>
 <form th:action="@{/login}" method="get">
   <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
 </form>
 
+<div class="panel-group" style="margin-top:40px">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span th:utext="${userName}"></span>
+    </div>
+
+    <div class="panel-body">
+      <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a th:href="@{/admin/registration}">Registration</a>
+        <a th:href="@{/admin/userPanel}">Users</a>
+        <a th:href="@{/admin/timeRecording}">Time Recording</a>
+        <a th:href="@{/admin/reportingView}">Reporting</a>
+        <a th:href="@{/admin/vacationManagement}">Vacation Management</a>
+        <a th:href="@{/admin/profileView}">Profile</a>
+      </div>
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -75,6 +92,7 @@
     </div>
   </div>
 </div>
+      </div>
 
 </body>
 </html>
