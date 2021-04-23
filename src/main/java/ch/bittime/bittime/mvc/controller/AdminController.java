@@ -35,11 +35,27 @@ public class AdminController {
 
         return "/admin/userPanel";
 
-
-
-
     }
 
+    @GetMapping("/admin/timeRecording")
+    public String timeRecording(){
+        return "/admin/timeRecording";
+    }
+
+    @GetMapping("/admin/reportingView")
+    public String reportingView(){
+        return "/admin/reportingView";
+    }
+
+    @GetMapping("/admin/vacationManagement")
+    public String vacationManagement(){
+        return "/admin/vacationManagement";
+    }
+
+    @GetMapping("/admin/profileView")
+    public String profileView(){
+        return "/admin/profileView";
+    }
 
 
 
