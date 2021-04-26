@@ -80,7 +80,6 @@ public class AdminController {
     @GetMapping("/admin/vacationManagement")
     public String vacationManagement(Model model){
 
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
@@ -89,8 +88,6 @@ public class AdminController {
 
     @GetMapping("/admin/profileView")
     public String profileView(Model model){
-
-
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
