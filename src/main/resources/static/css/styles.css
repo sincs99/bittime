@@ -56,3 +56,13 @@ Pascal
 	color: white;
 }
 
+.deleteBtn {
+	background-color: #b70f10;
+	border-radius: 6px;
+
+}
+
+.deleteBtn:hover{
+	background-color: #b70f10;
+}
+

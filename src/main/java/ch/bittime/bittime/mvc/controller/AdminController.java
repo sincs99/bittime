@@ -13,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ch.bittime.bittime.login.repository.UserRepo;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import java.util.List;
 
 @Controller
@@ -22,6 +25,12 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private UserRepo userRepo;
+
+//    @RequestMapping(value = "admin/deleteUser", method = RequestMethod.DELETE)
+//    public String deleteUser(Model model){
+//        List<User> listUser =userRepo.finb
+//    }
+
 
     @GetMapping("/admin/userPanel")
     public String listUser(Model model){

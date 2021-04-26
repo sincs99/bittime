@@ -53,6 +53,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Delete User</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,6 +63,12 @@
                         <td th:text="${user.lastName}"></td>
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.roles}"></td>
+                        <td><form th:method="delete" th:action="@{admin/deleteUser}">
+                            <input type="button" th:name ="deleteUser">
+                            <button type="submit">Delete</button>
+
+                        </form>
+
 
                     </tr>
                     </tbody>
