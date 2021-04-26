@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,11 +35,15 @@ public class LoginController {
 
 
     @RequestMapping(value = "/admin/registration", method = RequestMethod.GET)
-    public ModelAndView registration(){
+    public ModelAndView registration(Model model){
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         modelAndView.addObject("user", user);
         modelAndView.setViewName("/admin/registration");
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User userData = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + userData.getUserName() + "/" + userData.getName() + " " + userData.getLastName() + " (" + userData.getEmail() + ")");
         return modelAndView;
     }
 
