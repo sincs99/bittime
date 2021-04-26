@@ -46,6 +46,10 @@ public class AdminController {
 
     }
 
+    /**
+     * @author Andre
+     */
+
     @GetMapping("/admin/timeRecording")
     public String timeRecording(){
         return "/admin/timeRecording";
@@ -65,7 +69,5 @@ public class AdminController {
     public String profileView(){
         return "/admin/profileView";
     }
-
-
 
 }
