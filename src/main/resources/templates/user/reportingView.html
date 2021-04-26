@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <title>BitTime Admin Panel</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="author" content="Andre">
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button1 {background-color: #4CAF50;} /* Green */
+        .button2 {background-color: #008CBA;} /* Blue */
+    </style>
+
+</head>
+
+<body>
+<div class="container">
+
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
+    </form>
+
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:utext="${userName}"></span>
+            </div>
+
+            <div class="panel-body">
+                <div class="topnav">
+                    <a th:href="@{/user/home}">Home</a>
+                    <a th:href="@{/user/timeRecording}">Time Recording</a>
+                    <a th:href="@{/user/vacationView}">Schedule Vacation</a>
+                    <a class="active" th:href="@{/user/reportingView}">Reporting</a>
+                    <a th:href="@{/user/profileView}">Profile</a>
+                </div>
+            </div>
+
+            <p>TODO</p>
+            <p>Get Report? ;^)</p>
+            <!-- button todo: <a th:href="@{/admin/...report?}"><button>Um Report zu generieren Klick!</button></a>-->
+            <button class="button button1">Yes daddy</button>
+            <button class="button button2">No mami</button>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
