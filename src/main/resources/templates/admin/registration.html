@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Registration Form</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -11,9 +11,13 @@
 </head>
 
 <body>
-<form th:action="@{/login}" method="get">
-  <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
-</form>
+<div class="container">
+
+  <form th:action="@{/logout}" method="get">
+    <button class="btn btn-md btn-danger btn-block" name="registration"
+            type="Submit">Logout
+    </button>
+  </form>
 
 <div class="panel-group" style="margin-top:40px">
   <div class="panel panel-primary">
@@ -23,8 +27,8 @@
 
     <div class="panel-body">
       <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a th:href="@{/admin/registration}">Registration</a>
+        <a th:href="@{/admin/home}">Home</a>
+        <a class="active" th:href="@{/admin/registration}">Registration</a>
         <a th:href="@{/admin/userPanel}">Users</a>
         <a th:href="@{/admin/timeRecording}">Time Recording</a>
         <a th:href="@{/admin/reportingView}">Reporting</a>
@@ -93,6 +97,6 @@
   </div>
 </div>
       </div>
-
+  </div>
 </body>
 </html>
