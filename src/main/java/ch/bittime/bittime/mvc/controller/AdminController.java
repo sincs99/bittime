@@ -11,10 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import ch.bittime.bittime.login.repository.UserRepo;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -26,10 +24,21 @@ public class AdminController {
     @Autowired
     private UserRepo userRepo;
 
-//    @RequestMapping(value = "admin/deleteUser", method = RequestMethod.DELETE)
-//    public String deleteUser(Model model){
-//        List<User> listUser =userRepo.finb
-//    }
+
+
+    @RequestMapping("/admin/deleteUser/{id}")
+    public String deleteUser(@PathVariable(name = "id") int id, Model model) {
+
+        System.out.println("Request ok");
+
+        userService.deleteUser(id);
+        System.out.println("User gelöscht");
+
+        List<User> listUser = userRepo.findAll();
+        model.addAttribute("listUser", listUser);
+
+        return "/admin/userPanel";
+    }
 
 
     @GetMapping("/admin/userPanel")
@@ -51,22 +60,41 @@ public class AdminController {
      */
 
     @GetMapping("/admin/timeRecording")
-    public String timeRecording(){
+    public String timeRecording(Model model){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/timeRecording";
     }
 
     @GetMapping("/admin/reportingView")
-    public String reportingView(){
+    public String reportingView(Model model){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/reportingView";
     }
 
     @GetMapping("/admin/vacationManagement")
-    public String vacationManagement(){
+    public String vacationManagement(Model model){
+
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationManagement";
     }
 
     @GetMapping("/admin/profileView")
-    public String profileView(){
+    public String profileView(Model model){
+
+
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/profileView";
     }
 

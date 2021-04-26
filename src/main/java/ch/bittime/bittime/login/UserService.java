@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -17,6 +19,7 @@ import java.util.HashSet;
  */
 
 @Service
+@Transactional
 public class UserService {
 
     private UserRepo userRepo;
@@ -48,6 +51,11 @@ public class UserService {
         UserRole userRole = roleRepo.findByRole("ADMIN");
         user.setRoles(new HashSet<UserRole>(Arrays.asList(userRole)));
         return userRepo.save(user);
+    }
+
+
+    public void deleteUser(int id){
+        userRepo.deleteById(id);
     }
 
 
