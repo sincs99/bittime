@@ -4,7 +4,10 @@ package ch.bittime.bittime.login;
 import ch.bittime.bittime.login.repository.UserRepo;
 import ch.bittime.bittime.login.repository.RoleRepo;
 
+import ch.bittime.bittime.mvc.controller.ModalController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -55,7 +58,21 @@ public class UserService {
 
 
     public void deleteUser(int id){
-        userRepo.deleteById(id);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String role = auth.getAuthorities().toString();
+
+        if (role.contains("USER")){
+            userRepo.deleteById(id);
+
+
+
+        }else{
+             System.out.println("If statement Admin kann sich nicht löschen");
+        }
+
+    }
+
     }
 
 
@@ -64,4 +81,3 @@ public class UserService {
 
 
 
-}
