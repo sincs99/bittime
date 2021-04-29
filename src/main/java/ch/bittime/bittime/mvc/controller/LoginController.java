@@ -91,9 +91,9 @@ public class LoginController {
         } else if (time.getHour() > (22) && time.getHour()< (6)){
             modelAndView.addObject("adminMessage", "It's late " +user.getName()+" " +user.getLastName() + " better go to bed, Good night");
         } else if (time.getHour() > (6) && time.getHour()< (10)){
-            modelAndView.addObject("adminMessage", "Good Morning " +user.getName()+" " +user.getLastName() + " have a nice day");
+            modelAndView.addObject("adminMessage", "Good Morning " +user.getName()+" " +user.getLastName() + " have a nice day and do some good work");
         }else {
-            modelAndView.addObject("adminMessage", "Good Day " +user.getName()+" " +user.getLastName());
+            modelAndView.addObject("adminMessage", "Good Day " +user.getName()+" " +user.getLastName()+ " still here working, huh?") ;
         }
 
         modelAndView.addObject("userName", "Welcome " + user.getUserName() +
