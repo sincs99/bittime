@@ -14,7 +14,6 @@
             display: grid;
             place-items: center;
         } -->
-<!-- https://freefrontend.com/css-calendars/ -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,6 +94,12 @@
         #endtime {
             width: 200px;
 
+        }
+        span {
+            content: "\003E";
+        }
+        span {
+            content: "\003C";
         }
         .card__header, .card__footer {
             padding: 0 1.25rem;
@@ -185,8 +190,9 @@
     <div class="left">
     <section class="card__header">
         <h3 id="currentDay"></h3>
-        <button onclick="lastMonth();">last month</button>
-        <button onclick="nextMonth();">nect month</button>
+
+        <button onclick="lastMonth();"><span>&#60;</span></button>
+        <button onclick="nextMonth();"><span>&#62;</span></button>
         <h3 id="cMonthYear"></h3>
 
 
