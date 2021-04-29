@@ -1,0 +1,284 @@
+
+<!--/**
+* @author Robin
+*/
+
+        .card__footer .add {
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid #de6e46;
+            border-radius: 50%;
+            width: 3.5rem;
+            height: 3.5rem;
+            padding-top: 0.25rem;
+            display: grid;
+            place-items: center;
+        } -->
+<!-- https://freefrontend.com/css-calendars/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 10px;
+            font-family: sans-serif;
+            line-height: 1.6;
+        }
+
+        body {
+            background: #78accd;
+            color: #333333;
+            font-size: 1.5rem;
+        }
+
+        ul {
+            list-style: none;
+        }
+        .main {
+           display: flex;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+        .left{
+            float: left;
+            background: #ffffff;
+            width: 90%;
+            max-width: 40rem;
+            min-height: 40rem;
+            margin: 5rem auto;
+            display: grid;
+            margin-right:10px;
+            grid-template-rows: 8rem auto 10rem;
+            box-shadow: 0 1rem 2.5rem #1b405e;
+        }
+        .right{
+            float:left;
+            background: #ffffff;
+            width: 90%;
+            max-width: 40rem;
+            min-height: 40rem;
+            margin: 5rem auto;
+            margin-left:0px;
+            box-shadow: 0 1rem 2.5rem #1b405e;
+        }
+        .time_frame_header {
+            padding: 0 1.25rem;
+            color: #7d8994;
+            display: flex;
+
+            align-items: center;
+        }
+        .time_frame_body{
+            padding: 0 1.25rem;
+            color: #7d8994;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #starttime {
+            width: 200px;
+
+        }
+        #endtime {
+            width: 200px;
+
+        }
+        .card__header, .card__footer {
+            padding: 0 1.25rem;
+            color: #7d8994;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card__body {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        .card__body--days {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+        }
+        .card__body--days li {
+            flex: 1;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            color: #7d8994;
+            margin: 0 1px;
+        }
+        .card__body--dates {
+            display: grid;
+            gap: 3px;
+            grid-template-columns: repeat(7, 1fr);
+            justify-items: center;
+            text-align: center;
+        }
+        .card__body--dates li {
+            width: 3.5rem;
+            height: 3.5rem;
+            display: grid;
+            place-items: center;
+            font-weight: bold;
+            position: relative;
+        }
+        .card__body--dates li.prev,
+        .card__body--dates li.next {
+            color: #ccc;
+        }
+        .card__body--dates li.active {
+            background: #de6e46;
+            color: #ffffff;
+            border-radius: 50%;
+        }
+        .card__body--dates li.circle {
+            border: 2px solid;
+            border-radius: 50%;
+        }
+        .card__body--dates li.circle span {
+            position: absolute;
+            top: -0.75rem;
+            right: -0.5rem;
+            width: 1.75rem;
+            height: 1.75rem;
+            font-size: 1.2rem;
+            color: #ffffff;
+            border-radius: 50%;
+        }
+        .card__body--dates .circle.orange {
+            border-color: #de6e46;
+        }
+        .card__body--dates .circle.orange span {
+            background: #de6e46;
+        }
+        .card__body--dates .circle.purple {
+            border-color: #ae5989;
+        }
+        .card__body--dates .circle.purple span {
+            background: #ae5989;
+        }
+        .card__footer {
+            color: #333333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!--<main class="card">-->
+<div class="main">
+    <div class="left">
+    <section class="card__header">
+        <h3 id="currentDay"></h3>
+        <button onclick="lastMonth();">last month</button>
+        <button onclick="nextMonth();">nect month</button>
+        <h3 id="cMonthYear"></h3>
+
+
+    </section>
+
+
+    <section class="card__body">
+        <ul class="card__body--days">
+            <li>mon</li>
+            <li>tue</li>
+            <li>wed</li>
+            <li>thu</li>
+            <li>fri</li>
+            <li>sat</li>
+            <li>sun</li>
+        </ul>
+        <ul class="card__body--dates">
+            <li id="f1"></li>
+            <li id="f2"></li>
+            <li id="f3"></li>
+            <li id="f4"></li>
+            <li id="f5"></li>
+            <li id="f6"></li>
+            <li id="f7"></li>
+            <li id="f8"></li>
+            <li id="f9"></li>
+            <li id="f10"></li>
+            <li id="f11"></li>
+            <li id="f12"></li>
+            <li id="f13"></li>
+            <li id="f14"></li>
+            <li id="f15"></li>
+            <li id="f16"></li>
+            <li id="f17"></li>
+            <li id="f18"></li>
+            <li id="f19"></li>
+            <li id="f20"></li>
+            <li id="f21"></li>
+            <li id="f22"></li>
+            <li id="f23"></li>
+            <li id="f24"></li>
+            <li id="f25"></li>
+            <li id="f26"></li>
+            <li id="f27"></li>
+            <li id="f28"></li>
+            <li id="f29"></li>
+            <li id="f30"></li>
+            <li id="f31"></li>
+            <li id="f32"></li>
+            <li id="f33"></li>
+            <li id="f34"></li>
+            <li id="f35"></li>
+            <li id="f36"></li>
+            <li id="f37"></li>
+            <li id="f38"></li>
+            <li id="f39"></li>
+            <li id="f40"></li>
+            <li id="f41"></li>
+            <li id="f42"></li>
+        </ul>
+    </section>
+    </div>
+    <div class="right">
+
+
+
+    <section class="time_frame_header">
+
+    </section>
+    <section class="time_frame_body">
+
+        <input type="time" id="starttime" name="starttime">
+        <input type="time" id="endtime" name="endtime">
+
+
+
+
+    </section>
+        <section>
+            <h1>Type of time scheduling</h1>
+            <input type="radio" id="work" name="work" value="work">
+            <label for="work">Work</label><br>
+            <input type="radio" id="vacation" name="vacation" value="vacation">
+            <label for="vacation">Vacation</label><br>
+            <input type="radio" id="sick" name="sick" value="sick">
+            <label for="sick">Sick</label><br>
+
+        </section>
+    </div>
+</div>
+<!--</main>-->
+<script src="calendar.js">
+</script>
+</body>
+</html>
