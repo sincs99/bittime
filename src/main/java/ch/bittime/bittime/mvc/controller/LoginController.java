@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalTime;
 
 /**
  * @author Pascal
@@ -73,11 +74,31 @@ public class LoginController {
 
     @RequestMapping(value="/admin/home", method = RequestMethod.GET)
     public ModelAndView adminHome(){
+
+
+
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Nur für Admin ersichtlich");
+
+
+
+        LocalTime time = LocalTime.now();
+
+
+        if (time.getHour() > (17) && time.getHour()< (22)){
+            modelAndView.addObject("adminMessage", "Good evening " +user.getName()+" " +user.getLastName() + " enjoy your after work beer :)");
+        } else if (time.getHour() > (22) && time.getHour()< (6)){
+            modelAndView.addObject("adminMessage", "It's late " +user.getName()+" " +user.getLastName() + " better go to bed, Good night");
+        } else if (time.getHour() > (6) && time.getHour()< (10)){
+            modelAndView.addObject("adminMessage", "Good Morning " +user.getName()+" " +user.getLastName() + " have a nice day");
+        }else {
+            modelAndView.addObject("adminMessage", "Good Day " +user.getName()+" " +user.getLastName());
+        }
+
+        modelAndView.addObject("userName", "Welcome " + user.getUserName() +
+                "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+
         modelAndView.setViewName("admin/home");
         return modelAndView;
     }
@@ -93,8 +114,21 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+
+        LocalTime time = LocalTime.now();
+
+
+        if (time.getHour() > (17) && time.getHour()< (22)){
+            modelAndView.addObject("userMessage", "Good evening " +user.getName()+" " +user.getLastName() + " enjoy your after work beer :)");
+        } else if (time.getHour() > (22) && time.getHour()< (6)){
+            modelAndView.addObject("userMessage", "It's late " +user.getName()+" " +user.getLastName() + " better go to bed, Good night");
+        } else if (time.getHour() > (6) && time.getHour()< (10)){
+            modelAndView.addObject("userMessage", "Good Morning " +user.getName()+" " +user.getLastName() + " have a nice day");
+        }else {
+            modelAndView.addObject("userMessage", "Good Day " +user.getName()+" " +user.getLastName());
+        }
         modelAndView.addObject("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("userMessage", "Diese Nachricht ist nur für den User");
+
 
 
 
