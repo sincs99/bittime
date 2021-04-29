@@ -63,7 +63,13 @@
                         <td th:text="${user.lastName}"></td>
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.roles}"></td>
-                        <td><a th:href="@{deleteUser/{id}(id=${user.id})}">Delete</a></td>
+                        <td>
+
+                            <a th:href="@{deleteUser/{id}(id=${user.id})}" th:onclick="return confirm('Are you sure?')" >Delete</a>
+
+
+                        </td>
+
 
 
 
@@ -82,5 +88,7 @@
     </div>
 
 </div>
+
+
 </body>
 </html>

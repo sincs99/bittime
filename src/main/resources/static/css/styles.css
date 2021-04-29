@@ -65,4 +65,8 @@ Pascal
 .deleteBtn:hover{
 	background-color: #b70f10;
 }
-
+.welcomeText{
+	text-align: center;
+	font-size: large;
+	color: #b70f10;
+}
