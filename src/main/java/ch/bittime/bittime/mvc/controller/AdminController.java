@@ -59,13 +59,13 @@ public class AdminController {
      * @author Andre
      */
 
-    @GetMapping("/admin/timeRecording")
-    public String timeRecording(Model model){
+    @GetMapping("/admin/calendar")
+    public String calendar(Model model){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        return "/admin/timeRecording";
+        return "/admin/calendar";
     }
 
     @GetMapping("/admin/reportingView")
