@@ -38,6 +38,7 @@ public class AdminController {
         List<User> listUser = userRepo.findAll();
         model.addAttribute("listUser", listUser);
 
+
         return "/admin/userPanel";
     }
 

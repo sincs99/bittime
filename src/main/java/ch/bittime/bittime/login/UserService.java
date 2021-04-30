@@ -6,9 +6,6 @@ import ch.bittime.bittime.login.repository.RoleRepo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 
 /**
  * @author Pascal
@@ -49,6 +47,8 @@ public class UserService {
     }
 
 
+
+
     public User saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(true);
@@ -63,13 +63,12 @@ public class UserService {
 
     }
 
-    public void deactivateUser(int id){
-        userRepo.findById(id);
 
 
-    }
 
     }
+
+
 
 
 

@@ -84,16 +84,21 @@ public class LoginController {
 
 
         LocalTime time = LocalTime.now();
+        System.out.println(time.getHour());
 
 
-        if (time.getHour() > (17) && time.getHour()< (22)){
+        if (time.getHour() >= 17 && time.getHour()<= 21){
             modelAndView.addObject("adminMessage", "Good evening " +user.getName()+" " +user.getLastName() + " enjoy your after work beer :)");
-        } else if (time.getHour() > (22)){
+            System.out.println(time.getHour());
+        } else if (time.getHour() >= 22){
             modelAndView.addObject("adminMessage", "It's late " +user.getName()+" " +user.getLastName() + " better go to bed, Good night");
-        } else if (time.getHour() > (6) && time.getHour()< (9)){
+            System.out.println(time.getHour());
+        } else if (time.getHour() >= 6 && time.getHour()<= 9){
             modelAndView.addObject("adminMessage", "Good Morning " +user.getName()+" " +user.getLastName() + " have a nice day and do some good work");
-        }else if(time.getHour() > (10) && time.getHour()< (16)) {
+            System.out.println(time.getHour());
+        }else if(time.getHour() >= 10 && time.getHour()<= 16) {
             modelAndView.addObject("adminMessage", "Good Day " +user.getName()+" " +user.getLastName()+ " still here working, huh?") ;
+            System.out.println(time.getHour());
         }
 
         modelAndView.addObject("userName", "Welcome " + user.getUserName() +
