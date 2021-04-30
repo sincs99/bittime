@@ -16,6 +16,7 @@ import ch.bittime.bittime.login.repository.UserRepo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AdminController {
@@ -31,8 +32,15 @@ public class AdminController {
     public String deleteUser(@PathVariable(name = "id") int id, Model model) {
 
         System.out.println("Request ok");
+        Optional<User> i = userService.findUserById(id);
+        System.out.println(i);
+/**
+ *
+ * @TODO: 30.04.2021 auskommentieren entfernen! @Pascal
+ */
 
-        userService.deleteUser(id);
+        //userService.deleteUser(id);
+
         System.out.println("User gelöscht");
 
         List<User> listUser = userRepo.findAll();

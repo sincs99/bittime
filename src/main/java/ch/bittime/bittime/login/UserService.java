@@ -46,7 +46,10 @@ public class UserService {
         return userRepo.findByUserName(userName);
     }
 
+    public Optional<User> findUserById(int id) {
 
+        return userRepo.findById(id);
+    }
 
 
     public User saveUser(User user) {
