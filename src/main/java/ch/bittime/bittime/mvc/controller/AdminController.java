@@ -18,6 +18,7 @@ import ch.bittime.bittime.login.repository.UserRepo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AdminController {
@@ -36,12 +37,30 @@ public class AdminController {
     public String deleteUser(@PathVariable(name = "id") int id, Model model) {
 
         System.out.println("Request ok");
+        Optional<User> i = userService.findUserById(id);
+        System.out.println(i);
+        String roles;
 
-        userService.deleteUser(id);
+
+        roles = String.valueOf(i.get().getRoles());
+        System.out.println(roles);
+
+        if(roles.contains("USER")){
+            System.out.println("ist User");
+            userService.deleteUser(id);
+        }else{
+            System.out.println("ist Admin");
+            model.addAttribute("deleteError", "You cannot delete an Admin");
+        }
+
+
+
+        System.out.println(i);
         System.out.println("User gelöscht");
 
         List<User> listUser = userRepo.findAll();
         model.addAttribute("listUser", listUser);
+
 
 
         return "/admin/userPanel";

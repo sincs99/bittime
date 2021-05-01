@@ -66,6 +66,8 @@
                         <td>
 
                             <a th:href="@{deleteUser/{id}(id=${user.id})}" th:onclick="return confirm('Are you sure?')" >Delete</a>
+                            <br>
+
 
 
                         </td>
@@ -82,6 +84,8 @@
 
 
                 </table>
+            <h2><span class="text-center" th:utext="${deleteError}"></span></h2>
+
             </div>
 
         </div>
