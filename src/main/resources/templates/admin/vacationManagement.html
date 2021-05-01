@@ -60,12 +60,15 @@
 
           <!-- todo -->
           <tbody>
-          <tr th:each="user: ${listUser}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.lastName}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.roles}"></td>
+          <tr th:each="vacation: ${listVacation}">
+            <td th:text="${vacation.user.id }"></td>
+            <td th:text="${vacation.user.name}"></td>
+            <td th:text="${vacation.user.lastName}"></td>
+            <td>
+              <th:block th:text="${vacation.startDate}"/> -
+              <th:block th:text="${vacation.endDate}"/>
+            </td>
+            <td th:text="${vacation.acceptState}"></td>
           </tr>
           </tbody>
         </table>

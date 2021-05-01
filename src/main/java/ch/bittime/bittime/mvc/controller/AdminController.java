@@ -6,6 +6,8 @@ package ch.bittime.bittime.mvc.controller;
 
 import ch.bittime.bittime.login.User;
 import ch.bittime.bittime.login.UserService;
+import ch.bittime.bittime.login.Vacation;
+import ch.bittime.bittime.login.repository.VacationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +26,9 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private UserRepo userRepo;
+//vacationRep
+    @Autowired
+    private VacationRepo vacationRepo;
 
 
 
@@ -83,9 +88,19 @@ public class AdminController {
 
     @GetMapping("/admin/vacationManagement")
     public String vacationManagement(Model model){
-
+//list, vacationRepo
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+
+        List<Vacation> listVacation = vacationRepo.findAll();
+        Vacation v = new Vacation();
+        v.setUser(user);
+        listVacation.add(v);
+        model.addAttribute("listVacation", listVacation);
+
+
+
+
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationManagement";
     }
