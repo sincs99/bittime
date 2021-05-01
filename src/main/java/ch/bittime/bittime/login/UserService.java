@@ -6,6 +6,8 @@ import ch.bittime.bittime.login.repository.RoleRepo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,6 +66,21 @@ public class UserService {
     public void deleteUser(int id){
             userRepo.deleteById(id);
 
+    }
+
+
+    public boolean isUserAdmin(int id){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String role = auth.getAuthorities().toString();
+
+        Optional<User> user = userRepo.findById(id);
+        user.toString();
+
+
+        if (role.contains("ADMIN")){
+            return true;
+        }
+        return false;
     }
 
 

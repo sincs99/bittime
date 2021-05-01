@@ -34,17 +34,28 @@ public class AdminController {
         System.out.println("Request ok");
         Optional<User> i = userService.findUserById(id);
         System.out.println(i);
-/**
- *
- * @TODO: 30.04.2021 auskommentieren entfernen! @Pascal
- */
+        String roles;
 
-        //userService.deleteUser(id);
 
+        roles = String.valueOf(i.get().getRoles());
+        System.out.println(roles);
+
+        if(roles.contains("USER")){
+            System.out.println("ist User");
+            userService.deleteUser(id);
+        }else{
+            System.out.println("ist Admin");
+            model.addAttribute("deleteError", "You cannot delete an Admin");
+        }
+
+
+
+        System.out.println(i);
         System.out.println("User gelöscht");
 
         List<User> listUser = userRepo.findAll();
         model.addAttribute("listUser", listUser);
+
 
 
         return "/admin/userPanel";
