@@ -88,7 +88,10 @@ public class AdminController {
 
     @GetMapping("/admin/vacationManagement")
     public String vacationManagement(Model model){
-//list, vacationRepo
+/**
+ * @author Dominic
+ */
+        //list, vacationRepo
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
 
@@ -97,10 +100,6 @@ public class AdminController {
         v.setUser(user);
         listVacation.add(v);
         model.addAttribute("listVacation", listVacation);
-
-
-
-
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationManagement";
     }
