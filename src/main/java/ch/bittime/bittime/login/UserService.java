@@ -30,17 +30,14 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-
-
-
     @Autowired
-    public UserService(UserRepo userRepo, RoleRepo roleRepo, BCryptPasswordEncoder bCryptPasswordEncoder){
+    public UserService(UserRepo userRepo, RoleRepo roleRepo, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepo = userRepo;
         this.roleRepo = roleRepo;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public User findUserByEmail(String email){
+    public User findUserByEmail(String email) {
         return userRepo.findByEmail(email);
     }
 
@@ -63,13 +60,13 @@ public class UserService {
     }
 
 
-    public void deleteUser(int id){
-            userRepo.deleteById(id);
+    public void deleteUser(int id) {
+        userRepo.deleteById(id);
 
     }
 
 
-    public boolean isUserAdmin(int id){
+    public boolean isUserAdmin(int id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().toString();
 
@@ -77,16 +74,14 @@ public class UserService {
         user.toString();
 
 
-        if (role.contains("ADMIN")){
+        if (role.contains("ADMIN")) {
             return true;
         }
         return false;
     }
 
 
-
-
-    }
+}
 
 
 
