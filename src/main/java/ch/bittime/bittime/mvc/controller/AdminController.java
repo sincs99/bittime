@@ -52,6 +52,7 @@ public class AdminController {
         if (roles.contains("USER")) {
             System.out.println("ist User");
             userService.deleteUser(id);
+            model.addAttribute("deleteSuc", "User successful deleted!");
             System.out.println("User gelöscht");
         } else {
             System.out.println("ist Admin");

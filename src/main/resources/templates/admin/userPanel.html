@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta name="author" content="Andre">
+    <meta name="author" content="Pascal">
 </head>
 
 <body>
@@ -37,59 +37,53 @@
                 </div>
             </div>
 
-                <p></p>
-                <p>Search active user</p>
+            <p></p>
+            <p>Search active user</p>
 
-                <form>
-                    <input type="text" name="userName">
-                    <input type="submit">
-                </form>
+            <form>
+                <input type="text" name="userName">
+                <input type="submit">
+            </form>
 
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th>User ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Delete User?</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="user: ${listUser}">
-                        <td th:text="${user.id}"></td>
-                        <td th:text="${user.name}"></td>
-                        <td th:text="${user.lastName}"></td>
-                        <td th:text="${user.email}"></td>
-                        <td th:text="${user.roles}"></td>
-                        <td>
-
-                            <a th:href="@{deleteUser/{id}(id=${user.id})}" th:onclick="return confirm('Are you sure?')" >Delete</a>
-                            <br>
-
-
-
-                        </td>
-
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>User ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Delete User?</th>
+                    <th>Active</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${listUser}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.roles}"></td>
+                    <td>
+                        <a th:href="@{deleteUser/{id}(id=${user.id})}" th:onclick="return confirm('Are you sure?')"
+                           th:text="Delete"></a>
+                        <br>
+                    </td>
+                    <td th:text="${user.active}"></td>
 
 
+                </tr>
+                </tbody>
 
 
-
-                    </tr>
-                    </tbody>
-
-
-
-
-                </table>
+            </table>
             <h2><span class="errorMessage" th:utext="${deleteError}"></span></h2>
-
-            </div>
+            <h2><span class="sucMessage" th:utext="${deleteSuc}"</span></h2>
 
         </div>
+
     </div>
+</div>
 
 </div>
 
