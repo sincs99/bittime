@@ -70,6 +70,12 @@
                         <br>
                     </td>
                     <td th:text="${user.active}"></td>
+                    <td>
+                        <a th:if="${user.active}" th:href="@{deactivateUser/{id}(id=${user.id})}" th:onclick="return confirm('Are you sure?')"
+                           th:text="Deactivate"></a>
+                        <a th:if="${!user.active}" th:href="@{activateUser/{id}(id=${user.id})}" th:onclick="return confirm('Are you sure?')"
+                           th:text="Activate"></a>
+                    </td>
 
 
                 </tr>

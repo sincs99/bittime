@@ -37,7 +37,7 @@ public class AdminController {
     private VacationRepo vacationRepo;
 
 
-    @RequestMapping("/admin/deleteUser/{id}")
+    @RequestMapping(value = "/admin/deleteUser/{id}")
     public String deleteUser(@PathVariable(name = "id") int id, Model model) {
 
         System.out.println("Request ok");
@@ -68,7 +68,75 @@ public class AdminController {
         model.addAttribute("listUser", listUser);
 
 
-        return "/admin/userPanel";
+        return "redirect:/admin/userPanel";
+    }
+
+    @RequestMapping("/admin/activateUser/{id}")
+    public String deacUser(@PathVariable(name = "id") int id, Model model) {
+
+        System.out.println("Request ok");
+        Optional<User> i = userService.findUserById(id);
+        System.out.println(i);
+        String roles;
+
+
+        roles = String.valueOf(i.get().getRoles());
+        System.out.println(roles);
+
+        if (roles.contains("USER")) {
+            System.out.println("ist User");
+            userService.deactivateUser(id);
+            model.addAttribute("deacUser", "User successful deleted!");
+            System.out.println("User deaktiviert");
+        } else {
+            System.out.println("ist Admin");
+            model.addAttribute("deacAdmin", "You cannot deactivate an Admin");
+            System.out.println("Admin kann nicht deaktiviert werden");
+        }
+
+
+        System.out.println(i);
+
+
+        List<User> listUser = userRepo.findAll();
+        model.addAttribute("listUser", listUser);
+
+
+        return "redirect:/admin/userPanel";
+    }
+
+    @RequestMapping("/admin/deactivateUser/{id}")
+    public String acUser(@PathVariable(name = "id") int id, Model model) {
+
+        System.out.println("Request ok");
+        Optional<User> i = userService.findUserById(id);
+        System.out.println(i);
+        String roles;
+
+
+        roles = String.valueOf(i.get().getRoles());
+        System.out.println(roles);
+
+        if (roles.contains("USER")) {
+            System.out.println("ist User");
+            userService.deactivateUser(id);
+            model.addAttribute("deacUser", "User successful deleted!");
+            System.out.println("User deaktiviert");
+        } else {
+            System.out.println("ist Admin");
+            model.addAttribute("deacAdmin", "You cannot deactivate an Admin");
+            System.out.println("Admin kann nicht deaktiviert werden");
+        }
+
+
+        System.out.println(i);
+
+
+        List<User> listUser = userRepo.findAll();
+        model.addAttribute("listUser", listUser);
+
+
+        return "redirect:/admin/userPanel";
     }
 
 
