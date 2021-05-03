@@ -41,7 +41,7 @@
     <div class="panel-group" style="margin-top:40px">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <span th:utext="${userName}"></span>
+                <span th:utext="${name}"></span>
             </div>
 
             <div class="panel-body">
@@ -71,8 +71,16 @@
                 </select>
             </div>
 
+            <p></p>
+
             <button class="button button1">Show here</button>
             <button class="button button2">Generate PDF</button>
+
+            <p></p>
+
+            <h3 style="text-align: center; color: green">
+                <span th:text="${userName} + ', this is your time report!'"></span>
+            </h3>
 
             <p></p>
 
@@ -85,7 +93,24 @@
                     <th>Total Worktime</th>
                     <th>Dif. to 8h</th>
                 </tr>
+                <tr th:each="user: ${listUser}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.roles}"></td>
                 </thead>
+
+                <tbody>
+                <tr th:each="time: ${listTimes}">
+                    <td th:text="${time.date}"></td>
+                    <td th:text="${time.record}"></td>
+                    <td th:text="${time.break}"></td>
+                    <td th:text="${time.total}"></td>
+                    <td th:text="${time.difference}"></td>
+                </tr>
+                </tbody>
+
         </div>
     </div>
 

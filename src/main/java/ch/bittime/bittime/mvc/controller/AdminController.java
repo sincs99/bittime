@@ -104,12 +104,13 @@ public class AdminController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        model.addAttribute("userName", "Welcome " + user.getName());
         return "/admin/reportingView";
     }
 
     @GetMapping("/admin/vacationManagement")
     public String vacationManagement(Model model) {
+
 /**
  * @author Dominic
  */
@@ -124,15 +125,6 @@ public class AdminController {
         model.addAttribute("listVacation", listVacation);
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationManagement";
-    }
-
-    @GetMapping("/admin/profileView")
-    public String profileView(Model model) {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
-        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        return "/admin/profileView";
     }
 
 }

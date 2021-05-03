@@ -42,7 +42,7 @@ public class UserController {
         public String reportingView(Model model){
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             User user = userService.findUserByUserName(auth.getName());
-            model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+            model.addAttribute("userName", "Welcome " + user.getName());
             return "/user/reportingView";
         }
 
