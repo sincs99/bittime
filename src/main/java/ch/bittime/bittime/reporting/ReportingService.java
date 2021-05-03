@@ -32,7 +32,6 @@ public class ReportingService {
 
         Context context = new Context();
         context.setVariable("data", "data");
-
         return templateEngine.process("thymeleaf_template", context);
     }
 

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -44,13 +45,22 @@ public class ReportingController {
     @Autowired
     private ReportingService reportingService;
 
-    @RequestMapping("/generate")
+    @RequestMapping(value = {"/admin/generate/"})
     public String generatePdf(Model model) throws IOException, DocumentException {
 
-        ReportingService thymeleaf2Pdf = new ReportingService();
-        String html = thymeleaf2Pdf.parseThymeleafTemplate();
-        thymeleaf2Pdf.generatePdfFromHtml(html);
+//        ReportingService thymeleaf2Pdf = new ReportingService();
+//        String html = thymeleaf2Pdf.parseThymeleafTemplate();
+//        thymeleaf2Pdf.generatePdfFromHtml(html);
         System.out.println("here's the PDF");
+
+        return "/admin/reportingView";
+    }
+
+    @RequestMapping(value = {"/admin/show/"})
+    public String show(Model model) {
+
+        //Liste in Browser generieren
+        System.out.println("here's the List");
 
         return "/admin/reportingView";
     }
