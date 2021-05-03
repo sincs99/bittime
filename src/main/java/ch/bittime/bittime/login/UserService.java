@@ -66,21 +66,34 @@ public class UserService {
     }
 
 
-    public boolean isUserAdmin(int id) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String role = auth.getAuthorities().toString();
 
-        Optional<User> user = userRepo.findById(id);
-        user.toString();
+    public void deactivateUser(int id) {
+        Optional<User> u = userRepo.findById(id);
+        boolean status;
+        status = u.get().getActive();
 
 
-        if (role.contains("ADMIN")) {
-            return true;
-        }
-        return false;
+        System.out.println(status);
+        u.get().setActive(false);
+        status = u.get().getActive();
+
+        System.out.println(status);
+
     }
 
+    public void activateUser(int id) {
 
+        Optional<User> u = userRepo.findById(id);
+        boolean status;
+        status = u.get().getActive();
+
+
+        System.out.println(status);
+        u.get().setActive(true);
+        status = u.get().getActive();
+
+        System.out.println(status);
+    }
 }
 
 

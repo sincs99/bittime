@@ -27,11 +27,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
-
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -45,42 +40,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
-//    @Override
-//    protected void configure (HttpSecurity http) throws Exception{
-//        http.authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/login").permitAll()
-//                .antMatchers("/registration").permitAll()
-////                .antMatchers("/user/**").hasAnyAuthority("USER")
-//                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-//                .authenticated().and().csrf().disable().formLogin()
-//                .loginPage("/login").failureUrl("/login?error=true")
-//                .defaultSuccessUrl("/admin/home")
-//                .usernameParameter("user_name")
-//                .passwordParameter("password")
-//                .and().logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/login").and().exceptionHandling()
-//                .accessDeniedPage("/access-denied");
-//    }
 
         @Override
         protected void configure (HttpSecurity http) throws Exception{
 
-//        String[] staticResources = {
-//                "/css/**",
-//                "/images/**",
-//                "/fonts/**",
-//                "/scripts/**",
-//        };
+
        http.authorizeRequests()
 
                .antMatchers("/").permitAll()
-//               .antMatchers(staticResources).permitAll()
                .antMatchers("/default").permitAll()
                .antMatchers("/login").permitAll()
                .antMatchers("/admin/**").hasAuthority("ADMIN")//admin home is secured
-               .antMatchers("/modals/**").hasAuthority("ADMIN")
                .antMatchers("/user/**").hasAuthority("USER")
                .anyRequest().authenticated()
                .and()
