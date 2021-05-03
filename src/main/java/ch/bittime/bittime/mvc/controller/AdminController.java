@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ch.bittime.bittime.login.repository.UserRepo;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,7 @@ public class AdminController {
     }
 
     @RequestMapping("/admin/activateUser/{id}")
-    public String deacUser(@PathVariable(name = "id") int id, Model model) {
+    public String activateUser(@PathVariable(name = "id") int id, Model model) {
 
         System.out.println("Request ok");
         Optional<User> i = userService.findUserById(id);
@@ -85,13 +86,13 @@ public class AdminController {
 
         if (roles.contains("USER")) {
             System.out.println("ist User");
-            userService.deactivateUser(id);
-            model.addAttribute("deacUser", "User successful deleted!");
-            System.out.println("User deaktiviert");
+            userService.activateUser(id);
+            model.addAttribute("activateUser", "User successful activated!");
+            System.out.println("User aktiviert");
         } else {
             System.out.println("ist Admin");
-            model.addAttribute("deacAdmin", "You cannot deactivate an Admin");
-            System.out.println("Admin kann nicht deaktiviert werden");
+            model.addAttribute("activateAdmin", "You cannot activate an Admin");
+            System.out.println("Admin kann nicht aktiviert werden");
         }
 
 
@@ -106,12 +107,15 @@ public class AdminController {
     }
 
     @RequestMapping("/admin/deactivateUser/{id}")
-    public String acUser(@PathVariable(name = "id") int id, Model model) {
+    public String deactivateUser(@PathVariable(name = "id") int id, Model model) {
+
+
 
         System.out.println("Request ok");
         Optional<User> i = userService.findUserById(id);
         System.out.println(i);
         String roles;
+
 
 
         roles = String.valueOf(i.get().getRoles());
@@ -120,11 +124,11 @@ public class AdminController {
         if (roles.contains("USER")) {
             System.out.println("ist User");
             userService.deactivateUser(id);
-            model.addAttribute("deacUser", "User successful deleted!");
+            model.addAttribute("deactivateUser", "User successful deactivated!");
             System.out.println("User deaktiviert");
         } else {
             System.out.println("ist Admin");
-            model.addAttribute("deacAdmin", "You cannot deactivate an Admin");
+            model.addAttribute("deactivateAdmin", "You cannot deactivate an Admin");
             System.out.println("Admin kann nicht deaktiviert werden");
         }
 
@@ -136,7 +140,9 @@ public class AdminController {
         model.addAttribute("listUser", listUser);
 
 
+
         return "redirect:/admin/userPanel";
+
     }
 
 

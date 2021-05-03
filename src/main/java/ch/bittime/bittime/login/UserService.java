@@ -80,6 +80,20 @@ public class UserService {
         System.out.println(status);
 
     }
+
+    public void activateUser(int id) {
+
+        Optional<User> u = userRepo.findById(id);
+        boolean status;
+        status = u.get().getActive();
+
+
+        System.out.println(status);
+        u.get().setActive(true);
+        status = u.get().getActive();
+
+        System.out.println(status);
+    }
 }
 
 
