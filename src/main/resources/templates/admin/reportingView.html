@@ -85,8 +85,11 @@
 
       <p></p>
 
-      <button class="button button1">Show here</button>
-      <button class="button button2">Generate PDF</button>
+      <button class="button button1" name="showHere" value="show" type="Submit"
+              th:text="Show Here"></button>
+
+      <button class="button button2" name="generatePdf" value="generate" type="Submit"
+              th:text="Generate PDF"></button>
 
       <p></p>
 
@@ -107,16 +110,17 @@
         </tr>
         </thead>
 
-        <tbody>
-        <tr th:each="time: ${listTimes}">
-          <td th:text="${time.date}"></td>
-          <td th:text="${time.record}"></td>
-          <td th:text="${time.break}"></td>
-          <td th:text="${time.total}"></td>
-          <td th:text="${time.difference}"></td>
-      </tr>
-      </tbody>
+<!--        <tbody>-->
+<!--        <tr th:each="time: ${listTimes}">-->
+<!--          <td th:text="${time.date}"></td>-->
+<!--          <td th:text="${time.record}"></td>-->
+<!--          <td th:text="${time.break}"></td>-->
+<!--          <td th:text="${time.total}"></td>-->
+<!--          <td th:text="${time.difference}"></td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
 
+      </table>
   </div>
 </div>
 

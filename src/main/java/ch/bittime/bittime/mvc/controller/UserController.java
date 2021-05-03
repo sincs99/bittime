@@ -19,8 +19,6 @@ public class UserController {
 
         @Autowired
         private UserService userService;
-        @Autowired
-        private UserRepo userRepo;
 
         @GetMapping("/user/timeRecording")
         public String timeRecording(Model model){
@@ -42,7 +40,7 @@ public class UserController {
         public String reportingView(Model model){
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             User user = userService.findUserByUserName(auth.getName());
-            model.addAttribute("userName", "Welcome " + user.getName());
+            model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
             return "/user/reportingView";
         }
 

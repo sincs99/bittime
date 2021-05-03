@@ -41,7 +41,7 @@
     <div class="panel-group" style="margin-top:40px">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <span th:utext="${name}"></span>
+                <span th:utext="${userName}"></span>
             </div>
 
             <div class="panel-body">
@@ -93,15 +93,10 @@
                     <th>Total Worktime</th>
                     <th>Dif. to 8h</th>
                 </tr>
-                <tr th:each="user: ${listUser}">
-                    <td th:text="${user.id}"></td>
-                    <td th:text="${user.name}"></td>
-                    <td th:text="${user.lastName}"></td>
-                    <td th:text="${user.email}"></td>
-                    <td th:text="${user.roles}"></td>
                 </thead>
-
                 <tbody>
+                <!-- Warten auf Datenbankanbindung
+
                 <tr th:each="time: ${listTimes}">
                     <td th:text="${time.date}"></td>
                     <td th:text="${time.record}"></td>
@@ -109,8 +104,9 @@
                     <td th:text="${time.total}"></td>
                     <td th:text="${time.difference}"></td>
                 </tr>
+                -->
                 </tbody>
-
+            </table>
         </div>
     </div>
 

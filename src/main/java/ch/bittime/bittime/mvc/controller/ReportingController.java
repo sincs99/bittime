@@ -44,7 +44,7 @@ public class ReportingController {
     @Autowired
     private ReportingService reportingService;
 
-    @RequestMapping("/admin/reportingView/generatePdf")
+    @RequestMapping("/generate")
     public String generatePdf(Model model) throws DocumentException, IOException {
 
         ReportingService thymeleaf2Pdf = new ReportingService();
