@@ -3,6 +3,7 @@ package ch.bittime.bittime.mvc.controller;
 import ch.bittime.bittime.login.User;
 import ch.bittime.bittime.login.UserService;
 import ch.bittime.bittime.login.repository.UserRepo;
+import ch.bittime.bittime.reporting.ReportingService;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -40,11 +41,13 @@ public class ReportingController {
     private UserService userService;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private ReportingService reportingService;
 
     @RequestMapping("/admin/reportingView/generatePdf")
     public String generatePdf(Model model) throws DocumentException, IOException {
 
-        ReportingController thymeleaf2Pdf = new ReportingController();
+        ReportingService thymeleaf2Pdf = new ReportingService();
         String html = thymeleaf2Pdf.parseThymeleafTemplate();
         thymeleaf2Pdf.generatePdfFromHtml(html);
         System.out.println("here's the PDF");
@@ -52,29 +55,4 @@ public class ReportingController {
         return "/admin/reportingView";
     }
 
-    public String parseThymeleafTemplate() {
-        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-
-        TemplateEngine templateEngine = new TemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver);
-
-        Context context = new Context();
-        context.setVariable("data", "data");
-
-        return templateEngine.process("thymeleaf_template", context);
-    }
-
-    public void generatePdfFromHtml(String html) throws IOException, DocumentException {
-        String outputFolder = System.getProperty("user.home") + File.separator + "thymeleaf.pdf";
-
-        OutputStream outputStream = new FileOutputStream(outputFolder);
-        ITextRenderer renderer = new ITextRenderer();
-        renderer.setDocumentFromString(html);
-        renderer.layout();
-        renderer.createPDF(outputStream);
-
-        outputStream.close();
-    }
 }
