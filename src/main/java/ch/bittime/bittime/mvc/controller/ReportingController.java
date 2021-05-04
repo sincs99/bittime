@@ -65,4 +65,24 @@ public class ReportingController {
         return "/admin/reportingView";
     }
 
+    @RequestMapping(value = {"/user/generate/"})
+    public String generateUserPdf(Model model) throws IOException, DocumentException {
+
+//        ReportingService thymeleaf2Pdf = new ReportingService();
+//        String html = thymeleaf2Pdf.parseThymeleafTemplate();
+//        thymeleaf2Pdf.generatePdfFromHtml(html);
+        System.out.println("here's the PDF");
+
+        return "/user/reportingView";
+    }
+
+    @RequestMapping(value = {"/user/show/"})
+    public String showUser(Model model) {
+
+        //Liste in Browser generieren
+        System.out.println("here's the List");
+
+        return "/user/reportingView";
+    }
+
 }

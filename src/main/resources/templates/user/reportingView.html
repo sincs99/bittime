@@ -54,8 +54,6 @@
                 </div>
             </div>
 
-            user reportingView
-
             <p>TODO</p>
             <!-- button todo: <a th:href="@{/user/...report?}"><button>Um Report zu generieren</button></a>-->
 
@@ -75,8 +73,9 @@
 
             <p></p>
 
-            <button class="button button1">Show here</button>
-            <button class="button button2">Generate PDF</button>
+            <a th:href="@{show/}" th:text="ShowList" class="button button1"></a>
+
+            <a th:href="@{generate/}" th:text="GenerateReport" class="button button2"></a>
 
             <p></p>
 
