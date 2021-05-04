@@ -46,12 +46,16 @@ public class ReportingController {
     private ReportingService reportingService;
 
     @RequestMapping(value = {"/admin/generate/"})
+
     public String generatePdf(Model model) throws IOException, DocumentException {
 
-//        ReportingService thymeleaf2Pdf = new ReportingService();
-//        String html = thymeleaf2Pdf.parseThymeleafTemplate();
-//        thymeleaf2Pdf.generatePdfFromHtml(html);
-        System.out.println("here's the PDF");
+        reportingService.createPdf();
+        System.out.println("your PDF ");
+//        String htmlText = "Abc";
+//        ReportingService thymeleaf2Pdf = new ReportingService(htmlText);
+//        htmlText = thymeleaf2Pdf.parseThymeleafTemplate();
+//        thymeleaf2Pdf.generatePdfFromHtml(htmlText);
+//        System.out.println("here's the PDF");
 
         return "/admin/reportingView";
     }
