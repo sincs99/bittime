@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>BitTime Admin Panel</title>
+  <!--  <link rel="stylesheet" type="text/css" href="@{/css/styles.css}"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+  <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+
+  <meta name="author" content="Robin">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 10px;
+      font-family: sans-serif;
+      line-height: 1.6;
+    }
+
+    body {
+      background: #78accd;
+      color: #333333;
+      font-size: 1.5rem;
+    }
+
+    ul {
+      list-style: none;
+    }
+    .main {
+      display: flex;
+      width:  50%;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+    .left{
+      float: left;
+      background: #ffffff;
+      width: 90%;
+      max-width: 40rem;
+      min-height: 40rem;
+      margin: 5rem auto;
+      display: grid;
+      margin-right:10px;
+      grid-template-rows: 8rem auto 10rem;
+      box-shadow: 0 1rem 2.5rem #1b405e;
+    }
+    #divButton{
+      width: 50%;
+
+    }
+    #divDate{
+      width: 50%;
+    }
+    .right{
+      float:left;
+      background: #ffffff;
+      width: 90%;
+      max-width: 40rem;
+      min-height: 40rem;
+      margin: 5rem auto;
+      margin-left:0px;
+      box-shadow: 0 1rem 2.5rem #1b405e;
+    }
+    .time_frame_and_break_header {
+      padding: 0 1.25rem;
+      color: #7d8994;
+      display: flex;
+
+      align-items: center;
+    }
+    .time_frame_body{
+      padding: 0 1.25rem;
+      color: #7d8994;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .break_frame_body{
+      padding: 0 1.25rem;
+      color: #7d8994;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #starttime {
+      width: 100px;
+
+    }
+    #endtime {
+      width: 100px;
+
+    }
+    #startbreak {
+      width: 100px;
+    }
+    #endbreak {
+      width: 100px;
+    }
+
+    span {
+      content: "\003E";
+    }
+    span {
+      content: "\003C";
+    }
+    .card__header{
+      padding: 0 1.25rem;
+      color: #7d8994;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card__body {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+    .card__body--days {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 4rem;
+    }
+    .card__body--days li {
+      flex: 1;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+      color: #7d8994;
+      margin: 0 1px;
+    }
+    .card__body--dates {
+      display: grid;
+      gap: 3px;
+      grid-template-columns: repeat(7, 1fr);
+      justify-items: center;
+      text-align: center;
+    }
+    .card__body--dates li {
+      width: 3.5rem;
+      height: 3.5rem;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+      position: relative;
+    }
+    .card__body--dates li.prev,
+    .card__body--dates li.next {
+      color: #ccc;
+    }
+    .card__body--dates li.active {
+      background: #de6e46;
+      color: #ffffff;
+      border-radius: 50%;
+    }
+    .card__body--dates li {
+      border: 2px solid;
+      border-radius: 50%;
+    }
+    .card__body--dates li.circle span {
+      position: absolute;
+      top: -0.75rem;
+      right: -0.5rem;
+      width: 1.75rem;
+      height: 1.75rem;
+      font-size: 1.2rem;
+      color: #ffffff;
+      border-radius: 50%;
+    }
+    .card__body--dates  {
+      border-color: #de6e46;
+    }
+    .card__body--dates .circle.orange span {
+      background: #de6e46;
+    }
+    .card__body--dates {
+      border-color: #ae5989;
+    }
+    .card__body--dates .circle.purple span {
+      background: #ae5989;
+    }
+
+  </style>
+</head>
+<body >
+
+<script src="calendar.js" async>
+
+</script>
+
+<!--<main class="card">-->
+
+<!-- <div class="container">
+
+<form action="@{/logout}" method="get">
+  <button class="btn btn-md btn-danger btn-block" name="registration"
+          type="Submit">Logout
+  </button>
+</form> -->
+
+<div class="panel-group" style="margin-top:40px">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span utext="${userName}"></span>
+      </div>
+    <!-- <div class="panel-body">
+    <div class="topnav">
+      <a href="@{/admin/home}">Home</a>
+      <a href="@{/admin/registration}">Registration</a>
+      <a href="@{/admin/userPanel}">Users</a>
+      <a class="active" href="@{/admin/timeRecording}">Time Recording</a>
+      <a href="@{/admin/reportingView}">Reporting</a>
+      <a href="@{/admin/vacationManagement}">Vacation Management</a>
+      <a href="@{/admin/profileView}">Profile</a>
+    </div>
+  </div> -->
+    <div class="main">
+      <div class="left">
+        <section class="card__header">
+
+          <div id="divButton" name="divButton">
+          <button onclick="lastMonth()"><span>&#60;</span></button>
+          <button onclick="nextMonth()"><span>&#62;</span></button>
+          </div>
+          <div id="divDate" name="divDate">
+          <h3 id="cMonthYear"> </h3>
+          <h3 id="Year"></h3>
+            <h3 id="currentDay"></h3>
+          </div>
+
+
+        </section>
+
+
+        <section class="card__body">
+          <ul class="card__body--days">
+            <li>mon</li>
+            <li>tue</li>
+            <li>wed</li>
+            <li>thu</li>
+            <li>fri</li>
+            <li>sat</li>
+            <li>sun</li>
+          </ul>
+          <ul class="card__body--dates">
+            <li id="f1" onclick="showDay(this.id)"></li>
+            <li id="f2" onclick="showDay(this.id)"></li>
+            <li id="f3" onclick="showDay(this.id)"></li>
+            <li id="f4" onclick="showDay(this.id)"></li>
+            <li id="f5" onclick="showDay(this.id)"></li>
+            <li id="f6" onclick="showDay(this.id)"></li>
+            <li id="f7" onclick="showDay(this.id)"></li>
+            <li id="f8" onclick="showDay(this.id)"></li>
+            <li id="f9" onclick="showDay(this.id)"></li>
+            <li id="f10" onclick="showDay(this.id)"></li>
+            <li id="f11" onclick="showDay(this.id)"></li>
+            <li id="f12" onclick="showDay(this.id)"></li>
+            <li id="f13" onclick="showDay(this.id)"></li>
+            <li id="f14" onclick="showDay(this.id)"></li>
+            <li id="f15" onclick="showDay(this.id)"></li>
+            <li id="f16" onclick="showDay(this.id)"></li>
+            <li id="f17" onclick="showDay(this.id)"></li>
+            <li id="f18" onclick="showDay(this.id)"></li>
+            <li id="f19" onclick="showDay(this.id)"></li>
+            <li id="f20" onclick="showDay(this.id)"></li>
+            <li id="f21" onclick="showDay(this.id)"></li>
+            <li id="f22" onclick="showDay(this.id)"></li>
+            <li id="f23" onclick="showDay(this.id)"></li>
+            <li id="f24" onclick="showDay(this.id)"></li>
+            <li id="f25" onclick="showDay(this.id)"></li>
+            <li id="f26" onclick="showDay(this.id)"></li>
+            <li id="f27" onclick="showDay(this.id)"></li>
+            <li id="f28" onclick="showDay(this.id)"></li>
+            <li id="f29" onclick="showDay(this.id)"></li>
+            <li id="f30" onclick="showDay(this.id)"></li>
+            <li id="f31" onclick="showDay(this.id)"></li>
+            <li id="f32" onclick="showDay(this.id)"></li>
+            <li id="f33" onclick="showDay(this.id)"></li>
+            <li id="f34" onclick="showDay(this.id)"></li>
+            <li id="f35" onclick="showDay(this.id)"></li>
+            <li id="f36" onclick="showDay(this.id)"></li>
+            <li id="f37" onclick="showDay(this.id)"></li>
+            <li id="f38" onclick="showDay(this.id)"></li>
+            <li id="f39" onclick="showDay(this.id)"></li>
+            <li id="f40" onclick="showDay(this.id)"></li>
+            <li id="f41" onclick="showDay(this.id)"></li>
+            <li id="f42" onclick="showDay(this.id)"></li>
+          </ul>
+        </section>
+      </div>
+      <div class="right">
+
+
+
+        <section class="time_frame_and_break_header">
+
+        </section>
+        <section class="time_frame_body">
+          <label for="starttime">Start time:</label>
+          <input type="time" id="starttime" name="starttime">
+          <label for="endtime">End time:</label>
+          <input type="time" id="endtime" name="endtime">
+
+        </section>
+        <section class="break_frame_body">
+          <label for="startbreak">Start break:</label>
+          <input type="time" id="startbreak" name="startbreak">
+          <label for="endbreak">End break:</label>
+          <input type="time" id="endbreak" name="endbreak">
+
+
+
+        </section>
+        <section>
+          <h1>Type of time scheduling</h1>
+          <input type="radio" id="work" name="time" value="work">
+          <label for="work">Work</label><br>
+          <input type="radio" id="vacation" name="time" value="vacation">
+          <label for="vacation">Vacation</label><br>
+          <input type="radio" id="sick" name="time" value="sick">
+          <label for="sick">Sick</label><br>
+          <h3 id="sick2">asd</h3>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</body>
+</html>
