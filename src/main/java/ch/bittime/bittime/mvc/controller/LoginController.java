@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalTime;
 
 /**
  * @author Pascal
@@ -25,17 +26,17 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController {
     @Autowired
     private UserService userService;
+
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
-    public ModelAndView login(){
+    public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
 
-
     @RequestMapping(value = "/admin/registration", method = RequestMethod.GET)
-    public ModelAndView registration(Model model){
+    public ModelAndView registration(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         modelAndView.addObject("user", user);
@@ -46,8 +47,6 @@ public class LoginController {
         model.addAttribute("userName", "Welcome " + userData.getUserName() + "/" + userData.getName() + " " + userData.getLastName() + " (" + userData.getEmail() + ")");
         return modelAndView;
     }
-
-
 
 
     @RequestMapping(value = "/admin/registration", method = RequestMethod.POST)
@@ -71,13 +70,36 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/admin/home", method = RequestMethod.GET)
-    public ModelAndView adminHome(){
+    @RequestMapping(value = "/admin/home", method = RequestMethod.GET)
+    public ModelAndView adminHome() {
+
+
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Nur für Admin ersichtlich");
+
+
+        LocalTime time = LocalTime.now();
+        System.out.println(time.getHour());
+
+
+        if (time.getHour() >= 17 && time.getHour() <= 21) {
+            modelAndView.addObject("adminMessage", "Good evening " + user.getName() + " " + user.getLastName() + " enjoy your after work beer :)");
+            System.out.println(time.getHour());
+        } else if (time.getHour() >= 22) {
+            modelAndView.addObject("adminMessage", "It's late " + user.getName() + " " + user.getLastName() + " better go to bed, Good night");
+            System.out.println(time.getHour());
+        } else if (time.getHour() >= 6 && time.getHour() <= 9) {
+            modelAndView.addObject("adminMessage", "Good Morning " + user.getName() + " " + user.getLastName() + " have a nice day and do some good work");
+            System.out.println(time.getHour());
+        } else if (time.getHour() >= 10 && time.getHour() <= 16) {
+            modelAndView.addObject("adminMessage", "Good Day " + user.getName() + " " + user.getLastName() + " still here working, huh?");
+            System.out.println(time.getHour());
+        }
+
+        modelAndView.addObject("userName", "Welcome " + user.getUserName() +
+                "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+
         modelAndView.setViewName("admin/home");
         return modelAndView;
     }
@@ -89,24 +111,38 @@ public class LoginController {
 
 
     @GetMapping(value = "/user/home")
-    public  ModelAndView showUserHome(){
+    public ModelAndView showUserHome() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("userMessage", "Diese Nachricht ist nur für den User");
 
+        LocalTime time = LocalTime.now();
+
+
+        if (time.getHour() >= 17 && time.getHour() <= 21) {
+            modelAndView.addObject("adminMessage", "Good evening " + user.getName() + " " + user.getLastName() + " enjoy your after work beer :)");
+            System.out.println(time.getHour());
+        } else if (time.getHour() >= 22) {
+            modelAndView.addObject("adminMessage", "It's late " + user.getName() + " " + user.getLastName() + " better go to bed, Good night");
+            System.out.println(time.getHour());
+        } else if (time.getHour() >= 6 && time.getHour() <= 9) {
+            modelAndView.addObject("adminMessage", "Good Morning " + user.getName() + " " + user.getLastName() + " have a nice day and do some good work");
+            System.out.println(time.getHour());
+        } else if (time.getHour() >= 10 && time.getHour() <= 16) {
+            modelAndView.addObject("adminMessage", "Good Day " + user.getName() + " " + user.getLastName() + " still here working, huh?");
+            System.out.println(time.getHour());
+        }
 
 
         return modelAndView;
     }
 
     @GetMapping(value = "/default")
-    public  String defaultAfterLogin(HttpServletRequest request, HttpServletResponse response){
+    public String defaultAfterLogin(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().toString();
 
-        if (role.contains("ADMIN")){
+        if (role.contains("ADMIN")) {
             System.out.println("default Login Method");
             return "redirect:/admin/home/";
         }

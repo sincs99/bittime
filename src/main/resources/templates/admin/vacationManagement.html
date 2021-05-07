@@ -5,7 +5,7 @@
 
 <head>
   <title>BitTime Admin Panel</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -58,14 +58,17 @@
           </tr>
           </thead>
 
-          <!-- todo -->
+          <!-- @Dominic-->
           <tbody>
-          <tr th:each="user: ${listUser}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.lastName}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.roles}"></td>
+          <tr th:each="vacation: ${listVacation}">
+            <td th:text="${vacation.user.id }"></td>
+            <td th:text="${vacation.user.name}"></td>
+            <td th:text="${vacation.user.lastName}"></td>
+            <td>
+              <th:block th:text="${vacation.startDate}"/> -
+              <th:block th:text="${vacation.endDate}"/>
+            </td>
+            <td th:text="${vacation.acceptState}"></td>
           </tr>
           </tbody>
         </table>

@@ -4,7 +4,7 @@
 
 <head>
   <title>BitTime User Panel</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -34,6 +34,19 @@
           <a th:href="@{/user/reportingView}">Reporting</a>
           <a th:href="@{/user/profileView}">Profile</a>
         </div>
+
+        <div>
+
+          <p></p><br>
+
+          <div th:class="text-center" th:text="${userMessage}"></div>
+
+          <p></p><br>
+          <p></p><br>
+
+        </div>
+
+
 
         <img th:src="@{/images/Logotsp.png}" class="img-responsive center-block" width="400" height="400"
              alt="Logo"/>
