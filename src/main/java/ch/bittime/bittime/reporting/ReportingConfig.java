@@ -12,7 +12,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 @Configuration
 public class ReportingConfig {
 
-    // Bean doen't work, program crashes when implemented.
+    // Bean doen't work, "HTTP Status 500 – Internal Server Error" at login when implemented...
 
 //    @Bean
 //    public ClassLoaderTemplateResolver parseThymeleafTemplate() {
@@ -27,12 +27,13 @@ public class ReportingConfig {
 //        return templateResolver;
 
 
-////       Other approach didn't work aswell
-////        TemplateEngine templateEngine = new TemplateEngine();
-////        templateEngine.setTemplateResolver(templateResolver);
-////        Context context = new Context();
-////        context.setVariable("data", "data");
-////        return templateEngine.process("thymeleaf_template", context);
+    //       v.1 - didn't work...
+
+//        TemplateEngine templateEngine = new TemplateEngine();
+//        templateEngine.setTemplateResolver(templateResolver);
+//        Context context = new Context();
+//        context.setVariable("data", "data");
+//        return templateEngine.process("thymeleaf_template", context);
 
 //    }
 
