@@ -28,10 +28,11 @@ public class ReportingService {
     @Autowired
     private TemplateEngine templateEngine;
 
+    // v.2
     public void createPdf() throws IOException, DocumentException {
 
         Context context = new Context();
-        context.setVariable("adf", "hello");
+        context.setVariable("context", "helloWorld");
         String processHtml = templateEngine.process("okay", context);
         OutputStream outputStream = new FileOutputStream("time.pdf");
         ITextRenderer renderer = new ITextRenderer();
@@ -42,6 +43,8 @@ public class ReportingService {
         renderer.finishPDF();
         outputStream.close();
     }
+
+    // v.1 - not working...
 
 //    @Autowired
 //    SpringTemplateEngine templateEngine;
@@ -57,4 +60,6 @@ public class ReportingService {
 //
 //        outputStream.close();
 //    }
+
+
 }

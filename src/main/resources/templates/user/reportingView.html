@@ -54,11 +54,10 @@
                 </div>
             </div>
 
-            <p>TODO</p>
             <!-- button todo: <a th:href="@{/user/...report?}"><button>Um Report zu generieren</button></a>-->
 
             <p></p>
-            <label>CREATE REPORT</label>
+            <label>CREATE TIME REPORT</label>
             <p></p>
 
             <div class="dropdown">
@@ -72,10 +71,13 @@
             </div>
 
             <p></p>
+            <p></p>
 
-            <a th:href="@{show/}" th:text="ShowList" class="button button1"></a>
+            <p>Generate PDF not working, error if clicked.</p>
 
-            <a th:href="@{generate/}" th:text="GenerateReport" class="button button2"></a>
+            <a th:href="@{show/}" th:text="Show_List" class="button button1"></a>
+
+            <a th:href="@{generate/}" th:text="Generate_PDF" class="button button2"></a>
 
             <p></p>
 
