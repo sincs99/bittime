@@ -4,23 +4,19 @@ package ch.bittime.bittime.mvc.controller;
  * @author Pascal
  */
 
+import ch.bittime.bittime.login.TimeRecord;
 import ch.bittime.bittime.login.User;
 import ch.bittime.bittime.login.UserService;
 import ch.bittime.bittime.login.Vacation;
+import ch.bittime.bittime.login.repository.UserRepo;
 import ch.bittime.bittime.login.repository.VacationRepo;
-
-import org.apache.logging.log4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ch.bittime.bittime.login.repository.UserRepo;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -174,6 +170,13 @@ public class AdminController {
         return "/admin/timeRecording";
     }
 
+    //@PostMapping recordTime() method @Dominic
+    @PostMapping("/admin/timeRecording")
+    public String recordTime(@ModelAttribute TimeRecord timeRecord, Model model){
+    System.out.println(timeRecord);
+    return timeRecording(model);
+    }
+
     @GetMapping("/admin/reportingView")
     public String reportingView(Model model) {
 
@@ -211,6 +214,7 @@ public class AdminController {
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationManagement";
     }
+
 
 
 }
