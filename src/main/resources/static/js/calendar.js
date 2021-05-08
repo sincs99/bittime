@@ -318,6 +318,13 @@ function showDay(id) {
     } else {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Sunday";
     }
+
+    /**
+     * @author Dominic
+     * let month
+     * switch case
+     * document.get...
+     */
     //hidden input field
     let month = document.getElementById("cMonthYear").innerHTML;
     let c =-1;
