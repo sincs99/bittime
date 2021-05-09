@@ -318,6 +318,7 @@ function showDay(id) {
     } else {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Sunday";
     }
+
 // Dominic @ Robin suggestion:
 //         let currentDay = document.getElementById("currentDay");
 //         let monthDate = document.getElementById(id).innerHTML;

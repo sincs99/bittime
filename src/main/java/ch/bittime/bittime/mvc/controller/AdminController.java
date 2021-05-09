@@ -8,6 +8,7 @@ import ch.bittime.bittime.login.TimeRecord;
 import ch.bittime.bittime.login.User;
 import ch.bittime.bittime.login.UserService;
 import ch.bittime.bittime.login.Vacation;
+import ch.bittime.bittime.login.repository.TimeRecordRepo;
 import ch.bittime.bittime.login.repository.UserRepo;
 import ch.bittime.bittime.login.repository.VacationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class AdminController {
     //vacationRep
     @Autowired
     private VacationRepo vacationRepo;
+    @Autowired
+    private TimeRecordRepo timeRecordRepo;
 
 
     @RequestMapping(value = "/admin/deleteUser/{id}")
@@ -173,8 +176,9 @@ public class AdminController {
     //@PostMapping recordTime() method @Dominic
     @PostMapping("/admin/timeRecording")
     public String recordTime(@ModelAttribute TimeRecord timeRecord, Model model){
-    System.out.println(timeRecord);
-    return timeRecording(model);
+        System.out.println(timeRecord);
+        timeRecordRepo.save(timeRecord);
+        return timeRecording(model);
     }
 
     @GetMapping("/admin/reportingView")

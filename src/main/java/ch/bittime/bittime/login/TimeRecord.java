@@ -29,29 +29,31 @@ public class TimeRecord {
     private int id;
 
 
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private Date date;
 
-    @DateTimeFormat(pattern = "hh:mm")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "starttime")
     private Date starttime;
 
-    @DateTimeFormat(pattern = "hh:mm")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "endtime")
     private Date endtime;
 
-    @DateTimeFormat(pattern = "hh:mm")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "startbreak")
     private Date startbreak;
 
-    @DateTimeFormat(pattern = "hh:mm")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "endbreak")
     private Date endbreak;
 
     @Column(name = "time")
     private String time;
 
-
+    public int totalWorkTimeWithoutBreaksInMinutes() {
+        return 0;
+    }
 }
 
