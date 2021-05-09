@@ -318,5 +318,66 @@ function showDay(id) {
     } else {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Sunday";
     }
+
+// Dominic @ Robin suggestion:
+//         let currentDay = document.getElementById("currentDay");
+//         let monthDate = document.getElementById(id).innerHTML;
+//         let idNum = Number(id.substr(1));
+//
+//         const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+//
+//         let weekday = weekdays[idNum %7];
+//
+//         currentDay.innerHTML = monthDate + " / " + weekday;
+
+        /**
+     * @author Dominic
+     * let month
+     * switch case
+     * document.get...
+     */
+    //hidden input field
+    let month = document.getElementById("cMonthYear").innerHTML;
+    let c =-1;
+    switch(month) {
+        case "January":
+            c = 1;
+            break;
+        case "February":
+            c = 2;
+            break;
+        case "March":
+            c = 3;
+            break;
+        case "April":
+            c = 4;
+            break;
+        case "May":
+            c = 5;
+            break;
+        case "June":
+            c = 6;
+            break;
+        case "July":
+            c = 7;
+            break;
+        case "August":
+            c = 8;
+            break;
+        case "September":
+            c = 9;
+            break;
+        case "October":
+            c = 10;
+            break;
+        case "November":
+            c = 11;
+            break;
+        case "December":
+            c = 12;
+            break;
+    }
+    document.getElementById("calendarDate").value=document.getElementById("Year").innerHTML+"-"+c+"-" + document.getElementById(id).innerHTML;
+
 }
 

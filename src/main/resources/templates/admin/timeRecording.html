@@ -251,12 +251,13 @@
                 </div>
             </div>
             <div class="main">
+                <form method="post" action="#" th:action="@{/admin/timeRecording}">
                 <div class="left">
                     <section class="card__header">
 
                       <div th:id="divButton" name="divButton">
-                          <button th:onclick="lastMonth()"><span>&#60;</span></button>
-                          <button th:onclick="nextMonth()"><span>&#62;</span></button>
+                          <button type="button" th:onclick="lastMonth()"><span>&#60;</span></button>
+                          <button type="button" th:onclick="nextMonth()"><span>&#62;</span></button>
                       </div>
 
                         <div th:id="divDate" name="divDate">
@@ -323,7 +324,9 @@
                             <li th:id="f40" onclick="showDay(this.id)"></li>
                             <li th:id="f41" onclick="showDay(this.id)"></li>
                             <li th:id="f42" onclick="showDay(this.id)"></li>
-                        </ul>
+                       </ul>
+                        <!--@ Dominic input tag calendarDate -->
+                        <input type="hidden" id="calendarDate" name="date" />
                     </section>
                 </div>
 
@@ -350,7 +353,7 @@
                     </section>
                     <section>
                         <h1>Type of time scheduling</h1>
-                        <input th:type="radio" th:id="work" th:name="time" th:value="work">
+                        <input th:type="radio" th:id="work" th:name="time" th:value="work" checked>
                         <label th:for="work">Work</label><br>
                         <input th:type="radio" th:id="vacation" th:name="time" th:value="vacation">
                         <label th:for="vacation">Vacation</label><br>
@@ -358,7 +361,15 @@
                         <label th:for="sick">Sick</label><br>
                         <h3 th:id="sick2">asd</h3>
                     </section>
+
+<!-- Formular statt onclick -->
+                    <section class="timebt">
+                        <!-- @Dominic record time, onclick... -->
+                        <button type="submit">record time</button>
+                    </section>
+
                 </div>
+                </form>
             </div>
         </div>
     </div>
