@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>BitTime Admin Panel</title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+  <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+
+  <meta name="author" content="Robin">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 10px;
+      font-family: sans-serif;
+      line-height: 1.6;
+    }
+
+    body {
+      background: #ffffff;
+      color: #333333;
+      font-size: 1.5rem;
+    }
+
+    ul {
+      list-style: none;
+    }
+    .main {
+      display: flex;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+    .left{
+      border: 3px solid #AC05ACFF;
+      padding: 20px;
+
+      width: 80%;
+      float: left;
+
+
+      /* float: left;
+      background: #ffffff;
+      width: 90%;
+      max-width: 40rem;
+       min-height: 40rem;
+       margin: 5rem auto;
+       display: grid;
+       margin-right:10px;
+       grid-template-rows: 8rem auto 10rem;
+       box-shadow: 0 1rem 2.5rem #1b405e; */
+    }
+
+    #divButton{
+      width: 50%;
+
+    }
+    #divDate{
+      width: 50%;
+    }
+
+    #dayRightSide{
+      width: 50%;
+    }
+
+    .right{
+      border: 3px solid #AC05ACFF;
+      padding: 20px;
+
+      width: 50%;
+      float: left;
+
+
+      /*  float:left;
+        background: #ffffff;
+        width: 90%;
+     max-width: 40rem;
+      min-height: 40rem;
+      margin: 5rem auto;
+      margin-left:0px;
+      box-shadow: 0 1rem 2.5rem #1b405e; */
+    }
+    .time_frame_and_break_header {
+      padding: 0 1.25rem;
+      color: #7d8994;
+      display: flex;
+
+      align-items: center;
+    }
+    .time_frame_body{
+      padding: 0 1.25rem;
+      color: #7d8994;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .break_frame_body{
+      padding: 0 1.25rem;
+      color: #7d8994;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #starttime {
+      width: 100px;
+
+    }
+    #endtime {
+      width: 100px;
+
+    }
+    #startbreak {
+      width: 100px;
+    }
+    #endbreak {
+      width: 100px;
+    }
+
+    span {
+      content: "\003E";
+    }
+    span {
+      content: "\003C";
+    }
+    .card__header{
+      padding: 0 1.25rem;
+      color: #070000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card__body {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid #0e0000;
+      border-bottom: 1px solid #050000;
+    }
+    .card__body--days {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 4rem;
+
+    }
+    .card__body--days li {
+      flex: 1;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+      color: #020000;
+      margin: 0 1px;
+    }
+    .card__body--dates {
+      display: grid;
+      gap: 3px;
+      grid-template-columns: repeat(7, 1fr);
+      justify-items: center;
+      text-align: center;
+    }
+    .card__body--dates li {
+      width: 3.5rem;
+      height: 3.5rem;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+      position: relative;
+    }
+    .card__body--dates li.prev,
+    .card__body--dates li.next {
+      color: #ccc;
+    }
+    .card__body--dates li.active {
+      background: #0a0000;
+      color: #ffffff;
+      border-radius: 50%;
+    }
+    .card__body--dates li {
+      border: 2px solid;
+      border-radius: 50%;
+    }
+
+    .card__body--dates li:active{
+      background-color: #933a92;
+      transform: translateY(4px);
+    }
+    .card__body--dates li:visited{
+      background-color: #500236;
+    }
+    .card__body--dates li.circle span {
+      position: absolute;
+      top: -0.75rem;
+      right: -0.5rem;
+      width: 1.75rem;
+      height: 1.75rem;
+      font-size: 1.2rem;
+      color: #ffffff;
+      border-radius: 50%;
+    }
+    .card__body--dates  {
+      border-color: #de6e46;
+    }
+    .card__body--dates .circle.orange span {
+      background: #de6e46;
+    }
+    .card__body--dates {
+      border-color: #ae5989;
+    }
+    .card__body--dates .circle.purple span {
+      background: #ae5989;
+    }
+
+  </style>
+</head>
+<body>
+
+<script th:src="@{/js/calendar.js}" async></script>
+
+<!--<main class="card">-->
+
+<div th:class="container">
+
+  <form th:action="@{/logout}" method="get">
+    <button class="btn btn-md btn-danger btn-block" name="registration"
+            type="Submit">Logout
+    </button>
+  </form>
+
+  <div class="panel-group" style="margin-top:40px">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <span th:utext="${userName}"></span>
+      </div>
+      <div class="panel-body">
+        <div class="topnav">
+          <a th:href="@{/admin/home}">Home</a>
+          <a th:href="@{/admin/registration}">Registration</a>
+          <a th:href="@{/admin/userPanel}">Users</a>
+          <a th:href="@{/admin/timeRecording}">Time Recording</a>
+          <a th:href="@{/admin/vacationRecording}">Vacation Recording</a>
+          <a class="active" th:href="@{/admin/sickRecording}">Sick Recording</a>
+          <a th:href="@{/admin/reportingView}">Reporting</a>
+          <a th:href="@{/admin/vacationManagement}">Vacation Management</a>
+          <a th:href="@{/admin/profileView}">Profile</a>
+        </div>
+      </div>
+      <div class="main">
+        <form method="post" action="#" th:action="@{/admin/sickRecording}">
+          <div class="left">
+            <section class="card__header">
+
+              <div th:id="divButton" name="divButton">
+                <button type="button" th:onclick="lastMonth()"><span>&#60;</span></button>
+                <button type="button" th:onclick="nextMonth()"><span>&#62;</span></button>
+              </div>
+
+              <div th:id="divDate" name="divDate">
+                <h3 th:id="cMonthYear"> </h3>
+                <h3 th:id="Year"></h3>
+                <!--  <h3 th:id="currentDay"></h3> -->
+              </div>
+
+              <div th:id="dayRightSide" name="dayRightSide">
+                <h3 th:id="currentDay"></h3>
+              </div>
+            </section>
+
+            <section class="card__body">
+              <ul class="card__body--days">
+                <li>mon</li>
+                <li>tue</li>
+                <li>wed</li>
+                <li>thu</li>
+                <li>fri</li>
+                <li>sat</li>
+                <li>sun</li>
+              </ul>
+              <ul class="card__body--dates">
+                <li th:id="f1" onclick="showDay(this.id)"></li>
+                <li th:id="f2" onclick="showDay(this.id)"></li>
+                <li th:id="f3" onclick="showDay(this.id)"></li>
+                <li th:id="f4" onclick="showDay(this.id)"></li>
+                <li th:id="f5" onclick="showDay(this.id)"></li>
+                <li th:id="f6" onclick="showDay(this.id)"></li>
+                <li th:id="f7" onclick="showDay(this.id)"></li>
+                <li th:id="f8" onclick="showDay(this.id)"></li>
+                <li th:id="f9" onclick="showDay(this.id)"></li>
+                <li th:id="f10" onclick="showDay(this.id)"></li>
+                <li th:id="f11" onclick="showDay(this.id)"></li>
+                <li th:id="f12" onclick="showDay(this.id)"></li>
+                <li th:id="f13" onclick="showDay(this.id)"></li>
+                <li th:id="f14" onclick="showDay(this.id)"></li>
+                <li th:id="f15" onclick="showDay(this.id)"></li>
+                <li th:id="f16" onclick="showDay(this.id)"></li>
+                <li th:id="f17" onclick="showDay(this.id)"></li>
+                <li th:id="f18" onclick="showDay(this.id)"></li>
+                <li th:id="f19" onclick="showDay(this.id)"></li>
+                <li th:id="f20" onclick="showDay(this.id)"></li>
+                <li th:id="f21" onclick="showDay(this.id)"></li>
+                <li th:id="f22" onclick="showDay(this.id)"></li>
+                <li th:id="f23" onclick="showDay(this.id)"></li>
+                <li th:id="f24" onclick="showDay(this.id)"></li>
+                <li th:id="f25" onclick="showDay(this.id)"></li>
+                <li th:id="f26" onclick="showDay(this.id)"></li>
+                <li th:id="f27" onclick="showDay(this.id)"></li>
+                <li th:id="f28" onclick="showDay(this.id)"></li>
+                <li th:id="f29" onclick="showDay(this.id)"></li>
+                <li th:id="f30" onclick="showDay(this.id)"></li>
+                <li th:id="f31" onclick="showDay(this.id)"></li>
+                <li th:id="f32" onclick="showDay(this.id)"></li>
+                <li th:id="f33" onclick="showDay(this.id)"></li>
+                <li th:id="f34" onclick="showDay(this.id)"></li>
+                <li th:id="f35" onclick="showDay(this.id)"></li>
+                <li th:id="f36" onclick="showDay(this.id)"></li>
+                <li th:id="f37" onclick="showDay(this.id)"></li>
+                <li th:id="f38" onclick="showDay(this.id)"></li>
+                <li th:id="f39" onclick="showDay(this.id)"></li>
+                <li th:id="f40" onclick="showDay(this.id)"></li>
+                <li th:id="f41" onclick="showDay(this.id)"></li>
+                <li th:id="f42" onclick="showDay(this.id)"></li>
+              </ul>
+              <!--@ Dominic input tag calendarDate -->
+              <input type="hidden" id="calendarDate" name="date" />
+            </section>
+          </div>
+
+
+          <div class="right">
+            <section class="time_frame_and_break_header">
+
+            </section>
+
+
+            <section class="calculate_button">
+              <button type="button" onclick="">Calculate</button>
+            </section>
+
+            <section>
+              <h1>Type of time scheduling</h1>
+
+              <input th:type="radio" th:id="sick" th:name="time" th:value="sick">
+              <label th:for="sick">Sick</label><br>
+            </section>
+
+            <!-- Formular statt onclick -->
+            <section class="timebt">
+              <!-- @Dominic record time, onclick... -->
+              <button type="submit">record sick</button>
+            </section>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

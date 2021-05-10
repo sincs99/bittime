@@ -245,6 +245,8 @@
                     <a th:href="@{/admin/registration}">Registration</a>
                     <a th:href="@{/admin/userPanel}">Users</a>
                     <a th:class="active" th:href="@{/admin/timeRecording}">Time Recording</a>
+                    <a th:href="@{/admin/vacationRecording}">Vacation Recording</a>
+                    <a th:href="@{/admin/sickRecording}">Sick Recording</a>
                     <a th:href="@{/admin/reportingView}">Reporting</a>
                     <a th:href="@{/admin/vacationManagement}">Vacation Management</a>
                     <a th:href="@{/admin/profileView}">Profile</a>
@@ -347,18 +349,17 @@
                         <input th:type="time" id="startbreak" th:name="startbreak">
                         <label th:for="endbreak">End break:</label>
                         <input th:type="time" id="endbreak" th:name="endbreak">
-
-
-
                     </section>
+
+                    <section class="calculate_button">
+                    <button type="button" onclick="">Calculate</button>
+                    </section>
+
                     <section>
                         <h1>Type of time scheduling</h1>
                         <input th:type="radio" th:id="work" th:name="time" th:value="work" checked>
                         <label th:for="work">Work</label><br>
-                        <input th:type="radio" th:id="vacation" th:name="time" th:value="vacation">
-                        <label th:for="vacation">Vacation</label><br>
-                        <input th:type="radio" th:id="sick" th:name="time" th:value="sick">
-                        <label th:for="sick">Sick</label><br>
+
                         <h3 th:id="sick2">asd</h3>
                     </section>
 
