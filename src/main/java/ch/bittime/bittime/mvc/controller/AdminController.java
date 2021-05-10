@@ -181,6 +181,25 @@ public class AdminController {
         return timeRecording(model);
     }
 
+    @GetMapping("/admin/vacationRecording")
+    public String vacationRecording(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        return "/admin/vacationRecording";
+    }
+
+    @GetMapping("/admin/sickRecording")
+    public String sickRecording(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        return "/admin/sickRecording";
+    }
+
+
     @GetMapping("/admin/reportingView")
     public String reportingView(Model model) {
 
