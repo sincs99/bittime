@@ -52,8 +52,16 @@ public class TimeRecord {
     @Column(name = "time")
     private String time;
 
+    @JoinColumn(name="user")
+    @ManyToOne
+    private User user;
+
     public int totalWorkTimeWithoutBreaksInMinutes() {
-        return 0;
+
+
+       long result = ( (endtime.getTime()-starttime.getTime())-(endbreak.getTime()-startbreak.getTime())) /1000/(60);
+
+        return (int) result;
     }
 }
 

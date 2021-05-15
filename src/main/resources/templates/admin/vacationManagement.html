@@ -70,7 +70,25 @@
               <th:block th:text="${vacation.startDate}"/> -
               <th:block th:text="${vacation.endDate}"/>
             </td>
-            <td th:text="${vacation.acceptState}"></td>
+            <td>
+              <th:block th:switch="${vacation.acceptState}">
+                <th:block th:case="0" >
+
+                  <form method="post" action="#" th:action="@{/admin/vacationManagement}">
+                    <input type="hidden" name="vacation_id" th:value="${vacation.id}" />
+                  <button name="result" value="accept">accept</button>
+                    <button name="result" value="decline">decline</button>
+                </form></th:block>
+                <th:block th:case="1" >accept</th:block>
+                <th:block th:case="-1" >decline</th:block>
+
+              </th:block>
+
+
+
+            </td>
+
+
           </tr>
           </tbody>
         </table>
