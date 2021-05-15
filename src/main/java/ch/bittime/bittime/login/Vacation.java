@@ -1,10 +1,10 @@
 package ch.bittime.bittime.login;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 
 /**
@@ -34,8 +34,10 @@ public class Vacation {
     @JoinColumn(name="user",referencedColumnName="user_id")
     private User user;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name ="start_date")
     private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name ="end_date")
     private Date endDate;
 

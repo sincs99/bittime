@@ -252,103 +252,15 @@
         </div>
       </div>
       <div class="main">
+        <!-- @Dominic -->
         <form method="post" action="#" th:action="@{/admin/vacationRecording}">
-          <div class="left">
-            <section class="card__header">
-
-              <div th:id="divButton" name="divButton">
-                <button type="button" th:onclick="lastMonth()"><span>&#60;</span></button>
-                <button type="button" th:onclick="nextMonth()"><span>&#62;</span></button>
-              </div>
-
-              <div th:id="divDate" name="divDate">
-                <h3 th:id="cMonthYear"> </h3>
-                <h3 th:id="Year"></h3>
-                <!--  <h3 th:id="currentDay"></h3> -->
-              </div>
-
-              <div th:id="dayRightSide" name="dayRightSide">
-                <h3 th:id="currentDay"></h3>
-              </div>
-            </section>
-
-            <section class="card__body">
-              <ul class="card__body--days">
-                <li>mon</li>
-                <li>tue</li>
-                <li>wed</li>
-                <li>thu</li>
-                <li>fri</li>
-                <li>sat</li>
-                <li>sun</li>
-              </ul>
-              <ul class="card__body--dates">
-                <li th:id="f1" onclick="showDay(this.id)"></li>
-                <li th:id="f2" onclick="showDay(this.id)"></li>
-                <li th:id="f3" onclick="showDay(this.id)"></li>
-                <li th:id="f4" onclick="showDay(this.id)"></li>
-                <li th:id="f5" onclick="showDay(this.id)"></li>
-                <li th:id="f6" onclick="showDay(this.id)"></li>
-                <li th:id="f7" onclick="showDay(this.id)"></li>
-                <li th:id="f8" onclick="showDay(this.id)"></li>
-                <li th:id="f9" onclick="showDay(this.id)"></li>
-                <li th:id="f10" onclick="showDay(this.id)"></li>
-                <li th:id="f11" onclick="showDay(this.id)"></li>
-                <li th:id="f12" onclick="showDay(this.id)"></li>
-                <li th:id="f13" onclick="showDay(this.id)"></li>
-                <li th:id="f14" onclick="showDay(this.id)"></li>
-                <li th:id="f15" onclick="showDay(this.id)"></li>
-                <li th:id="f16" onclick="showDay(this.id)"></li>
-                <li th:id="f17" onclick="showDay(this.id)"></li>
-                <li th:id="f18" onclick="showDay(this.id)"></li>
-                <li th:id="f19" onclick="showDay(this.id)"></li>
-                <li th:id="f20" onclick="showDay(this.id)"></li>
-                <li th:id="f21" onclick="showDay(this.id)"></li>
-                <li th:id="f22" onclick="showDay(this.id)"></li>
-                <li th:id="f23" onclick="showDay(this.id)"></li>
-                <li th:id="f24" onclick="showDay(this.id)"></li>
-                <li th:id="f25" onclick="showDay(this.id)"></li>
-                <li th:id="f26" onclick="showDay(this.id)"></li>
-                <li th:id="f27" onclick="showDay(this.id)"></li>
-                <li th:id="f28" onclick="showDay(this.id)"></li>
-                <li th:id="f29" onclick="showDay(this.id)"></li>
-                <li th:id="f30" onclick="showDay(this.id)"></li>
-                <li th:id="f31" onclick="showDay(this.id)"></li>
-                <li th:id="f32" onclick="showDay(this.id)"></li>
-                <li th:id="f33" onclick="showDay(this.id)"></li>
-                <li th:id="f34" onclick="showDay(this.id)"></li>
-                <li th:id="f35" onclick="showDay(this.id)"></li>
-                <li th:id="f36" onclick="showDay(this.id)"></li>
-                <li th:id="f37" onclick="showDay(this.id)"></li>
-                <li th:id="f38" onclick="showDay(this.id)"></li>
-                <li th:id="f39" onclick="showDay(this.id)"></li>
-                <li th:id="f40" onclick="showDay(this.id)"></li>
-                <li th:id="f41" onclick="showDay(this.id)"></li>
-                <li th:id="f42" onclick="showDay(this.id)"></li>
-              </ul>
-              <!--@ Dominic input tag calendarDate -->
-              <input type="hidden" id="calendarDate" name="date" />
-            </section>
-          </div>
-
-
           <div class="right">
             <section class="time_frame_and_break_header">
-
+              <label for="startDate">Start date:</label>
+              <input type="date" id="startDate" name="startDate" required/>
+              <label for="endDate">End date:</label>
+              <input type="date" id="endDate" name="endDate" required/>
             </section>
-
-
-            <section class="calculate_button">
-              <button type="button" onclick="">Calculate</button>
-            </section>
-
-            <section>
-              <h1>Type of time scheduling</h1>
-
-              <input th:type="radio" th:id="vacation" th:name="time" th:value="vacation">
-              <label th:for="vacation">Vacation</label><br>
-            </section>
-
             <!-- Formular statt onclick -->
             <section class="timebt">
               <!-- @Dominic record time, onclick... -->

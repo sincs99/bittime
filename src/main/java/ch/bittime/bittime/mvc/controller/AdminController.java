@@ -175,11 +175,22 @@ public class AdminController {
 
     //@PostMapping recordTime() method @Dominic
     @PostMapping("/admin/timeRecording")
+
     public String recordTime(@ModelAttribute TimeRecord timeRecord, Model model){
-        System.out.println(timeRecord);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        timeRecord.setUser(user);
+
+        // endtime>starttime?
+        //endbreak>startbreak?
+        //startbreak>starttime
+        //endbreak<endtime
+        //model.addAttribute errorMsg
+
         timeRecordRepo.save(timeRecord);
         return timeRecording(model);
     }
+
 
     @GetMapping("/admin/vacationRecording")
     public String vacationRecording(Model model) {
@@ -189,6 +200,22 @@ public class AdminController {
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationRecording";
     }
+
+    //@PostMapping Vaca() method @Dominic
+    @PostMapping("/admin/vacationRecording")
+
+    public String recordVacation(@ModelAttribute Vacation vacation, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        vacation.setUser(user);
+
+        //tests
+        //model.addAttribute errorMsg
+//enddate>startdate?
+        vacationRepo.save(vacation);
+        return vacationRecording(model);
+    }
+
 
     @GetMapping("/admin/sickRecording")
     public String sickRecording(Model model) {
@@ -205,6 +232,8 @@ public class AdminController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+        //@Dominic timeRecords
+        model.addAttribute("timeRecords", timeRecordRepo.findAll());
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/reportingView";
     }
@@ -230,14 +259,28 @@ public class AdminController {
         User user = userService.findUserByUserName(auth.getName());
 
         List<Vacation> listVacation = vacationRepo.findAll();
-        Vacation v = new Vacation();
-        v.setUser(user);
-        listVacation.add(v);
+//        Vacation v = new Vacation();
+//        v.setUser(user);
+       // listVacation.add(v);
         model.addAttribute("listVacation", listVacation);
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationManagement";
     }
-
+    /**
+     * @author Dominic
+     * acceptOrDeclineVacation() method
+     */
+    @PostMapping("/admin/vacationManagement")
+    public String acceptOrDeclineVacation(@RequestParam int vacation_id, @RequestParam String result, Model model) {
+        vacationRepo.findById(vacation_id).ifPresent(vacation -> {
+                    if (vacation.getAcceptState() == 0) {
+                        vacation.setAcceptState("accept".equals(result) ? 1 : -1);
+                        vacationRepo.save(vacation);
+                    }
+                }
+        );
+        return vacationManagement(model);
+    }
 
 
 }

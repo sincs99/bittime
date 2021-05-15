@@ -339,29 +339,28 @@
                     </section>
                     <section class="time_frame_body">
                         <label th:for="starttime">Start time:</label>
-                        <input th:type="time" id="starttime" th:name="starttime">
+                        <input th:type="time" required id="starttime" th:name="starttime">
                         <label th:for="endtime">End time:</label>
-                        <input th:type="time" id="endtime" th:name="endtime">
+                        <input th:type="time" required id="endtime" th:name="endtime">
 
                     </section>
                     <section class="break_frame_body">
                         <label th:for="startbreak">Start break:</label>
-                        <input th:type="time" id="startbreak" th:name="startbreak">
+                        <input th:type="time" required id="startbreak" th:name="startbreak">
                         <label th:for="endbreak">End break:</label>
-                        <input th:type="time" id="endbreak" th:name="endbreak">
+                        <input th:type="time" required id="endbreak" th:name="endbreak">
+
                     </section>
 
                     <section class="calculate_button">
                     <button type="button" onclick="">Calculate</button>
                     </section>
 
-                    <section>
-                        <h1>Type of time scheduling</h1>
-                        <input th:type="radio" th:id="work" th:name="time" th:value="work" checked>
-                        <label th:for="work">Work</label><br>
 
-                        <h3 th:id="sick2">asd</h3>
-                    </section>
+
+                        <input th:type="hidden" th:name="time" th:value="work">
+
+
 
 
                     <section class="timebt">

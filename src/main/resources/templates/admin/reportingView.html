@@ -111,16 +111,23 @@
           <th>Dif. to 8h</th>
         </tr>
         </thead>
+        <tbody>
+        <!-- @Dominic modified to timeRecords & method called totalWork... -->
+            <tr th:each="time: ${timeRecords}">
+              <td th:text="${time.date}"></td>
+              <td>
+                <th:block th:text="${time.starttime}"/> -
+                <th:block th:text="${time.endtime}"/>
+              </td>
+              <td>
+                <th:block th:text="${time.startbreak}"/> -
+                <th:block th:text="${time.endbreak}"/>
+              </td>
+              <td th:text="${time.totalWorkTimeWithoutBreaksInMinutes()}"></td>
+              <td th:text="${time.totalWorkTimeWithoutBreaksInMinutes() - 480}"></td>
+          </tr>
+        </tbody>
 
-<!--                <tbody>-->
-<!--                <tr th:each="time: ${listTimes}">-->
-<!--                  <td th:text="${time.date}"></td>-->
-<!--                  <td th:text="${time.record}"></td>-->
-<!--                  <td th:text="${time.break}"></td>-->
-<!--                  <td th:text="${time.total}"></td>-->
-<!--                  <td th:text="${time.difference}"></td>-->
-<!--              </tr>-->
-<!--              </tbody>-->
 
       </table>
     </div>
