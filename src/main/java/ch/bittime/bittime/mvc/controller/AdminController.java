@@ -193,6 +193,7 @@ public class AdminController {
             timeRecordRepo.save(timeRecord);
         } else{
             //model.addAttribute errorMsg
+            model.addAttribute( "recordTimeErrorMsg", "endtime greater starttime,endbreak greater startbreak, startbreak greater starttime, endbreak smaller endtime may not be applied correctly");
         }
 
         return timeRecording(model);
@@ -224,6 +225,7 @@ public class AdminController {
         }else{
 
             //model.addAttribute errorMsg
+            model.addAttribute( "vacationErrorMsg", "enddate greater startdate may not be applied correctly");
         }
         return vacationRecording(model);
     }
