@@ -173,21 +173,28 @@ public class AdminController {
         return "/admin/timeRecording";
     }
 
-    //@PostMapping recordTime() method @Dominic
+    /**
+     * @author Dominic
+     */
     @PostMapping("/admin/timeRecording")
 
     public String recordTime(@ModelAttribute TimeRecord timeRecord, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+
         timeRecord.setUser(user);
 
         // endtime>starttime?
         //endbreak>startbreak?
         //startbreak>starttime
         //endbreak<endtime
-        //model.addAttribute errorMsg
 
-        timeRecordRepo.save(timeRecord);
+        if(timeRecord.getEndtime().getTime()>timeRecord.getStarttime().getTime() && timeRecord.getEndtime().getTime()>timeRecord.getStartbreak().getTime() && timeRecord.getStartbreak().getTime() > timeRecord.getStarttime().getTime() && timeRecord.getEndbreak().getTime() < timeRecord.getEndtime().getTime() ){
+            timeRecordRepo.save(timeRecord);
+        } else{
+            //model.addAttribute errorMsg
+        }
+
         return timeRecording(model);
     }
 
@@ -201,7 +208,9 @@ public class AdminController {
         return "/admin/vacationRecording";
     }
 
-    //@PostMapping Vaca() method @Dominic
+    /**
+     * @author Dominic
+     */
     @PostMapping("/admin/vacationRecording")
 
     public String recordVacation(@ModelAttribute Vacation vacation, Model model){
@@ -209,10 +218,13 @@ public class AdminController {
         User user = userService.findUserByUserName(auth.getName());
         vacation.setUser(user);
 
-        //tests
-        //model.addAttribute errorMsg
-//enddate>startdate?
-        vacationRepo.save(vacation);
+        //enddate>startdate?
+        if(vacation.getEndDate().getTime() > vacation.getStartDate().getTime() ){
+            vacationRepo.save(vacation);
+        }else{
+
+            //model.addAttribute errorMsg
+        }
         return vacationRecording(model);
     }
 
