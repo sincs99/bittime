@@ -14,6 +14,7 @@ import java.util.Set;
 @Data
 @Builder
 
+@Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
@@ -43,38 +44,4 @@ public class User {
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<UserRole> roles;
-
-    public int getId() {
-        return id;
-    }
-
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public Set<UserRole> getRoles() {
-        return roles;
-    }
 }

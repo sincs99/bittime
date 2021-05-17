@@ -2,18 +2,231 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-
 <head>
     <title>BitTime Admin Panel</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta name="author" content="Andre">
-</head>
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
+
+    <meta name="author" content="Robin">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 10px;
+            font-family: sans-serif;
+            line-height: 1.6;
+        }
+
+        body {
+            background: #ffffff;
+            color: #333333;
+            font-size: 1.5rem;
+        }
+
+        ul {
+            list-style: none;
+        }
+        .main {
+            display: flex;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+        .left{
+            border: 3px solid #AC05ACFF;
+            padding: 20px;
+
+            width: 80%;
+            float: left;
+
+
+            /* float: left;
+            background: #ffffff;
+            width: 90%;
+            max-width: 40rem;
+             min-height: 40rem;
+             margin: 5rem auto;
+             display: grid;
+             margin-right:10px;
+             grid-template-rows: 8rem auto 10rem;
+             box-shadow: 0 1rem 2.5rem #1b405e; */
+        }
+
+        #divButton{
+            width: 50%;
+
+        }
+        #divDate{
+            width: 50%;
+        }
+
+        #dayRightSide{
+            width: 50%;
+        }
+
+        .right{
+            border: 3px solid #AC05ACFF;
+            padding: 20px;
+
+            width: 50%;
+            float: left;
+
+
+            /*  float:left;
+              background: #ffffff;
+              width: 90%;
+           max-width: 40rem;
+            min-height: 40rem;
+            margin: 5rem auto;
+            margin-left:0px;
+            box-shadow: 0 1rem 2.5rem #1b405e; */
+        }
+        .time_frame_and_break_header {
+            padding: 0 1.25rem;
+            color: #7d8994;
+            display: flex;
+
+            align-items: center;
+        }
+        .time_frame_body{
+            padding: 0 1.25rem;
+            color: #7d8994;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .break_frame_body{
+            padding: 0 1.25rem;
+            color: #7d8994;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #starttime {
+            width: 100px;
+
+        }
+        #endtime {
+            width: 100px;
+
+        }
+        #startbreak {
+            width: 100px;
+        }
+        #endbreak {
+            width: 100px;
+        }
+
+        span {
+            content: "\003E";
+        }
+        span {
+            content: "\003C";
+        }
+        .card__header{
+            padding: 0 1.25rem;
+            color: #070000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card__body {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid #0e0000;
+            border-bottom: 1px solid #050000;
+        }
+        .card__body--days {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+
+        }
+        .card__body--days li {
+            flex: 1;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            color: #020000;
+            margin: 0 1px;
+        }
+        .card__body--dates {
+            display: grid;
+            gap: 3px;
+            grid-template-columns: repeat(7, 1fr);
+            justify-items: center;
+            text-align: center;
+        }
+        .card__body--dates li {
+            width: 3.5rem;
+            height: 3.5rem;
+            display: grid;
+            place-items: center;
+            font-weight: bold;
+            position: relative;
+        }
+        .card__body--dates li.prev,
+        .card__body--dates li.next {
+            color: #ccc;
+        }
+        .card__body--dates li.active {
+            background: #0a0000;
+            color: #ffffff;
+            border-radius: 50%;
+        }
+        .card__body--dates li {
+            border: 2px solid;
+            border-radius: 50%;
+        }
+
+        .card__body--dates li:active{
+            background-color: #933a92;
+            transform: translateY(4px);
+        }
+        .card__body--dates li:visited{
+            background-color: #500236;
+        }
+        .card__body--dates li.circle span {
+            position: absolute;
+            top: -0.75rem;
+            right: -0.5rem;
+            width: 1.75rem;
+            height: 1.75rem;
+            font-size: 1.2rem;
+            color: #ffffff;
+            border-radius: 50%;
+        }
+        .card__body--dates  {
+            border-color: #de6e46;
+        }
+        .card__body--dates .circle.orange span {
+            background: #de6e46;
+        }
+        .card__body--dates {
+            border-color: #ae5989;
+        }
+        .card__body--dates .circle.purple span {
+            background: #ae5989;
+        }
+
+    </style>
+</head>
 <body>
-<div class="container">
+
+<script th:src="@{/js/calendar.js}" async></script>
+
+<!--<main class="card">-->
+
+<div th:class="container">
 
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
@@ -29,390 +242,137 @@
             <div class="panel-body">
                 <div class="topnav">
                     <a th:href="@{/user/home}">Home</a>
-                    <a class="active" th:href="@{/user/timeRecording}">Time Recording</a>
+                    <a th:class="active" th:href="@{/user/timeRecording}">Time Recording</a>
                     <a th:href="@{/user/vacationView}">Schedule Vacation</a>
+                    <a th:href="@{/user/sickRecording}">Sick Recording</a>
                     <a th:href="@{/user/reportingView}">Reporting</a>
                     <a th:href="@{/user/profileView}">Profile</a>
                 </div>
             </div>
+            <div class="main">
+                <form method="post" action="#" th:action="@{/user/timeRecording}">
+                    <div class="left">
+                        <section class="card__header">
 
-            <script>
-                var app = {
-                    settings: {
-                        container: $('.calendar'),
-                        calendar: $('.front'),
-                        days: $('.weeks span'),
-                        form: $('.back'),
-                        input: $('.back input'),
-                        buttons: $('.back button')
-                    },
+                            <div th:id="divButton" name="divButton">
+                                <button type="button" th:onclick="lastMonth()"><span>&#60;</span></button>
+                                <button type="button" th:onclick="nextMonth()"><span>&#62;</span></button>
+                            </div>
 
-                    init: function() {
-                        instance = this;
-                        settings = this.settings;
-                        this.bindUIActions();
-                    },
+                            <div th:id="divDate" name="divDate">
+                                <h3 th:id="cMonthYear"> </h3>
+                                <h3 th:id="Year"></h3>
+                                <!--  <h3 th:id="currentDay"></h3> -->
+                            </div>
 
-                    swap: function(currentSide, desiredSide) {
-                        settings.container.toggleClass('flip');
+                            <div th:id="dayRightSide" name="dayRightSide">
+                                <h3 th:id="currentDay"></h3>
+                            </div>
+                        </section>
 
-                        currentSide.fadeOut(900);
-                        currentSide.hide();
-
-                        desiredSide.show();
-                    },
-
-                    bindUIActions: function() {
-                        settings.days.on('click', function(){
-                            instance.swap(settings.calendar, settings.form);
-                            settings.input.focus();
-                        });
-
-                        settings.buttons.on('click', function(){
-                            instance.swap(settings.form, settings.calendar);
-                        });
-                    }
-                }
-
-                app.init();
-            </script>
-
-            <!-- inspired by http://colorhunt.co/c/8184 and
-              https://dribbble.com/shots/2407357-Calendar%60 -->
-            <style>
-                * {
-                    box-sizing: border-box;
-                    font-family: 'Roboto', sans-serif;
-                    list-style: none;
-                    margin: 0;
-                    outline: none;
-                    padding: 0;
-                }
-
-                a {
-                    text-decoration: none;
-                }
-
-                body, html {
-                    height: 100%;
-                }
-
-                body {
-                    background: #dfebed;
-                    font-family: 'Roboto', sans-serif;
-                }
-
-                .container {
-                    align-items: center;
-                    display: flex;
-                    height: 100%;
-                    justify-content: center;
-                    margin: 0 auto;
-                    max-width: 600px;
-                    width: 100%;
-                }
-
-                .calendar {
-                    background: #2b4450;
-                    border-radius: 4px;
-                    box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
-                    height: 501px;
-                    perspective: 1000;
-                    transition: .9s;
-                    transform-style: preserve-3d;
-                    width: 100%;
-                }
-
-                /* Front - Calendar */
-                .front {
-                    transform: rotateY(0deg);
-                }
-
-                .current-date {
-                    border-bottom: 1px solid rgba(73, 114, 133, .6);
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 30px 40px;
-                }
-
-                .current-date h1 {
-                    color: #dfebed;
-                    font-size: 1.4em;
-                    font-weight: 300;
-                }
-
-                .week-days {
-                    color: #dfebed;
-                    display: flex;
-                    justify-content: space-between;
-                    font-weight: 600;
-                    padding: 30px 40px;
-                }
-
-                .days {
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: space-between;
-                }
-
-                .weeks {
-                    color: #fff;
-                    display: flex;
-                    flex-direction: column;
-                    padding: 0 40px;
-                }
-
-                .weeks div {
-                    display: flex;
-                    font-size: 1.2em;
-                    font-weight: 300;
-                    justify-content: space-between;
-                    margin-bottom: 20px;
-                    width: 100%;
-                }
-
-                .last-month {
-                    opacity: .3;
-                }
-
-                .weeks span {
-                    padding: 10px;
-                }
-
-                .weeks span.active {
-                    background: #f78536;
-                    border-radius: 50%;
-                }
-
-                .weeks span:not(.last-month):hover {
-                    cursor: pointer;
-                    font-weight: 600;
-                }
-
-                .event {
-                    position: relative;
-                }
-
-                .event:after {
-                    content: '•';
-                    color: #f78536;
-                    font-size: 1.4em;
-                    position: absolute;
-                    right: -4px;
-                    top: -4px;
-                }
-
-                /* Back - Event form */
-
-                .back {
-                    height: 100%;
-                    transform: rotateY(180deg);
-                }
-
-                .back input {
-                    background: none;
-                    border: none;
-                    border-bottom: 1px solid rgba(73, 114, 133, .6);
-                    color: #dfebed;
-                    font-size: 1.4em;
-                    font-weight: 300;
-                    padding: 30px 40px;
-                    width: 100%;
-                }
-
-                .info {
-                    color: #dfebed;
-                    display: flex;
-                    flex-direction: column;
-                    font-weight: 600;
-                    font-size: 1.2em;
-                    padding: 30px 40px;
-                }
-
-                .info div:not(.observations) {
-                    margin-bottom: 40px;
-                }
-
-                .info span {
-                    font-weight: 300;
-                }
-
-                .info .date {
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                .info .date p {
-                    width: 50%;
-                }
-
-                .info .address p {
-                    width: 100%;
-                }
-
-                .actions {
-                    bottom: 0;
-                    border-top: 1px solid rgba(73, 114, 133, .6);
-                    display: flex;
-                    justify-content: space-between;
-                    position: absolute;
-                    width: 100%;
-                }
-
-                .actions button {
-                    background: none;
-                    border: 0;
-                    color: #fff;
-                    font-weight: 600;
-                    letter-spacing: 3px;
-                    margin: 0;
-                    padding: 30px 0;
-                    text-transform: uppercase;
-                    width: 50%;
-                }
-
-                .actions button:first-of-type {
-                    border-right: 1px solid rgba(73, 114, 133, .6);
-                }
-
-                .actions button:hover {
-                    background: #497285;
-                    cursor: pointer;
-                }
-
-                .actions button:active {
-                    background: #5889a0;
-                    outline: none;
-                }
-
-                /* Flip animation */
-
-                .flip {
-                    transform: rotateY(180deg);
-                }
-
-                .front, .back {
-                    backface-visibility: hidden;
-                }
-            </style>
-
-            <p>TODO</p>
-            <p>Choose date in calendar</p>
-            <div class="container">
-                <div class="calendar">
-                    <div class="front">
-                        <div class="current-date">
-                            <h1>Friday 15th</h1>
-                            <h1>January 2016</h1>
-                        </div>
-
-                        <div class="current-month">
-                            <ul class="week-days">
-                                <li>MON</li>
-                                <li>TUE</li>
-                                <li>WED</li>
-                                <li>THU</li>
-                                <li>FRI</li>
-                                <li>SAT</li>
-                                <li>SUN</li>
+                        <section class="card__body">
+                            <ul class="card__body--days">
+                                <li>mon</li>
+                                <li>tue</li>
+                                <li>wed</li>
+                                <li>thu</li>
+                                <li>fri</li>
+                                <li>sat</li>
+                                <li>sun</li>
                             </ul>
-
-                            <div class="weeks">
-                                <div class="first">
-                                    <span class="last-month">28</span>
-                                    <span class="last-month">29</span>
-                                    <span class="last-month">30</span>
-                                    <span class="last-month">31</span>
-                                    <span>01</span>
-                                    <span>02</span>
-                                    <span>03</span>
-                                </div>
-
-                                <div class="second">
-                                    <span>04</span>
-                                    <span>05</span>
-                                    <span class="event">06</span>
-                                    <span>07</span>
-                                    <span>08</span>
-                                    <span>09</span>
-                                    <span>10</span>
-                                </div>
-
-                                <div class="third">
-                                    <span>11</span>
-                                    <span>12</span>
-                                    <span>13</span>
-                                    <span>14</span>
-                                    <span class="active">15</span>
-                                    <span>16</span>
-                                    <span>17</span>
-                                </div>
-
-                                <div class="fourth">
-                                    <span>18</span>
-                                    <span>19</span>
-                                    <span>20</span>
-                                    <span>21</span>
-                                    <span>22</span>
-                                    <span>23</span>
-                                    <span>24</span>
-                                </div>
-
-                                <div class="fifth">
-                                    <span>25</span>
-                                    <span>26</span>
-                                    <span>27</span>
-                                    <span>28</span>
-                                    <span>29</span>
-                                    <span>30</span>
-                                    <span>31</span>
-                                </div>
-                            </div>
-                        </div>
+                            <ul class="card__body--dates">
+                                <li th:id="f1" onclick="showDay(this.id)"></li>
+                                <li th:id="f2" onclick="showDay(this.id)"></li>
+                                <li th:id="f3" onclick="showDay(this.id)"></li>
+                                <li th:id="f4" onclick="showDay(this.id)"></li>
+                                <li th:id="f5" onclick="showDay(this.id)"></li>
+                                <li th:id="f6" onclick="showDay(this.id)"></li>
+                                <li th:id="f7" onclick="showDay(this.id)"></li>
+                                <li th:id="f8" onclick="showDay(this.id)"></li>
+                                <li th:id="f9" onclick="showDay(this.id)"></li>
+                                <li th:id="f10" onclick="showDay(this.id)"></li>
+                                <li th:id="f11" onclick="showDay(this.id)"></li>
+                                <li th:id="f12" onclick="showDay(this.id)"></li>
+                                <li th:id="f13" onclick="showDay(this.id)"></li>
+                                <li th:id="f14" onclick="showDay(this.id)"></li>
+                                <li th:id="f15" onclick="showDay(this.id)"></li>
+                                <li th:id="f16" onclick="showDay(this.id)"></li>
+                                <li th:id="f17" onclick="showDay(this.id)"></li>
+                                <li th:id="f18" onclick="showDay(this.id)"></li>
+                                <li th:id="f19" onclick="showDay(this.id)"></li>
+                                <li th:id="f20" onclick="showDay(this.id)"></li>
+                                <li th:id="f21" onclick="showDay(this.id)"></li>
+                                <li th:id="f22" onclick="showDay(this.id)"></li>
+                                <li th:id="f23" onclick="showDay(this.id)"></li>
+                                <li th:id="f24" onclick="showDay(this.id)"></li>
+                                <li th:id="f25" onclick="showDay(this.id)"></li>
+                                <li th:id="f26" onclick="showDay(this.id)"></li>
+                                <li th:id="f27" onclick="showDay(this.id)"></li>
+                                <li th:id="f28" onclick="showDay(this.id)"></li>
+                                <li th:id="f29" onclick="showDay(this.id)"></li>
+                                <li th:id="f30" onclick="showDay(this.id)"></li>
+                                <li th:id="f31" onclick="showDay(this.id)"></li>
+                                <li th:id="f32" onclick="showDay(this.id)"></li>
+                                <li th:id="f33" onclick="showDay(this.id)"></li>
+                                <li th:id="f34" onclick="showDay(this.id)"></li>
+                                <li th:id="f35" onclick="showDay(this.id)"></li>
+                                <li th:id="f36" onclick="showDay(this.id)"></li>
+                                <li th:id="f37" onclick="showDay(this.id)"></li>
+                                <li th:id="f38" onclick="showDay(this.id)"></li>
+                                <li th:id="f39" onclick="showDay(this.id)"></li>
+                                <li th:id="f40" onclick="showDay(this.id)"></li>
+                                <li th:id="f41" onclick="showDay(this.id)"></li>
+                                <li th:id="f42" onclick="showDay(this.id)"></li>
+                            </ul>
+                            <!--@ Dominic input tag calendarDate -->
+                            <input type="hidden" id="calendarDate" name="date" />
+                        </section>
                     </div>
 
-                    <div class="back">
-                        <input placeholder="What's the event?">
-                        <div class="info">
-                            <div class="date">
-                                <p class="info-date">
-                                    Date: <span>Jan 15th, 2016</span>
-                                </p>
-                                <p class="info-time">
-                                    Time: <span>6:35 PM</span>
-                                </p>
-                            </div>
-                            <div class="address">
-                                <p>
-                                    Address: <span>129 W 81st St, New York, NY</span>
-                                </p>
-                            </div>
-                            <div class="observations">
-                                <p>
-                                    Observations: <span>Be there 15 minutes earlier</span>
-                                </p>
-                            </div>
-                        </div>
 
-                        <div class="actions">
-                            <button class="save">
-                                Save <i class="ion-checkmark"></i>
-                            </button>
-                            <button class="dismiss">
-                                Dismiss <i class="ion-android-close"></i>
-                            </button>
-                        </div>
+                    <div class="right">
+                        <section class="time_frame_and_break_header">
+
+                        </section>
+                        <section class="time_frame_body">
+                            <label th:for="starttime">Start time:</label>
+                            <input th:type="time" required id="starttime" th:name="starttime">
+                            <label th:for="endtime">End time:</label>
+                            <input th:type="time" required id="endtime" th:name="endtime">
+
+                        </section>
+                        <section class="break_frame_body">
+                            <label th:for="startbreak">Start break:</label>
+                            <input th:type="time" required id="startbreak" th:name="startbreak">
+                            <label th:for="endbreak">End break:</label>
+                            <input th:type="time" required id="endbreak" th:name="endbreak">
+
+                        </section>
+
+                        <section class="calculate_button">
+                            <button type="button" onclick="">Calculate</button>
+                        </section>
+
+
+
+                        <input th:type="hidden" th:name="time" th:value="work">
+
+
+
+
+                        <section class="timebt">
+                            <!-- @Dominic record time, submit -->
+                            <button type="submit">record time</button>
+                            <span th:if="${recordTimeErrorMsg !=null}" th:utext="${recordTimeErrorMsg}"></span>
+                        </section>
+
                     </div>
-
-                </div>
+                    <!-- @Dominic form tag, method post, action timeRecording-->
+                </form>
             </div>
         </div>
-
     </div>
 </div>
-
-</div>
-
 
 </body>
 </html>

@@ -252,8 +252,8 @@
           <a th:href="@{/admin/profileView}">Profile</a>
         </div>
       </div>
+      <form method="post" action="#" th:action="@{/admin/sickRecording}">
       <div class="main">
-        <form method="post" action="#" th:action="@{/admin/sickRecording}">
           <div class="left">
             <section class="card__header">
 
@@ -334,21 +334,7 @@
 
 
           <div class="right">
-            <section class="time_frame_and_break_header">
-
-            </section>
-
-
-            <section class="calculate_button">
-              <button type="button" onclick="">Calculate</button>
-            </section>
-
-            <section>
-              <h1>Type of time scheduling</h1>
-
-              <input th:type="radio" th:id="sick" th:name="time" th:value="sick">
-              <label th:for="sick">Sick</label><br>
-            </section>
+            <input th:type="hidden" th:name="time" th:value="sick">
 
             <!-- Formular statt onclick -->
             <section class="timebt">
@@ -357,9 +343,9 @@
             </section>
 
           </div>
-          <!-- @Dominic form tag-->
-        </form>
       </div>
+      <!-- @Dominic form tag-->
+      </form>
     </div>
   </div>
 </div>

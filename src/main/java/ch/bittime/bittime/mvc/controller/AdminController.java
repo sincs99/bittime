@@ -240,14 +240,26 @@ public class AdminController {
         return "/admin/sickRecording";
     }
 
-
+    /**
+     * @author Dominic
+     */
     @GetMapping("/admin/reportingView")
-    public String reportingView(Model model) {
+    public String reportingView(@RequestParam(defaultValue = "-1") int userId, /*@RequestParam(defaultValue = "") String timeFilter,*/ Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+        // List<TimeRecord> timeRecordList;
+
         //@Dominic timeRecords
-        model.addAttribute("timeRecords", timeRecordRepo.findAll());
+        if(userId == -1) model.addAttribute("timeRecords", timeRecordRepo.findAll());
+        else {
+            userRepo.findById(userId).ifPresentOrElse(filteredUser ->
+                    model.addAttribute("timeRecords", timeRecordRepo.findAllByUser(filteredUser)),
+                    () -> model.addAttribute("timeRecords", timeRecordRepo.findAll())
+            );
+        }
+        // model.addAttribute("timeRecords", timeRecordList.stream().filter(timeFilter).collect(Collectors.toList()));
+        model.addAttribute("userList", userRepo.findAll());
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/reportingView";
     }

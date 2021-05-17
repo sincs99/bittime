@@ -252,8 +252,9 @@
                     <a th:href="@{/admin/profileView}">Profile</a>
                 </div>
             </div>
+
+            <form method="post" action="#" th:action="@{/admin/timeRecording}">
             <div class="main">
-                <form method="post" action="#" th:action="@{/admin/timeRecording}">
                 <div class="left">
                     <section class="card__header">
 
@@ -334,9 +335,6 @@
 
 
                 <div class="right">
-                    <section class="time_frame_and_break_header">
-
-                    </section>
                     <section class="time_frame_body">
                         <label th:for="starttime">Start time:</label>
                         <input th:type="time" required id="starttime" th:name="starttime">
@@ -349,19 +347,9 @@
                         <input th:type="time" required id="startbreak" th:name="startbreak">
                         <label th:for="endbreak">End break:</label>
                         <input th:type="time" required id="endbreak" th:name="endbreak">
-
                     </section>
-
-                    <section class="calculate_button">
-                    <button type="button" onclick="">Calculate</button>
-                    </section>
-
-
 
                         <input th:type="hidden" th:name="time" th:value="work">
-
-
-
 
                     <section class="timebt">
                         <!-- @Dominic record time, submit -->
@@ -371,8 +359,8 @@
 
                 </div>
                     <!-- @Dominic form tag, method post, action timeRecording-->
-                </form>
             </div>
+            </form>
         </div>
     </div>
 </div>
