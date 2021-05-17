@@ -175,7 +175,6 @@ function lastMonth() {
     count++;
     cc = count-1;
     today = new Date();
-    document.getElementById("sick2").innerHTML = "" + count;
     if(yearc > 0 ){
         if(yearc - 1 > 0 && monthCounter == 12){
             monthCounter = 0;
@@ -185,7 +184,6 @@ function lastMonth() {
         var monthMultiply = monthCheckCounter*2;
         count = monthCheckCounter - monthMultiply;
         count = count + monthCounter;
-   //     document.getElementById("sick2").innerHTML = "" + count;
         monthCounter++;
 
     }
@@ -195,7 +193,6 @@ function lastMonth() {
         firstDay = new Date(today.getFullYear() - yearc, today.getMonth() - count, 1);
         l = new Date(today.getFullYear()  - yearc, today.getMonth() - count, 0).getDate();
         monthName = monthNames[today.getMonth() - count];
-      //  document.getElementById("sick2").innerHTML = monthName;
         firstDay = new Date(today.getFullYear()  - yearc, today.getMonth() -count, 1);
         l = new Date(today.getFullYear()  - yearc, today.getMonth() - cc, 0).getDate();
         lLastM = new Date(today.getFullYear() - yearc, today.getMonth()-count, 0).getDate();
@@ -204,13 +201,11 @@ function lastMonth() {
         yearc++;
 
     } else {
-       // document.getElementById("sick2").innerHTML = yearc;
         firstDay = new Date(today.getFullYear() - yearc, today.getMonth() - count, 1);
         l = new Date(today.getFullYear()  - yearc, today.getMonth() - count, 0).getDate();
 
 
             monthName = monthNames[today.getMonth() - count];
-    //    document.getElementById("sick2").innerHTML = yearc;
         firstDay = new Date(today.getFullYear()  - yearc, today.getMonth() -count, 1);
 
         l = new Date(today.getFullYear()  - yearc, today.getMonth() - cc, 0).getDate();
@@ -237,7 +232,6 @@ function nextMonth() {
     count--;
     cc = count+1;
     today = new Date();
-    document.getElementById("sick2").innerHTML = "" + count;
     if(yearc != 0){
         if(yearc + 1 != 0 && monthCounter == -12){
             monthCounter = 0;
@@ -248,18 +242,15 @@ function nextMonth() {
         var monthMultiply = monthCheckCounter2*2;
         count = monthMultiply -  monthCheckCounter2 ;
         count = count + monthCounter;
-         //   document.getElementById("sick2").innerHTML = "" + monthCounter;
         monthCounter--;
 
     }
 
     check = monthNames[today.getMonth() - count];
-    document.getElementById("sick2").innerHTML = "" + check;
     if(check.toString() == "December") {
         firstDay = new Date(today.getFullYear() - yearc, today.getMonth() - count, 1);
         l = new Date(today.getFullYear()  - yearc, today.getMonth() - count, 0).getDate();
         monthName = monthNames[today.getMonth() - count];
-        //  document.getElementById("sick2").innerHTML = monthName;
         firstDay = new Date(today.getFullYear()  - yearc, today.getMonth() -count, 1);
         l = new Date(today.getFullYear()  - yearc, today.getMonth() - cc, 0).getDate();
         lLastM = new Date(today.getFullYear() - yearc, today.getMonth()-count, 0).getDate();
@@ -268,13 +259,11 @@ function nextMonth() {
 
     }
     else {
-        // document.getElementById("sick2").innerHTML = yearc;
         firstDay = new Date(today.getFullYear() - yearc, today.getMonth() - count, 1);
         l = new Date(today.getFullYear()  - yearc, today.getMonth() - count, 0).getDate();
 
 
         monthName = monthNames[today.getMonth() - count];
-        //    document.getElementById("sick2").innerHTML = yearc;
         firstDay = new Date(today.getFullYear()  - yearc, today.getMonth() -count, 1);
 
         l = new Date(today.getFullYear()  - yearc, today.getMonth() - cc, 0).getDate();
