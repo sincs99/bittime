@@ -4,10 +4,8 @@ package ch.bittime.bittime.mvc.controller;
  * @author Pascal
  */
 
-import ch.bittime.bittime.login.TimeRecord;
-import ch.bittime.bittime.login.User;
-import ch.bittime.bittime.login.UserService;
-import ch.bittime.bittime.login.Vacation;
+import ch.bittime.bittime.login.*;
+import ch.bittime.bittime.login.repository.SickdayRepo;
 import ch.bittime.bittime.login.repository.TimeRecordRepo;
 import ch.bittime.bittime.login.repository.UserRepo;
 import ch.bittime.bittime.login.repository.VacationRepo;
@@ -35,6 +33,7 @@ public class AdminController {
     private VacationRepo vacationRepo;
     @Autowired
     private TimeRecordRepo timeRecordRepo;
+    @Autowired SickdayRepo sickdayRepo;
 
 
     @RequestMapping(value = "/admin/deleteUser/{id}")
@@ -59,6 +58,10 @@ public class AdminController {
             model.addAttribute("deleteError", "You cannot delete an Admin");
             System.out.println("Admin kann nicht gelöscht werden");
         }
+
+        /* Dominic @ Pascal test if user has db table entries that are displayed in application...
+        -> sonst error bei Report und vacation mgt im Falle von null Einträgen...
+         */
 
 
         System.out.println(i);
@@ -238,6 +241,27 @@ public class AdminController {
         User user = userService.findUserByUserName(auth.getName());
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/sickRecording";
+    }
+
+    /**
+     * @author Dominic
+     */
+    @PostMapping("/admin/sickRecording")
+
+    public String recordVacation(@ModelAttribute Sickday sickday, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        sickday.setUser(user);
+
+        //enddate>startdate?
+        if(sickday.getEndDate().getTime() > sickday.getStartDate().getTime() ){
+            sickdayRepo.save(sickday);
+        }else{
+
+            //model.addAttribute errorMsg
+            model.addAttribute( "sickdayErrorMsg", "Sickday recording was not successful. Please enter a sickday's end date/s that take place after the start date/s.");
+        }
+        return sickRecording(model);
     }
 
     /**

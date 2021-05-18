@@ -241,21 +241,18 @@
       </div>
       <div class="panel-body">
         <div class="topnav">
-          <a th:href="@{/admin/home}">Home</a>
-          <a th:href="@{/admin/registration}">Registration</a>
-          <a th:href="@{/admin/userPanel}">Users</a>
-          <a th:href="@{/admin/timeRecording}">Time Recording</a>
-          <a th:href="@{/admin/vacationRecording}">Vacation Recording</a>
-          <a class="active" th:href="@{/admin/sickRecording}">Sick Recording</a>
-          <a th:href="@{/admin/reportingView}">Reporting</a>
-          <a th:href="@{/admin/vacationManagement}">Vacation Management</a>
-          <a th:href="@{/admin/profileView}">Profile</a>
+          <a th:href="@{/user/home}">Home</a>
+          <a th:href="@{/user/timeRecording}">Time Recording</a>
+          <a th:href="@{/user/vacationView}">Vacation Recording</a>
+          <a class="active" th:href="@{/user/sickRecording}">Sick Recording</a>
+          <a th:href="@{/user/reportingView}">Reporting</a>
+          <a th:href="@{/user/profileView}">Profile</a>
         </div>
       </div>
 
       <!-- @Dominic -->
             <input th:type="hidden" th:name="time" th:value="sick">
-            <form method="post" action="#" th:action="@{/admin/sickRecording}">
+            <form method="post" action="#" th:action="@{/user/sickRecording}">
               <div class="main">
                 <div class="right">
                   <section class="time_frame_and_break_header">

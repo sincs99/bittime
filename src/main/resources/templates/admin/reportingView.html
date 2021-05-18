@@ -102,6 +102,7 @@
           <th>Break Record</th>
           <th>Total Worktime</th>
           <th>Dif. to 8h</th>
+          <th>Sickdays</th>
         </tr>
         </thead>
         <tbody>
@@ -122,6 +123,7 @@
               </td>
               <td th:text="${time.totalWorkTimeWithoutBreaksInMinutes()}"></td>
               <td th:text="${time.totalWorkTimeWithoutBreaksInMinutes() - 480}"></td>
+
           </tr>
         </tbody>
 
