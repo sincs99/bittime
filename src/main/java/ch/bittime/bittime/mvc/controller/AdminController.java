@@ -225,7 +225,7 @@ public class AdminController {
         }else{
 
             //model.addAttribute errorMsg
-            model.addAttribute( "vacationErrorMsg", "enddate greater startdate may not be applied correctly");
+            model.addAttribute( "vacationErrorMsg", "Vacation request was not successful. Please enter a vacation end date that take place after the start date.");
         }
         return vacationRecording(model);
     }
