@@ -1,9 +1,7 @@
 package ch.bittime.bittime.mvc.controller;
 
-import ch.bittime.bittime.login.TimeRecord;
-import ch.bittime.bittime.login.User;
-import ch.bittime.bittime.login.UserService;
-import ch.bittime.bittime.login.Vacation;
+import ch.bittime.bittime.login.*;
+import ch.bittime.bittime.login.repository.SickdayRepo;
 import ch.bittime.bittime.login.repository.TimeRecordRepo;
 import ch.bittime.bittime.login.repository.UserRepo;
 import ch.bittime.bittime.login.repository.VacationRepo;
@@ -32,6 +30,9 @@ public class UserController {
     //vacationRep
     @Autowired
     private VacationRepo vacationRepo;
+
+    @Autowired
+    private SickdayRepo sickdayRepo;
 
         @GetMapping("/user/timeRecording")
         public String timeRecording(Model model){
@@ -113,4 +114,34 @@ public class UserController {
             return "/user/profileView";
         }
 
+
+    @GetMapping("/user/sickRecording")
+    public String sickRecording(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        return "/user/sickRecording";
+    }
+
+    /**
+     * @author Dominic
+     */
+    @PostMapping("/user/sickRecording")
+
+    public String recordVacation(@ModelAttribute Sickday sickday, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        sickday.setUser(user);
+
+        //enddate>startdate?
+        if(sickday.getEndDate().getTime() > sickday.getStartDate().getTime() ){
+            sickdayRepo.save(sickday);
+        }else{
+
+            //model.addAttribute errorMsg
+            model.addAttribute( "sickdayErrorMsg", "Sickday recording was not successful. Please enter a sickday's end date/s that take place after the start date/s.");
+        }
+        return sickRecording(model);
+    }
 }

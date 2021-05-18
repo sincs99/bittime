@@ -20,6 +20,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+
 import java.io.*;
 import java.util.List;
 import java.util.Optional;
@@ -47,10 +48,10 @@ public class ReportingController {
 
     @RequestMapping(value = {"/admin/generate/"})
 
-    public String generatePdf(Model model) throws IOException, DocumentException {
+    public String generatePdf(/*Model model */) /*throws IOException, DocumentException */ {
 
-        reportingService.createPdf();
-        System.out.println("here's the PDF ");
+        //reportingService.createPdf();
+        //System.out.println("here's the PDF ");
 //        String htmlText = "Abc";
 //        ReportingService thymeleaf2Pdf = new ReportingService(htmlText);
 //        htmlText = thymeleaf2Pdf.parseThymeleafTemplate();
@@ -69,15 +70,23 @@ public class ReportingController {
         return "/admin/reportingView";
     }
 
-    @RequestMapping(value = {"/user/generate/"})
+    @RequestMapping(value = {"/pdf/okay/"})
     public String generateUserPdf(Model model) throws IOException, DocumentException {
 
 //        ReportingService thymeleaf2Pdf = new ReportingService();
 //        String html = thymeleaf2Pdf.parseThymeleafTemplate();
 //        thymeleaf2Pdf.generatePdfFromHtml(html);
         System.out.println("here's the PDF");
+        /**
+         * @author Dominic
+         * Code taken from //https://www.baeldung.com/thymeleaf-generate-pdf
+         */
+        ReportingController thymeleaf2Pdf = new ReportingController();
+        String html = thymeleaf2Pdf.parseThymeleafTemplate();
+        thymeleaf2Pdf.generatePdfFromHtml(html);
 
-        return "/user/reportingView";
+
+        return "/pdf/okay/";
     }
 
     @RequestMapping(value = {"/user/show/"})
@@ -88,5 +97,42 @@ public class ReportingController {
 
         return "/user/reportingView";
     }
+
+
+    /**
+     * @author Dominic
+     * Code taken from //https://www.baeldung.com/thymeleaf-generate-pdf
+     */
+
+    private String parseThymeleafTemplate() {
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+
+        Context context = new Context();
+        context.setVariable("pdf", "txt");
+
+        return templateEngine.process("thymeleaf_template", context);
+    }
+    /**
+     * @author Dominic
+     * Code taken from //https://www.baeldung.com/thymeleaf-generate-pdf
+     */
+    public void generatePdfFromHtml(String html) throws IOException, DocumentException {
+        String outputFolder = System.getProperty("user.home") + File.separator + "thymeleaf.pdf";
+        OutputStream outputStream = new FileOutputStream(outputFolder);
+
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocumentFromString(html);
+        renderer.layout();
+        renderer.createPDF(outputStream);
+
+        outputStream.close();
+    }
+
+
 
 }
