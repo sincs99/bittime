@@ -89,6 +89,7 @@
                 <thead class="thead-dark">
                 <tr>
                     <th>Date</th>
+                    <th>User</th>
                     <th>Time Record</th>
                     <th>Break Record</th>
                     <th>Total Worktime</th>
@@ -99,6 +100,10 @@
                 <!-- @Dominic modified to timeRecords & method called totalWork... -->
                 <tr th:each="time: ${timeRecords}">
                     <td th:text="${#dates.format(time.date, 'dd. MM. yyyy')}"></td>
+                    <td>
+                        <th:block th:text="${time.user?.lastName}"/>
+                        <th:block th:text="${time.user?.name}"/>
+                    </td>
                     <td>
                         <th:block th:text="${#dates.format(time.starttime, 'HH:mm')}"/> -
                         <th:block th:text="${#dates.format(time.endtime, 'HH:mm')}"/>

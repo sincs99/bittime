@@ -81,222 +81,215 @@
             <!-- inspired by http://colorhunt.co/c/8184 and
               https://dribbble.com/shots/2407357-Calendar%60 -->
             <style>
+
                 * {
-                    box-sizing: border-box;
-                    font-family: 'Roboto', sans-serif;
-                    list-style: none;
                     margin: 0;
-                    outline: none;
                     padding: 0;
+                    box-sizing: border-box;
                 }
 
-                a {
-                    text-decoration: none;
-                }
-
-                body, html {
-                    height: 100%;
+                html {
+                    font-size: 10px;
+                    font-family: sans-serif;
+                    line-height: 1.6;
                 }
 
                 body {
-                    background: #dfebed;
-                    font-family: 'Roboto', sans-serif;
+                    background: #ffffff;
+                    color: #333333;
+                    font-size: 1.5rem;
                 }
 
-                .container {
+                ul {
+                    list-style: none;
+                }
+                .main {
+                    display: flex;
+                    width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+
+                }
+                .left{
+                    border: 3px solid #AC05ACFF;
+                    padding: 20px;
+
+                    width: 80%;
+                    float: left;
+
+
+                    /* float: left;
+                    background: #ffffff;
+                    width: 90%;
+                    max-width: 40rem;
+                     min-height: 40rem;
+                     margin: 5rem auto;
+                     display: grid;
+                     margin-right:10px;
+                     grid-template-rows: 8rem auto 10rem;
+                     box-shadow: 0 1rem 2.5rem #1b405e; */
+                }
+
+                #divButton{
+                    width: 50%;
+
+                }
+                #divDate{
+                    width: 50%;
+                }
+
+                #dayRightSide{
+                    width: 50%;
+                }
+
+                .right{
+                    border: 3px solid #AC05ACFF;
+                    padding: 20px;
+
+                    width: 50%;
+                    float: left;
+
+
+                    /*  float:left;
+                      background: #ffffff;
+                      width: 90%;
+                   max-width: 40rem;
+                    min-height: 40rem;
+                    margin: 5rem auto;
+                    margin-left:0px;
+                    box-shadow: 0 1rem 2.5rem #1b405e; */
+                }
+                .time_frame_and_break_header {
+                    padding: 0 1.25rem;
+                    color: #7d8994;
+                    display: flex;
+
                     align-items: center;
-                    display: flex;
-                    height: 100%;
-                    justify-content: center;
-                    margin: 0 auto;
-                    max-width: 600px;
-                    width: 100%;
                 }
-
-                .calendar {
-                    background: #2b4450;
-                    border-radius: 4px;
-                    box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
-                    height: 501px;
-                    perspective: 1000;
-                    transition: .9s;
-                    transform-style: preserve-3d;
-                    width: 100%;
-                }
-
-                /* Front - Calendar */
-                .front {
-                    transform: rotateY(0deg);
-                }
-
-                .current-date {
-                    border-bottom: 1px solid rgba(73, 114, 133, .6);
+                .time_frame_body{
+                    padding: 0 1.25rem;
+                    color: #7d8994;
                     display: flex;
                     justify-content: space-between;
-                    padding: 30px 40px;
+                    align-items: center;
                 }
-
-                .current-date h1 {
-                    color: #dfebed;
-                    font-size: 1.4em;
-                    font-weight: 300;
-                }
-
-                .week-days {
-                    color: #dfebed;
+                .break_frame_body{
+                    padding: 0 1.25rem;
+                    color: #7d8994;
                     display: flex;
                     justify-content: space-between;
-                    font-weight: 600;
-                    padding: 30px 40px;
+                    align-items: center;
+                }
+                #starttime {
+                    width: 100px;
+
+                }
+                #endtime {
+                    width: 100px;
+
+                }
+                #startbreak {
+                    width: 100px;
+                }
+                #endbreak {
+                    width: 100px;
                 }
 
-                .days {
+                span {
+                    content: "\003E";
+                }
+                span {
+                    content: "\003C";
+                }
+                .card__header{
+                    padding: 0 1.25rem;
+                    color: #070000;
                     display: flex;
-                    flex-wrap: wrap;
                     justify-content: space-between;
+                    align-items: center;
                 }
-
-                .weeks {
-                    color: #fff;
-                    display: flex;
-                    flex-direction: column;
-                    padding: 0 40px;
+                .card__body {
+                    padding: 1.5rem 2rem;
+                    border-top: 1px solid #0e0000;
+                    border-bottom: 1px solid #050000;
                 }
-
-                .weeks div {
+                .card__body--days {
                     display: flex;
-                    font-size: 1.2em;
-                    font-weight: 300;
                     justify-content: space-between;
-                    margin-bottom: 20px;
-                    width: 100%;
-                }
+                    align-items: center;
+                    height: 4rem;
 
-                .last-month {
-                    opacity: .3;
                 }
-
-                .weeks span {
-                    padding: 10px;
+                .card__body--days li {
+                    flex: 1;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    text-align: center;
+                    color: #020000;
+                    margin: 0 1px;
                 }
-
-                .weeks span.active {
-                    background: #f78536;
+                .card__body--dates {
+                    display: grid;
+                    gap: 3px;
+                    grid-template-columns: repeat(7, 1fr);
+                    justify-items: center;
+                    text-align: center;
+                }
+                .card__body--dates li {
+                    width: 3.5rem;
+                    height: 3.5rem;
+                    display: grid;
+                    place-items: center;
+                    font-weight: bold;
+                    position: relative;
+                }
+                .card__body--dates li.prev,
+                .card__body--dates li.next {
+                    color: #ccc;
+                }
+                .card__body--dates li.active {
+                    background: #0a0000;
+                    color: #ffffff;
+                    border-radius: 50%;
+                }
+                .card__body--dates li {
+                    border: 2px solid;
                     border-radius: 50%;
                 }
 
-                .weeks span:not(.last-month):hover {
-                    cursor: pointer;
-                    font-weight: 600;
+                .card__body--dates li:active{
+                    background-color: #933a92;
+                    transform: translateY(4px);
                 }
-
-                .event {
-                    position: relative;
+                .card__body--dates li:visited{
+                    background-color: #500236;
                 }
-
-                .event:after {
-                    content: '•';
-                    color: #f78536;
-                    font-size: 1.4em;
+                .card__body--dates li.circle span {
                     position: absolute;
-                    right: -4px;
-                    top: -4px;
+                    top: -0.75rem;
+                    right: -0.5rem;
+                    width: 1.75rem;
+                    height: 1.75rem;
+                    font-size: 1.2rem;
+                    color: #ffffff;
+                    border-radius: 50%;
+                }
+                .card__body--dates  {
+                    border-color: #de6e46;
+                }
+                .card__body--dates .circle.orange span {
+                    background: #de6e46;
+                }
+                .card__body--dates {
+                    border-color: #ae5989;
+                }
+                .card__body--dates .circle.purple span {
+                    background: #ae5989;
                 }
 
-                /* Back - Event form */
 
-                .back {
-                    height: 100%;
-                    transform: rotateY(180deg);
-                }
-
-                .back input {
-                    background: none;
-                    border: none;
-                    border-bottom: 1px solid rgba(73, 114, 133, .6);
-                    color: #dfebed;
-                    font-size: 1.4em;
-                    font-weight: 300;
-                    padding: 30px 40px;
-                    width: 100%;
-                }
-
-                .info {
-                    color: #dfebed;
-                    display: flex;
-                    flex-direction: column;
-                    font-weight: 600;
-                    font-size: 1.2em;
-                    padding: 30px 40px;
-                }
-
-                .info div:not(.observations) {
-                    margin-bottom: 40px;
-                }
-
-                .info span {
-                    font-weight: 300;
-                }
-
-                .info .date {
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                .info .date p {
-                    width: 50%;
-                }
-
-                .info .address p {
-                    width: 100%;
-                }
-
-                .actions {
-                    bottom: 0;
-                    border-top: 1px solid rgba(73, 114, 133, .6);
-                    display: flex;
-                    justify-content: space-between;
-                    position: absolute;
-                    width: 100%;
-                }
-
-                .actions button {
-                    background: none;
-                    border: 0;
-                    color: #fff;
-                    font-weight: 600;
-                    letter-spacing: 3px;
-                    margin: 0;
-                    padding: 30px 0;
-                    text-transform: uppercase;
-                    width: 50%;
-                }
-
-                .actions button:first-of-type {
-                    border-right: 1px solid rgba(73, 114, 133, .6);
-                }
-
-                .actions button:hover {
-                    background: #497285;
-                    cursor: pointer;
-                }
-
-                .actions button:active {
-                    background: #5889a0;
-                    outline: none;
-                }
-
-                /* Flip animation */
-
-                .flip {
-                    transform: rotateY(180deg);
-                }
-
-                .front, .back {
-                    backface-visibility: hidden;
-                }
             </style>
-
+<!--
             <p>TODO</p>
             <p>Enter desired vacation period</p>
             <div class="container">
@@ -406,7 +399,28 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
+            <!-- @Dominic -->
+            <form method="post" action="#" th:action="@{/user/vacationView}">
+                <div class="main">
+                    <div class="right">
+                        <section class="time_frame_and_break_header">
+                            <label for="startDate">Start date:</label>
+                            <input type="date" id="startDate" name="startDate" required/>
+                            <label for="endDate">End date:</label>
+                            <input type="date" id="endDate" name="endDate" required/>
+                        </section>
+                        <!-- Formular statt onclick -->
+                        <section class="timebt">
+                            <!-- @Dominic record time, onclick... -->
+                            <button type="submit">record vacation</button>
+                            <span th:utext="${vacationErrorMsg}"></span>
+                        </section>
+
+                    </div>
+                </div>
+                <!-- @Dominic form tag-->
+            </form>
 
         </div>
         </div>
