@@ -3,8 +3,10 @@ package ch.bittime.bittime.mvc.controller;
 import ch.bittime.bittime.login.TimeRecord;
 import ch.bittime.bittime.login.User;
 import ch.bittime.bittime.login.UserService;
+import ch.bittime.bittime.login.Vacation;
 import ch.bittime.bittime.login.repository.TimeRecordRepo;
 import ch.bittime.bittime.login.repository.UserRepo;
+import ch.bittime.bittime.login.repository.VacationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,6 +29,9 @@ public class UserController {
         private UserRepo userRepo;
     @Autowired
     private TimeRecordRepo timeRecordRepo;
+    //vacationRep
+    @Autowired
+    private VacationRepo vacationRepo;
 
         @GetMapping("/user/timeRecording")
         public String timeRecording(Model model){
@@ -67,6 +72,27 @@ public class UserController {
             User user = userService.findUserByUserName(auth.getName());
             model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
             return "/user/vacationView";
+    }
+
+    /**
+     * @author Dominic
+     */
+    @PostMapping("/user/vacationView")
+
+    public String recordVacation(@ModelAttribute Vacation vacation, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        vacation.setUser(user);
+
+        //enddate>startdate?
+        if(vacation.getEndDate().getTime() > vacation.getStartDate().getTime() ){
+            vacationRepo.save(vacation);
+        }else{
+
+            //model.addAttribute errorMsg
+            model.addAttribute( "vacationErrorMsg", "enddate greater startdate may not be applied correctly");
+        }
+        return vacationView(model);
     }
 
         @GetMapping("/user/reportingView")
