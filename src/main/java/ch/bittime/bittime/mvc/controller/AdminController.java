@@ -193,7 +193,7 @@ public class AdminController {
             timeRecordRepo.save(timeRecord);
         } else{
             //model.addAttribute errorMsg
-            model.addAttribute( "recordTimeErrorMsg", "endtime greater starttime,endbreak greater startbreak, startbreak greater starttime, endbreak smaller endtime may not be applied correctly");
+            model.addAttribute( "recordTimeErrorMsg", "Storing the time record was not successful. Please enter a start time that takes place before the end time and at least one break for your health within that interval.");
         }
 
         return timeRecording(model);
