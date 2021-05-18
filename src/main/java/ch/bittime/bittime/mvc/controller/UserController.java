@@ -60,7 +60,7 @@ public class UserController {
             timeRecordRepo.save(timeRecord);
         } else{
             //model.addAttribute errorMsg
-            model.addAttribute( "recordTimeErrorMsg", "endtime greater starttime,endbreak greater startbreak, startbreak greater starttime, endbreak smaller endtime may not be applied correctly");
+            model.addAttribute( "recordTimeErrorMsg", "Storing the time record was not successful. Please enter a start time that takes place before the end time and at least one break for your health within that interval.");
         }
 
         return timeRecording(model);
@@ -90,7 +90,7 @@ public class UserController {
         }else{
 
             //model.addAttribute errorMsg
-            model.addAttribute( "vacationErrorMsg", "enddate greater startdate may not be applied correctly");
+            model.addAttribute( "vacationErrorMsg", "Vacation request was not successful. Please enter a vacation end date that take place after the start date.");
         }
         return vacationView(model);
     }
