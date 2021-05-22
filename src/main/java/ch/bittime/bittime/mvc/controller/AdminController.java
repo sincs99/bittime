@@ -180,10 +180,10 @@ public class AdminController {
 
         timeRecord.setUser(user);
 
-        // endtime>starttime?
-        //endbreak>startbreak?
-        //startbreak>starttime
-        //endbreak<endtime
+        // endtime > starttime?
+        // endbreak >= startbreak?
+        // startbreak >= starttime?
+        // endbreak <= endtime?
 
         if (timeRecord.getEndtime().getTime() > timeRecord.getStarttime().getTime() &&
                 timeRecord.getEndtime().getTime() >= timeRecord.getStartbreak().getTime() &&
@@ -201,9 +201,6 @@ public class AdminController {
     @GetMapping("/vacationRecording")
     public String vacationRecording(Model model) {
         assignUser(model);
-        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //User user = userService.findUserByUserName(auth.getName());
-        //model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationRecording";
     }
 
@@ -212,11 +209,12 @@ public class AdminController {
      */
     @PostMapping("/vacationRecording")
     public String recordVacation(@ModelAttribute Vacation vacation, Model model) {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         vacation.setUser(user);
 
-        //enddate>startdate?
+        // enddate >= startdate?
         if (vacation.getEndDate().getTime() >= vacation.getStartDate().getTime()) {
             vacationRepo.save(vacation);
         } else {
@@ -229,9 +227,9 @@ public class AdminController {
 
     @GetMapping("/sickRecording")
     public String sickRecording(Model model) {
-        User user = assignUser(model);
-        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //User user = userService.findUserByUserName(auth.getName());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/sickRecording";
     }
@@ -242,8 +240,6 @@ public class AdminController {
     @PostMapping("/sickRecording")
     public String recordSickdays(@ModelAttribute Sickday sickday, Model model) {
         User user = assignUser(model);
-        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //User user = userService.findUserByUserName(auth.getName());
         sickday.setUser(user);
 
         //enddate>startdate?

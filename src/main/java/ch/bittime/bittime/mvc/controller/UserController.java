@@ -48,11 +48,14 @@ public class UserController {
         timeRecord.setUser(user);
 
         // endtime > starttime?
-        // endbreak > startbreak?
-        // startbreak > starttime?
-        // endbreak < endtime?
+        // endbreak >= startbreak?
+        // startbreak >= starttime?
+        // endbreak <= endtime?
 
-        if (timeRecord.getEndtime().getTime() > timeRecord.getStarttime().getTime() && timeRecord.getEndtime().getTime() > timeRecord.getStartbreak().getTime() && timeRecord.getStartbreak().getTime() > timeRecord.getStarttime().getTime() && timeRecord.getEndbreak().getTime() < timeRecord.getEndtime().getTime()) {
+        if (timeRecord.getEndtime().getTime() > timeRecord.getStarttime().getTime() &&
+                timeRecord.getEndtime().getTime() >= timeRecord.getStartbreak().getTime() &&
+                timeRecord.getStartbreak().getTime() >= timeRecord.getStarttime().getTime() &&
+                timeRecord.getEndbreak().getTime() <= timeRecord.getEndtime().getTime()) {
             timeRecordRepo.save(timeRecord);
         } else {
             model.addAttribute("recordTimeErrorMsg", "Storing the time record was not successful. Please enter a start time that takes place before the end time and at least one break for your health within that interval.");
@@ -78,7 +81,7 @@ public class UserController {
         vacation.setUser(user);
 
         // enddate > startdate?
-        if (vacation.getEndDate().getTime() > vacation.getStartDate().getTime()) {
+        if (vacation.getEndDate().getTime() >= vacation.getStartDate().getTime()) {
             vacationRepo.save(vacation);
         } else {
             model.addAttribute("vacationErrorMsg", "Vacation request was not successful. Please enter a vacation end date that take place after the start date.");
@@ -117,12 +120,12 @@ public class UserController {
      * @author Dominic
      */
     @PostMapping("/user/sickRecording")
-    public String recordVacation(@ModelAttribute Sickday sickday, Model model) {
+    public String recordSickdays(@ModelAttribute Sickday sickday, Model model) {
         User user = assignUser(model);
         sickday.setUser(user);
 
         // enddate > startdate?
-        if (sickday.getEndDate().getTime() > sickday.getStartDate().getTime()) {
+        if (sickday.getEndDate().getTime() >= sickday.getStartDate().getTime()) {
             sickdayRepo.save(sickday);
         } else {
             model.addAttribute("sickdayErrorMsg", "Sickday recording was not successful. Please enter a sickday's end date/s that take place after the start date/s.");
