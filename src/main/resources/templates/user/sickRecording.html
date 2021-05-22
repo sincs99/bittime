@@ -3,222 +3,248 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>BitTime Admin Panel</title>
-  <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
-  <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <title>BitTime Admin Panel</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
 
-  <meta name="author" content="Robin, Dominic">
+    <meta name="author" content="Robin, Dominic">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    html {
-      font-size: 10px;
-      font-family: sans-serif;
-      line-height: 1.6;
-    }
+        html {
+            font-size: 10px;
+            font-family: sans-serif;
+            line-height: 1.6;
+        }
 
-    body {
-      background: #ffffff;
-      color: #333333;
-      font-size: 1.5rem;
-    }
+        body {
+            background: #ffffff;
+            color: #333333;
+            font-size: 1.5rem;
+        }
 
-    ul {
-      list-style: none;
-    }
-    .main {
-      display: flex;
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
+        ul {
+            list-style: none;
+        }
 
-    }
-    .left{
-      border: 3px solid #AC05ACFF;
-      padding: 20px;
+        .main {
+            display: flex;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
 
-      width: 80%;
-      float: left;
+        }
 
+        .left {
+            border: 3px solid #AC05ACFF;
+            padding: 20px;
 
-      /* float: left;
-      background: #ffffff;
-      width: 90%;
-      max-width: 40rem;
-       min-height: 40rem;
-       margin: 5rem auto;
-       display: grid;
-       margin-right:10px;
-       grid-template-rows: 8rem auto 10rem;
-       box-shadow: 0 1rem 2.5rem #1b405e; */
-    }
-
-    #divButton{
-      width: 50%;
-
-    }
-    #divDate{
-      width: 50%;
-    }
-
-    #dayRightSide{
-      width: 50%;
-    }
-
-    .right{
-      border: 3px solid #AC05ACFF;
-      padding: 20px;
-
-      width: 50%;
-      float: left;
+            width: 80%;
+            float: left;
 
 
-      /*  float:left;
-        background: #ffffff;
-        width: 90%;
-     max-width: 40rem;
-      min-height: 40rem;
-      margin: 5rem auto;
-      margin-left:0px;
-      box-shadow: 0 1rem 2.5rem #1b405e; */
-    }
-    .time_frame_and_break_header {
-      padding: 0 1.25rem;
-      color: #7d8994;
-      display: flex;
+            /* float: left;
+            background: #ffffff;
+            width: 90%;
+            max-width: 40rem;
+             min-height: 40rem;
+             margin: 5rem auto;
+             display: grid;
+             margin-right:10px;
+             grid-template-rows: 8rem auto 10rem;
+             box-shadow: 0 1rem 2.5rem #1b405e; */
+        }
 
-      align-items: center;
-    }
-    .time_frame_body{
-      padding: 0 1.25rem;
-      color: #7d8994;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .break_frame_body{
-      padding: 0 1.25rem;
-      color: #7d8994;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    #starttime {
-      width: 100px;
+        #divButton {
+            width: 50%;
 
-    }
-    #endtime {
-      width: 100px;
+        }
 
-    }
-    #startbreak {
-      width: 100px;
-    }
-    #endbreak {
-      width: 100px;
-    }
+        #divDate {
+            width: 50%;
+        }
 
-    span {
-      content: "\003E";
-    }
-    span {
-      content: "\003C";
-    }
-    .card__header{
-      padding: 0 1.25rem;
-      color: #070000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .card__body {
-      padding: 1.5rem 2rem;
-      border-top: 1px solid #0e0000;
-      border-bottom: 1px solid #050000;
-    }
-    .card__body--days {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 4rem;
+        #dayRightSide {
+            width: 50%;
+        }
 
-    }
-    .card__body--days li {
-      flex: 1;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-align: center;
-      color: #020000;
-      margin: 0 1px;
-    }
-    .card__body--dates {
-      display: grid;
-      gap: 3px;
-      grid-template-columns: repeat(7, 1fr);
-      justify-items: center;
-      text-align: center;
-    }
-    .card__body--dates li {
-      width: 3.5rem;
-      height: 3.5rem;
-      display: grid;
-      place-items: center;
-      font-weight: bold;
-      position: relative;
-    }
-    .card__body--dates li.prev,
-    .card__body--dates li.next {
-      color: #ccc;
-    }
-    .card__body--dates li.active {
-      background: #0a0000;
-      color: #ffffff;
-      border-radius: 50%;
-    }
-    .card__body--dates li {
-      border: 2px solid;
-      border-radius: 50%;
-    }
+        .right {
+            border: 3px solid #AC05ACFF;
+            padding: 20px;
 
-    .card__body--dates li:active{
-      background-color: #933a92;
-      transform: translateY(4px);
-    }
-    .card__body--dates li:visited{
-      background-color: #500236;
-    }
-    .card__body--dates li.circle span {
-      position: absolute;
-      top: -0.75rem;
-      right: -0.5rem;
-      width: 1.75rem;
-      height: 1.75rem;
-      font-size: 1.2rem;
-      color: #ffffff;
-      border-radius: 50%;
-    }
-    .card__body--dates  {
-      border-color: #de6e46;
-    }
-    .card__body--dates .circle.orange span {
-      background: #de6e46;
-    }
-    .card__body--dates {
-      border-color: #ae5989;
-    }
-    .card__body--dates .circle.purple span {
-      background: #ae5989;
-    }
+            width: 50%;
+            float: left;
 
-  </style>
+
+            /*  float:left;
+              background: #ffffff;
+              width: 90%;
+           max-width: 40rem;
+            min-height: 40rem;
+            margin: 5rem auto;
+            margin-left:0px;
+            box-shadow: 0 1rem 2.5rem #1b405e; */
+        }
+
+        .time_frame_and_break_header {
+            padding: 0 1.25rem;
+            color: #7d8994;
+            display: flex;
+
+            align-items: center;
+        }
+
+        .time_frame_body {
+            padding: 0 1.25rem;
+            color: #7d8994;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .break_frame_body {
+            padding: 0 1.25rem;
+            color: #7d8994;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #starttime {
+            width: 100px;
+
+        }
+
+        #endtime {
+            width: 100px;
+
+        }
+
+        #startbreak {
+            width: 100px;
+        }
+
+        #endbreak {
+            width: 100px;
+        }
+
+        span {
+            content: "\003E";
+        }
+
+        span {
+            content: "\003C";
+        }
+
+        .card__header {
+            padding: 0 1.25rem;
+            color: #070000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card__body {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid #0e0000;
+            border-bottom: 1px solid #050000;
+        }
+
+        .card__body--days {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+
+        }
+
+        .card__body--days li {
+            flex: 1;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            color: #020000;
+            margin: 0 1px;
+        }
+
+        .card__body--dates {
+            display: grid;
+            gap: 3px;
+            grid-template-columns: repeat(7, 1fr);
+            justify-items: center;
+            text-align: center;
+        }
+
+        .card__body--dates li {
+            width: 3.5rem;
+            height: 3.5rem;
+            display: grid;
+            place-items: center;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .card__body--dates li.prev,
+        .card__body--dates li.next {
+            color: #ccc;
+        }
+
+        .card__body--dates li.active {
+            background: #0a0000;
+            color: #ffffff;
+            border-radius: 50%;
+        }
+
+        .card__body--dates li {
+            border: 2px solid;
+            border-radius: 50%;
+        }
+
+        .card__body--dates li:active {
+            background-color: #933a92;
+            transform: translateY(4px);
+        }
+
+        .card__body--dates li:visited {
+            background-color: #500236;
+        }
+
+        .card__body--dates li.circle span {
+            position: absolute;
+            top: -0.75rem;
+            right: -0.5rem;
+            width: 1.75rem;
+            height: 1.75rem;
+            font-size: 1.2rem;
+            color: #ffffff;
+            border-radius: 50%;
+        }
+
+        .card__body--dates {
+            border-color: #de6e46;
+        }
+
+        .card__body--dates .circle.orange span {
+            background: #de6e46;
+        }
+
+        .card__body--dates {
+            border-color: #ae5989;
+        }
+
+        .card__body--dates .circle.purple span {
+            background: #ae5989;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -228,55 +254,55 @@
 
 <div th:class="container">
 
-  <form th:action="@{/logout}" method="get">
-    <button class="btn btn-md btn-danger btn-block" name="registration"
-            type="Submit">Logout
-    </button>
-  </form>
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
+    </form>
 
-  <div class="panel-group" style="margin-top:40px">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span th:utext="${userName}"></span>
-      </div>
-      <div class="panel-body">
-        <div class="topnav">
-          <a th:href="@{/user/home}">Home</a>
-          <a th:href="@{/user/timeRecording}">Time Recording</a>
-          <a th:href="@{/user/vacationView}">Vacation Recording</a>
-          <a class="active" th:href="@{/user/sickRecording}">Sick Recording</a>
-          <a th:href="@{/user/reportingView}">Reporting</a>
-          <a th:href="@{/user/profileView}">Profile</a>
-        </div>
-      </div>
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:utext="${userName}"></span>
+            </div>
+            <div class="panel-body">
+                <div class="topnav">
+                    <a th:href="@{/user/home}">Home</a>
+                    <a th:href="@{/user/timeRecording}">Time Recording</a>
+                    <a th:href="@{/user/vacationView}">Vacation Recording</a>
+                    <a class="active" th:href="@{/user/sickRecording}">Sick Recording</a>
+                    <a th:href="@{/user/reportingView}">Reporting</a>
+                    <a th:href="@{/user/profileView}">Profile</a>
+                </div>
+            </div>
 
-      <!-- @Dominic -->
+            <!-- @Dominic -->
             <input th:type="hidden" th:name="time" th:value="sick">
             <form method="post" action="#" th:action="@{/user/sickRecording}">
-              <div class="main">
-                <div class="right">
-                  <section class="time_frame_and_break_header">
-                    <label for="startDate">Start date:</label>
-                    <input type="date" id="startDate" name="startDate" required/>
-                    <label for="endDate">End date:</label>
-                    <input type="date" id="endDate" name="endDate" required/>
-                  </section>
-                  <!-- Formular statt onclick -->
-                  <section class="timebt">
-                    <!-- @Dominic record time, onclick... -->
-                    <button type="submit">record sickday</button>
-                   <span th:if="${sickdayErrorMsg} != null" th:utext="${sickdayErrorMsg}"></span>
-                  </section>
+                <div class="main">
+                    <div class="right">
+                        <section class="time_frame_and_break_header">
+                            <label for="startDate">Start date:</label>
+                            <input type="date" id="startDate" name="startDate" required/>
+                            <label for="endDate">End date:</label>
+                            <input type="date" id="endDate" name="endDate" required/>
+                        </section>
+                        <!-- Formular statt onclick -->
+                        <section class="timebt">
+                            <!-- @Dominic record time, onclick... -->
+                            <button type="submit">record sickday</button>
+                            <span th:if="${sickdayErrorMsg} != null" th:utext="${sickdayErrorMsg}"></span>
+                        </section>
 
+                    </div>
                 </div>
-              </div>
 
             </form>
 
-      </div>
+        </div>
 
     </div>
-  </div>
+</div>
 </div>
 
 </body>

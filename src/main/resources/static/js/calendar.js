@@ -29,10 +29,15 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
     document.getElementById("currentDay").innerHTML = dd +" / " + dayName;
 document.getElementById("Year").innerHTML = yyyy;
 
-    calendar(lLastM, fd, l, monthName, firstDay);
+    try {
+        calendar(lLastM, fd, l, monthName, firstDay); //Dominic @ Robin arguments are not used
+    }catch{
+
+    }
+    fillHiddenInput(dd);
 
 
-function calendar(){
+function calendar(){ //no args
     document.getElementById("cMonthYear").innerHTML = monthName;
     if (fd == "Mon") {
 
@@ -162,7 +167,6 @@ function calendar(){
                 document.getElementById("f" + f).innerHTML = c.toString()
             }
         }
-
     }
 }
 var s = lastDay.toString();
@@ -271,7 +275,7 @@ function nextMonth() {
         yyyy = today.getFullYear() - yearc;
     }
 
-    days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; // Dominic @ Robin already defined above
     d = new Date();
     dayName = days[d.getDay()];
 
@@ -292,17 +296,17 @@ function nextMonth() {
 
 function showDay(id) {
 
-    if (id == "f"+1 || id == "f"+8 || id == "f"+15 || id == "f"+22 || id == "f"+29 || id == "f"+36) {
+    if (id == "f" + 1 || id == "f" + 8 || id == "f" + 15 || id == "f" + 22 || id == "f" + 29 || id == "f" + 36) {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Monday";
-    } else if (id =="f"+ 2 || id == "f"+9 || id == "f"+16 || id == "f"+23 || id =="f"+ 30 || id == "f"+37) {
+    } else if (id == "f" + 2 || id == "f" + 9 || id == "f" + 16 || id == "f" + 23 || id == "f" + 30 || id == "f" + 37) {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Tuesday";
-    } else if (id =="f"+ 3 || id == "f"+10 || id =="f"+ 17 || id =="f"+ 24 || id =="f"+ 31 || id == "f"+38) {
+    } else if (id == "f" + 3 || id == "f" + 10 || id == "f" + 17 || id == "f" + 24 || id == "f" + 31 || id == "f" + 38) {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Wednesday";
-    } else if (id =="f"+ 4 || id == "f"+11 || id == "f"+18 || id =="f"+ 25 || id == "f"+32 || id == "f"+39) {
+    } else if (id == "f" + 4 || id == "f" + 11 || id == "f" + 18 || id == "f" + 25 || id == "f" + 32 || id == "f" + 39) {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Thursday";
-    } else if (id == "f"+5 || id == "f"+12 || id =="f"+ 19 || id == "f"+26 || id =="f"+33 || id == "f"+40) {
+    } else if (id == "f" + 5 || id == "f" + 12 || id == "f" + 19 || id == "f" + 26 || id == "f" + 33 || id == "f" + 40) {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Friday";
-    } else if (id == "f"+6 || id =="f"+ 13 || id == "f"+20 || id == "f"+27 || id == "f"+34 || id == "f"+41) {
+    } else if (id == "f" + 6 || id == "f" + 13 || id == "f" + 20 || id == "f" + 27 || id == "f" + 34 || id == "f" + 41) {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Saturday";
     } else {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Sunday";
@@ -318,7 +322,10 @@ function showDay(id) {
 //         let weekday = weekdays[idNum %7];
 //
 //         currentDay.innerHTML = monthDate + " / " + weekday;
+    fillHiddenInput(document.getElementById(id).innerHTML);
+}
 
+function fillHiddenInput(day) {
         /**
      * @author Dominic
      * let month
@@ -366,7 +373,8 @@ function showDay(id) {
             c = 12;
             break;
     }
-    document.getElementById("calendarDate").value=document.getElementById("Year").innerHTML+"-"+c+"-" + document.getElementById(id).innerHTML;
+    document.getElementById("calendarDate").value =
+        document.getElementById("Year").innerHTML + "-" + c + "-" + day;
 
 }
 

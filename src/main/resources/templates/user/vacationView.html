@@ -49,13 +49,13 @@
                         buttons: $('.back button')
                     },
 
-                    init: function() {
+                    init: function () {
                         instance = this;
                         settings = this.settings;
                         this.bindUIActions();
                     },
 
-                    swap: function(currentSide, desiredSide) {
+                    swap: function (currentSide, desiredSide) {
                         settings.container.toggleClass('flip');
 
                         currentSide.fadeOut(900);
@@ -64,13 +64,13 @@
                         desiredSide.show();
                     },
 
-                    bindUIActions: function() {
-                        settings.days.on('click', function(){
+                    bindUIActions: function () {
+                        settings.days.on('click', function () {
                             instance.swap(settings.calendar, settings.form);
                             settings.input.focus();
                         });
 
-                        settings.buttons.on('click', function(){
+                        settings.buttons.on('click', function () {
                             instance.swap(settings.form, settings.calendar);
                         });
                     }
@@ -104,6 +104,7 @@
                 ul {
                     list-style: none;
                 }
+
                 .main {
                     display: flex;
                     width: 100%;
@@ -111,7 +112,8 @@
                     margin-right: auto;
 
                 }
-                .left{
+
+                .left {
                     border: 3px solid #AC05ACFF;
                     padding: 20px;
 
@@ -131,19 +133,20 @@
                      box-shadow: 0 1rem 2.5rem #1b405e; */
                 }
 
-                #divButton{
+                #divButton {
                     width: 50%;
 
                 }
-                #divDate{
+
+                #divDate {
                     width: 50%;
                 }
 
-                #dayRightSide{
+                #dayRightSide {
                     width: 50%;
                 }
 
-                .right{
+                .right {
                     border: 3px solid #AC05ACFF;
                     padding: 20px;
 
@@ -160,6 +163,7 @@
                     margin-left:0px;
                     box-shadow: 0 1rem 2.5rem #1b405e; */
                 }
+
                 .time_frame_and_break_header {
                     padding: 0 1.25rem;
                     color: #7d8994;
@@ -167,31 +171,37 @@
 
                     align-items: center;
                 }
-                .time_frame_body{
+
+                .time_frame_body {
                     padding: 0 1.25rem;
                     color: #7d8994;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                 }
-                .break_frame_body{
+
+                .break_frame_body {
                     padding: 0 1.25rem;
                     color: #7d8994;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                 }
+
                 #starttime {
                     width: 100px;
 
                 }
+
                 #endtime {
                     width: 100px;
 
                 }
+
                 #startbreak {
                     width: 100px;
                 }
+
                 #endbreak {
                     width: 100px;
                 }
@@ -199,21 +209,25 @@
                 span {
                     content: "\003E";
                 }
+
                 span {
                     content: "\003C";
                 }
-                .card__header{
+
+                .card__header {
                     padding: 0 1.25rem;
                     color: #070000;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                 }
+
                 .card__body {
                     padding: 1.5rem 2rem;
                     border-top: 1px solid #0e0000;
                     border-bottom: 1px solid #050000;
                 }
+
                 .card__body--days {
                     display: flex;
                     justify-content: space-between;
@@ -221,6 +235,7 @@
                     height: 4rem;
 
                 }
+
                 .card__body--days li {
                     flex: 1;
                     font-weight: bold;
@@ -229,6 +244,7 @@
                     color: #020000;
                     margin: 0 1px;
                 }
+
                 .card__body--dates {
                     display: grid;
                     gap: 3px;
@@ -236,6 +252,7 @@
                     justify-items: center;
                     text-align: center;
                 }
+
                 .card__body--dates li {
                     width: 3.5rem;
                     height: 3.5rem;
@@ -244,27 +261,32 @@
                     font-weight: bold;
                     position: relative;
                 }
+
                 .card__body--dates li.prev,
                 .card__body--dates li.next {
                     color: #ccc;
                 }
+
                 .card__body--dates li.active {
                     background: #0a0000;
                     color: #ffffff;
                     border-radius: 50%;
                 }
+
                 .card__body--dates li {
                     border: 2px solid;
                     border-radius: 50%;
                 }
 
-                .card__body--dates li:active{
+                .card__body--dates li:active {
                     background-color: #933a92;
                     transform: translateY(4px);
                 }
-                .card__body--dates li:visited{
+
+                .card__body--dates li:visited {
                     background-color: #500236;
                 }
+
                 .card__body--dates li.circle span {
                     position: absolute;
                     top: -0.75rem;
@@ -275,15 +297,19 @@
                     color: #ffffff;
                     border-radius: 50%;
                 }
-                .card__body--dates  {
+
+                .card__body--dates {
                     border-color: #de6e46;
                 }
+
                 .card__body--dates .circle.orange span {
                     background: #de6e46;
                 }
+
                 .card__body--dates {
                     border-color: #ae5989;
                 }
+
                 .card__body--dates .circle.purple span {
                     background: #ae5989;
                 }
@@ -313,8 +339,8 @@
             </form>
 
         </div>
-        </div>
     </div>
+</div>
 
 </div>
 </body>

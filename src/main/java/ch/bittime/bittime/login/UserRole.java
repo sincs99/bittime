@@ -25,12 +25,7 @@ Pascal
 /**
  * @author Pascal
  */
-
 public class UserRole {
-
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
@@ -38,5 +33,4 @@ public class UserRole {
 
     @Column(name = "role")
     private String role;
-
 }
