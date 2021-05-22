@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * @author Andre
+ * @author Andre, Dominic
  */
 @Controller
 public class UserController {
@@ -44,9 +44,7 @@ public class UserController {
      */
     @PostMapping("/user/timeRecording")
     public String recordTime(@ModelAttribute TimeRecord timeRecord, Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
-
+        User user = assignUser(model);
         timeRecord.setUser(user);
 
         // endtime > starttime?
@@ -76,8 +74,7 @@ public class UserController {
      */
     @PostMapping("/user/vacationView")
     public String recordVacation(@ModelAttribute Vacation vacation, Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
+        User user = assignUser(model);
         vacation.setUser(user);
 
         // enddate > startdate?
@@ -91,8 +88,7 @@ public class UserController {
 
     @GetMapping("/user/reportingView")
     public String reportingView(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
+        User user = assignUser(model);
         // @Dominic timeRecords
         model.addAttribute("timeRecords", timeRecordRepo.findAllByUser(user));
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
@@ -122,8 +118,7 @@ public class UserController {
      */
     @PostMapping("/user/sickRecording")
     public String recordVacation(@ModelAttribute Sickday sickday, Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
+        User user = assignUser(model);
         sickday.setUser(user);
 
         // enddate > startdate?
@@ -134,4 +129,16 @@ public class UserController {
         }
         return sickRecording(model);
     }
+
+    /**
+     * @author Dominic
+     */
+    private User assignUser(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        return user;
+    }
+
+
 }

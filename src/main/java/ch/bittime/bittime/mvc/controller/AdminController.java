@@ -1,7 +1,7 @@
 package ch.bittime.bittime.mvc.controller;
 
 /**
- * @author Pascal
+ * @author Pascal, Dominic, Andre
  */
 
 import ch.bittime.bittime.login.*;
@@ -229,9 +229,9 @@ public class AdminController {
 
     @GetMapping("/sickRecording")
     public String sickRecording(Model model) {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
+        User user = assignUser(model);
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //User user = userService.findUserByUserName(auth.getName());
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/sickRecording";
     }
@@ -241,8 +241,9 @@ public class AdminController {
      */
     @PostMapping("/sickRecording")
     public String recordSickdays(@ModelAttribute Sickday sickday, Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
+        User user = assignUser(model);
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //User user = userService.findUserByUserName(auth.getName());
         sickday.setUser(user);
 
         //enddate>startdate?
@@ -261,9 +262,9 @@ public class AdminController {
      */
     @GetMapping("/reportingView")
     public String reportingView(@RequestParam(defaultValue = "-1") int userId, /*@RequestParam(defaultValue = "") String timeFilter,*/ Model model) {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
+        User user = assignUser(model);
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //User user = userService.findUserByUserName(auth.getName());
         // List<TimeRecord> timeRecordList;
 
         //@Dominic timeRecords
@@ -295,8 +296,9 @@ public class AdminController {
     @GetMapping("/vacationManagement")
     public String vacationManagement(Model model) {
         //list, vacationRepo
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
+        User user = assignUser(model);
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //User user = userService.findUserByUserName(auth.getName());
 
         List<Vacation> listVacation = vacationRepo.findAll();
 //        Vacation v = new Vacation();
