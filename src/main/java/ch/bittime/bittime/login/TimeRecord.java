@@ -6,28 +6,21 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * @author Dominic
+ */
 @Data
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "timerecord") //MySQL Data Table
-/**
- * @author Dominic
- */
-
 public class TimeRecord {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @Column(name = "timeRecord_id")
     private int id;
-
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
@@ -52,14 +45,12 @@ public class TimeRecord {
     @Column(name = "time")
     private String time;
 
-    @JoinColumn(name="user")
+    @JoinColumn(name = "user")
     @ManyToOne
     private User user;
 
     public int totalWorkTimeWithoutBreaksInMinutes() {
-
-
-       long result = ( (endtime.getTime()-starttime.getTime())-(endbreak.getTime()-startbreak.getTime())) /1000/(60);
+        long result = ((endtime.getTime() - starttime.getTime()) - (endbreak.getTime() - startbreak.getTime())) / 1000 / (60);
 
         return (int) result;
     }

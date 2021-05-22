@@ -1,17 +1,12 @@
 package ch.bittime.bittime.login;
 
 
-import ch.bittime.bittime.login.repository.UserRepo;
 import ch.bittime.bittime.login.repository.RoleRepo;
-
-
+import ch.bittime.bittime.login.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -21,15 +16,13 @@ import java.util.Optional;
  * @author Pascal
  * test master
  */
-
 @Service
 @Transactional
 public class UserService {
 
-    private UserRepo userRepo;
-    private RoleRepo roleRepo;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    private final UserRepo userRepo;
+    private final RoleRepo roleRepo;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserService(UserRepo userRepo, RoleRepo roleRepo, BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -47,10 +40,8 @@ public class UserService {
     }
 
     public Optional<User> findUserById(int id) {
-
         return userRepo.findById(id);
     }
-
 
     public User saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -60,34 +51,26 @@ public class UserService {
         return userRepo.save(user);
     }
 
-
     public void deleteUser(int id) {
         userRepo.deleteById(id);
-
     }
-
-
 
     public void deactivateUser(int id) {
         Optional<User> u = userRepo.findById(id);
         boolean status;
         status = u.get().getActive();
 
-
         System.out.println(status);
         u.get().setActive(false);
         status = u.get().getActive();
 
         System.out.println(status);
-
     }
 
     public void activateUser(int id) {
-
         Optional<User> u = userRepo.findById(id);
         boolean status;
         status = u.get().getActive();
-
 
         System.out.println(status);
         u.get().setActive(true);

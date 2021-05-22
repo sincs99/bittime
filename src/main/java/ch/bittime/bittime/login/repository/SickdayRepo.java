@@ -2,7 +2,6 @@ package ch.bittime.bittime.login.repository;
 
 
 import ch.bittime.bittime.login.Sickday;
-import ch.bittime.bittime.login.Vacation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,9 +10,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SickdayRepo extends JpaRepository<Sickday, Integer> {
-
-
-
-
-
 }

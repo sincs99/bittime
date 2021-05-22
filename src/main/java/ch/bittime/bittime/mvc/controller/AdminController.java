@@ -23,7 +23,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -111,12 +111,10 @@ public class AdminController {
     public String deactivateUser(@PathVariable(name = "id") int id, Model model) {
 
 
-
         System.out.println("Request ok");
         Optional<User> i = userService.findUserById(id);
         System.out.println(i);
         String roles;
-
 
 
         roles = String.valueOf(i.get().getRoles());
@@ -139,7 +137,6 @@ public class AdminController {
 
         List<User> listUser = userRepo.findAll();
         model.addAttribute("listUser", listUser);
-
 
 
         return "redirect:/admin/userPanel";
@@ -176,9 +173,9 @@ public class AdminController {
      * @author Dominic
      */
     @PostMapping("/timeRecording")
-    public String recordTime(@ModelAttribute TimeRecord timeRecord, Model model){
-       User user = assignUser(model);
-       // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    public String recordTime(@ModelAttribute TimeRecord timeRecord, Model model) {
+        User user = assignUser(model);
+        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         //User user = userService.findUserByUserName(auth.getName());
 
         timeRecord.setUser(user);
@@ -188,19 +185,19 @@ public class AdminController {
         //startbreak>starttime
         //endbreak<endtime
 
-        if(timeRecord.getEndtime().getTime()>timeRecord.getStarttime().getTime() &&
-                timeRecord.getEndtime().getTime()>=timeRecord.getStartbreak().getTime() &&
+        if (timeRecord.getEndtime().getTime() > timeRecord.getStarttime().getTime() &&
+                timeRecord.getEndtime().getTime() >= timeRecord.getStartbreak().getTime() &&
                 timeRecord.getStartbreak().getTime() >= timeRecord.getStarttime().getTime() &&
-                timeRecord.getEndbreak().getTime() <= timeRecord.getEndtime().getTime() ){
+                timeRecord.getEndbreak().getTime() <= timeRecord.getEndtime().getTime()) {
             timeRecordRepo.save(timeRecord);
-        } else{
+        } else {
             //model.addAttribute errorMsg
-            model.addAttribute( "recordTimeErrorMsg", "Storing the time record was not successful. Please enter a start time that takes place before the end time and at least one break for your health within that interval.");
+            model.addAttribute("recordTimeErrorMsg", "Storing the time record was not successful. Please enter a start time that takes place before the end time and at least one break for your health within that interval.");
         }
 
         return timeRecording(model);
     }
-    
+
     @GetMapping("/vacationRecording")
     public String vacationRecording(Model model) {
         assignUser(model);
@@ -214,18 +211,18 @@ public class AdminController {
      * @author Dominic
      */
     @PostMapping("/vacationRecording")
-    public String recordVacation(@ModelAttribute Vacation vacation, Model model){
+    public String recordVacation(@ModelAttribute Vacation vacation, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         vacation.setUser(user);
 
         //enddate>startdate?
-        if(vacation.getEndDate().getTime() >= vacation.getStartDate().getTime() ){
+        if (vacation.getEndDate().getTime() >= vacation.getStartDate().getTime()) {
             vacationRepo.save(vacation);
-        }else{
+        } else {
 
             //model.addAttribute errorMsg
-            model.addAttribute( "vacationErrorMsg", "Vacation request was not successful. Please enter a vacation end date that take place after the start date.");
+            model.addAttribute("vacationErrorMsg", "Vacation request was not successful. Please enter a vacation end date that take place after the start date.");
         }
         return vacationRecording(model);
     }
@@ -243,18 +240,18 @@ public class AdminController {
      * @author Dominic
      */
     @PostMapping("/sickRecording")
-    public String recordSickdays(@ModelAttribute Sickday sickday, Model model){
+    public String recordSickdays(@ModelAttribute Sickday sickday, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         sickday.setUser(user);
 
         //enddate>startdate?
-        if(sickday.getEndDate().getTime() >= sickday.getStartDate().getTime() ){
+        if (sickday.getEndDate().getTime() >= sickday.getStartDate().getTime()) {
             sickdayRepo.save(sickday);
-        }else{
+        } else {
 
             //model.addAttribute errorMsg
-            model.addAttribute( "sickdayErrorMsg", "Sickday recording was not successful. Please enter a sickday's end date/s that take place after the start date/s.");
+            model.addAttribute("sickdayErrorMsg", "Sickday recording was not successful. Please enter a sickday's end date/s that take place after the start date/s.");
         }
         return sickRecording(model);
     }
@@ -270,10 +267,10 @@ public class AdminController {
         // List<TimeRecord> timeRecordList;
 
         //@Dominic timeRecords
-        if(userId == -1) model.addAttribute("timeRecords", timeRecordRepo.findAll());
+        if (userId == -1) model.addAttribute("timeRecords", timeRecordRepo.findAll());
         else {
             userRepo.findById(userId).ifPresentOrElse(filteredUser ->
-                    model.addAttribute("timeRecords", timeRecordRepo.findAllByUser(filteredUser)),
+                            model.addAttribute("timeRecords", timeRecordRepo.findAllByUser(filteredUser)),
                     () -> model.addAttribute("timeRecords", timeRecordRepo.findAll())
             );
         }
@@ -304,7 +301,7 @@ public class AdminController {
         List<Vacation> listVacation = vacationRepo.findAll();
 //        Vacation v = new Vacation();
 //        v.setUser(user);
-       // listVacation.add(v);
+        // listVacation.add(v);
         model.addAttribute("listVacation", listVacation);
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationManagement";
@@ -328,7 +325,7 @@ public class AdminController {
     /**
      * @author Dominic
      */
-    private User assignUser(Model model){
+    private User assignUser(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
