@@ -21,22 +21,21 @@ import java.util.Optional;
 
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
-
-
+    
     @Autowired
     private UserService userService;
     @Autowired
     private UserRepo userRepo;
-    //vacationRep
     @Autowired
     private VacationRepo vacationRepo;
     @Autowired
     private TimeRecordRepo timeRecordRepo;
-    @Autowired SickdayRepo sickdayRepo;
+    @Autowired
+    private SickdayRepo sickdayRepo;
 
-
-    @RequestMapping(value = "/admin/deleteUser/{id}")
+    @RequestMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable(name = "id") int id, Model model) {
 
         System.out.println("Request ok");
@@ -74,7 +73,7 @@ public class AdminController {
         return "redirect:/admin/userPanel";
     }
 
-    @RequestMapping("/admin/activateUser/{id}")
+    @RequestMapping("/activateUser/{id}")
     public String activateUser(@PathVariable(name = "id") int id, Model model) {
 
         System.out.println("Request ok");
@@ -108,7 +107,7 @@ public class AdminController {
         return "redirect:/admin/userPanel";
     }
 
-    @RequestMapping("/admin/deactivateUser/{id}")
+    @RequestMapping("/deactivateUser/{id}")
     public String deactivateUser(@PathVariable(name = "id") int id, Model model) {
 
 
@@ -147,8 +146,7 @@ public class AdminController {
 
     }
 
-
-    @GetMapping("/admin/userPanel")
+    @GetMapping("/userPanel")
     public String listUser(Model model) {
         List<User> listUser = userRepo.findAll();
         model.addAttribute("listUser", listUser);
@@ -162,12 +160,10 @@ public class AdminController {
 
     }
 
-
     /**
      * @author Andre
      */
-
-    @GetMapping("/admin/timeRecording")
+    @GetMapping("/timeRecording")
     public String timeRecording(Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -179,11 +175,11 @@ public class AdminController {
     /**
      * @author Dominic
      */
-    @PostMapping("/admin/timeRecording")
-
+    @PostMapping("/timeRecording")
     public String recordTime(@ModelAttribute TimeRecord timeRecord, Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
+       User user = assignUser(model);
+       // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //User user = userService.findUserByUserName(auth.getName());
 
         timeRecord.setUser(user);
 
@@ -192,7 +188,10 @@ public class AdminController {
         //startbreak>starttime
         //endbreak<endtime
 
-        if(timeRecord.getEndtime().getTime()>timeRecord.getStarttime().getTime() && timeRecord.getEndtime().getTime()>timeRecord.getStartbreak().getTime() && timeRecord.getStartbreak().getTime() > timeRecord.getStarttime().getTime() && timeRecord.getEndbreak().getTime() < timeRecord.getEndtime().getTime() ){
+        if(timeRecord.getEndtime().getTime()>timeRecord.getStarttime().getTime() &&
+                timeRecord.getEndtime().getTime()>=timeRecord.getStartbreak().getTime() &&
+                timeRecord.getStartbreak().getTime() >= timeRecord.getStarttime().getTime() &&
+                timeRecord.getEndbreak().getTime() <= timeRecord.getEndtime().getTime() ){
             timeRecordRepo.save(timeRecord);
         } else{
             //model.addAttribute errorMsg
@@ -201,29 +200,27 @@ public class AdminController {
 
         return timeRecording(model);
     }
-
-
-    @GetMapping("/admin/vacationRecording")
+    
+    @GetMapping("/vacationRecording")
     public String vacationRecording(Model model) {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
-        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        assignUser(model);
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //User user = userService.findUserByUserName(auth.getName());
+        //model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationRecording";
     }
 
     /**
      * @author Dominic
      */
-    @PostMapping("/admin/vacationRecording")
-
+    @PostMapping("/vacationRecording")
     public String recordVacation(@ModelAttribute Vacation vacation, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         vacation.setUser(user);
 
         //enddate>startdate?
-        if(vacation.getEndDate().getTime() > vacation.getStartDate().getTime() ){
+        if(vacation.getEndDate().getTime() >= vacation.getStartDate().getTime() ){
             vacationRepo.save(vacation);
         }else{
 
@@ -233,8 +230,7 @@ public class AdminController {
         return vacationRecording(model);
     }
 
-
-    @GetMapping("/admin/sickRecording")
+    @GetMapping("/sickRecording")
     public String sickRecording(Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -246,15 +242,14 @@ public class AdminController {
     /**
      * @author Dominic
      */
-    @PostMapping("/admin/sickRecording")
-
-    public String recordVacation(@ModelAttribute Sickday sickday, Model model){
+    @PostMapping("/sickRecording")
+    public String recordSickdays(@ModelAttribute Sickday sickday, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         sickday.setUser(user);
 
         //enddate>startdate?
-        if(sickday.getEndDate().getTime() > sickday.getStartDate().getTime() ){
+        if(sickday.getEndDate().getTime() >= sickday.getStartDate().getTime() ){
             sickdayRepo.save(sickday);
         }else{
 
@@ -267,7 +262,7 @@ public class AdminController {
     /**
      * @author Dominic
      */
-    @GetMapping("/admin/reportingView")
+    @GetMapping("/reportingView")
     public String reportingView(@RequestParam(defaultValue = "-1") int userId, /*@RequestParam(defaultValue = "") String timeFilter,*/ Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -288,7 +283,7 @@ public class AdminController {
         return "/admin/reportingView";
     }
 
-    @GetMapping("/admin/profileView")
+    @GetMapping("/profileView")
     public String profileView(Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -297,13 +292,11 @@ public class AdminController {
         return "/admin/profileView";
     }
 
-    @GetMapping("/admin/vacationManagement")
+    /**
+     * @author Dominic
+     */
+    @GetMapping("/vacationManagement")
     public String vacationManagement(Model model) {
-
-
-/**
- * @author Dominic
- */
         //list, vacationRepo
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
@@ -316,11 +309,11 @@ public class AdminController {
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationManagement";
     }
+
     /**
      * @author Dominic
-     * acceptOrDeclineVacation() method
      */
-    @PostMapping("/admin/vacationManagement")
+    @PostMapping("/vacationManagement")
     public String acceptOrDeclineVacation(@RequestParam int vacation_id, @RequestParam String result, Model model) {
         vacationRepo.findById(vacation_id).ifPresent(vacation -> {
                     if (vacation.getAcceptState() == 0) {
@@ -332,5 +325,13 @@ public class AdminController {
         return vacationManagement(model);
     }
 
-
+    /**
+     * @author Dominic
+     */
+    private User assignUser(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        return user;
+    }
 }
