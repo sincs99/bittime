@@ -3,57 +3,56 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>BitTime User Panel</title>
-  <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <meta name="author" content="Andre">
+    <title>BitTime User Panel</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="author" content="Andre">
 </head>
 
 <body>
 <div class="container">
 
-  <form th:action="@{/logout}" method="get">
-    <button class="btn btn-md btn-danger btn-block" name="registration"
-            type="Submit">Logout
-    </button>
-  </form>
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
+    </form>
 
-  <div class="panel-group" style="margin-top:40px">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span th:utext="${userName}"></span>
-      </div>
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span th:utext="${userName}"></span>
+            </div>
 
-      <div class="panel-body">
-        <div class="topnav">
-          <a class="active" href="#home">Home</a>
-          <a th:href="@{/user/timeRecording}">Time Recording</a>
-          <a th:href="@{/user/vacationView}">Schedule Vacation</a>
-          <a th:href="@{/user/sickRecording}">Sick Recording</a>
-          <a th:href="@{/user/reportingView}">Reporting</a>
-          <a th:href="@{/user/profileView}">Profile</a>
+            <div class="panel-body">
+                <div class="topnav">
+                    <a class="active" href="#home">Home</a>
+                    <a th:href="@{/user/timeRecording}">Time Recording</a>
+                    <a th:href="@{/user/vacationView}">Schedule Vacation</a>
+                    <a th:href="@{/user/sickRecording}">Sick Recording</a>
+                    <a th:href="@{/user/reportingView}">Reporting</a>
+                    <a th:href="@{/user/profileView}">Profile</a>
+                </div>
+
+                <div>
+
+                    <p></p><br>
+
+                    <div th:class="text-center" th:text="${userMessage}"></div>
+
+                    <p></p><br>
+                    <p></p><br>
+
+                </div>
+
+
+                <img th:src="@{/images/Logotsp.png}" class="img-responsive center-block" width="400" height="400"
+                     alt="Logo"/>
+            </div>
         </div>
-
-        <div>
-
-          <p></p><br>
-
-          <div th:class="text-center" th:text="${userMessage}"></div>
-
-          <p></p><br>
-          <p></p><br>
-
-        </div>
-
-
-
-        <img th:src="@{/images/Logotsp.png}" class="img-responsive center-block" width="400" height="400"
-             alt="Logo"/>
-      </div>
     </div>
-  </div>
 </div>
 </body>
 </html>
