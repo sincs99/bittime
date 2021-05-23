@@ -64,6 +64,9 @@ public class UserController {
         return timeRecording(model);
     }
 
+    /**
+     * @author Andre
+     */
     @GetMapping("/user/vacationView")
     public String vacationView(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -89,6 +92,9 @@ public class UserController {
         return vacationView(model);
     }
 
+    /**
+     * @author Andre
+     */
     @GetMapping("/user/reportingView")
     public String reportingView(Model model) {
         User user = assignUser(model);
@@ -105,7 +111,6 @@ public class UserController {
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/user/profileView";
     }
-
 
     @GetMapping("/user/sickRecording")
     public String sickRecording(Model model) {

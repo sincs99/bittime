@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * @author Pascal
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -198,6 +200,9 @@ public class AdminController {
         return timeRecording(model);
     }
 
+    /**
+     * @author Andre
+     */
     @GetMapping("/vacationRecording")
     public String vacationRecording(Model model) {
         assignUser(model);
@@ -225,6 +230,9 @@ public class AdminController {
         return vacationRecording(model);
     }
 
+    /**
+     * @author Andre
+     */
     @GetMapping("/sickRecording")
     public String sickRecording(Model model) {
 
@@ -277,6 +285,9 @@ public class AdminController {
         return "/admin/reportingView";
     }
 
+    /**
+     * @author Andre
+     */
     @GetMapping("/profileView")
     public String profileView(Model model) {
 
