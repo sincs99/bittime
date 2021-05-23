@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta name="author" content="Pascal">
+    <meta name="author" content="Andre, Pascal">
 </head>
-
+<!-- @Andre -->
 <body>
 <div class="container">
 
@@ -60,6 +60,8 @@
                     <th>Activate or Deactivate User</th>
                 </tr>
                 </thead>
+
+                <!-- @Pascal-->
                 <tbody>
                 <tr th:each="user: ${listUser}">
                     <td th:text="${user.id}"></td>
@@ -69,7 +71,7 @@
                     <td th:text="${user.roles}"></td>
                     <td>
                         <a th:href="@{deleteUser/{id}(id=${user.id})}"
-                           th:onclick="return confirm('Are you really want to delete this Account')"
+                           th:onclick="return confirm('Do you want to delete this Account')"
                            th:text="Delete"></a>
                         <br>
                     </td>
