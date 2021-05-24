@@ -221,15 +221,19 @@ function lastMonth() {
      dayName = days[d.getDay()];
 
      dd = String(today.getDate()).padStart(2, '0');
-    mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+     mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 
 
 
-    document.getElementById("Year").innerHTML = yyyy;
+     document.getElementById("Year").innerHTML = yyyy;
 
-    fd = firstDay.toString().substring(0, 3);
-    today = dd + '/' + mm + '/' + yyyy;
-    calendar(lLastM, fd, l, monthName, firstDay);
+     fd = firstDay.toString().substring(0, 3);
+     today = dd + '/' + mm + '/' + yyyy;
+     try {
+         calendar(lLastM, fd, l, monthName, firstDay);
+     }catch{
+
+     }
 
 }
 function nextMonth() {
@@ -289,7 +293,11 @@ function nextMonth() {
     fd = firstDay.toString().substring(0, 3);
 
     today = dd + '/' + mm + '/' + yyyy;
-    calendar(lLastM, fd, l, monthName, firstDay);
+    try {
+        calendar(lLastM, fd, l, monthName, firstDay);
+    }catch{
+
+    }
 
 
 }
@@ -322,17 +330,16 @@ function showDay(id) {
 //         let weekday = weekdays[idNum %7];
 //
 //         currentDay.innerHTML = monthDate + " / " + weekday;
+    /**
+     * @author Dominic
+     */
     fillHiddenInput(document.getElementById(id).innerHTML);
 }
-
+/**
+ * @author Dominic
+ */
 function fillHiddenInput(day) {
-        /**
-     * @author Dominic
-     * let month
-     * switch case
-     * document.get...
-     */
-    //hidden input field
+
     let month = document.getElementById("cMonthYear").innerHTML;
     let c =-1;
     switch(month) {
