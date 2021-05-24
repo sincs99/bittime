@@ -4,7 +4,7 @@
 
 
 <head>
-    <title>BitTime Admin Panel</title>
+    <title>BitTime User Panel</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -63,28 +63,31 @@
                 </div>
             </div>
 
-            <!-- button todo: <a th:href="@{/user/...report?}"><button>Um Report zu generieren</button></a>-->
-
             <p></p>
             <label>CREATE TIME REPORT</label>
             <p></p>
 
-            <div class="dropdown">
-                <label for="time">Choose time period: </label>
-                <select name="time" id="time">
-                    <option value="timeDay">Today</option>
-                    <option value="timeWeek">Weekly</option>
-                    <option value="timeMonth">Monthly</option>
-                    <option value="timeYear">Yearly</option>
-                </select>
-            </div>
+<!--            todo: Zeitintervall für Ansichtsperiode einbauen-->
+
+<!--            <div class="dropdown">-->
+<!--                <label for="time">Choose time period: </label>-->
+<!--                <select name="time" id="time">-->
+<!--                    <option value="timeDay">Today</option>-->
+<!--                    <option value="timeWeek">Weekly</option>-->
+<!--                    <option value="timeMonth">Monthly</option>-->
+<!--                    <option value="timeYear">Yearly</option>-->
+<!--                </select>-->
+<!--            </div>-->
+
 
             <p></p>
             <p></p>
 
-            <p>Generate PDF not working, error if clicked.</p>
+<!--            todo: Zeitliste als PDF generieren-->
 
-            <a th:href="@{generate/}" th:text="Generate_PDF" class="button button2"></a>
+<!--            <a th:href="@{generate/}" th:text="Generate_PDF" class="button button2"></a>-->
+<!--            -->
+<!--             <p>Generate PDF not working, error if clicked.</p>-->
 
             <p></p>
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>BitTime Admin Panel</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="author" content="Andre">
+</head>
+
+<body>
+<div class="container">
+
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
+    </form>
+            <div class="panel-body">
+                <div class="topnav">
+                    <a th:href="@{/admin/home}">Home</a>
+                    <a class="active" th:href="@{/admin/registration}">Registration</a>
+                    <a th:href="@{/admin/userPanel}">Users</a>
+                    <a th:href="@{/admin/timeRecording}">Time Recording</a>
+                    <a th:href="@{/admin/vacationRecording}">Vacation Recording</a>
+                    <a th:href="@{/admin/sickRecording}">Sick Recording</a>
+                    <a th:href="@{/admin/reportingView}">Reporting</a>
+                    <a th:href="@{/admin/vacationManagement}">Vacation Management</a>
+                    <a th:href="@{/admin/profileView}">Profile</a>
+                </div>
+
+                <div align="center">
+                    <h1>Edit Profile</h1>
+                    <br/>
+                    <form action="#" th:action="@{/save}" th:object="${product}"
+                          method="post">
+
+                        <table border="0" cellpadding="10">
+                            <tr>
+                                <td>First Name:</td>
+                                <td>
+                                    <input type="text" th:field="*{user.firstName}" readonly="readonly"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Name:</td>
+                                <td>
+                                    <input type="text" th:field="*{user.lastName}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td><input type="text" th:field="*{user.email}"/></td>
+                            </tr>
+                            <tr>
+                                <td>Username:</td>
+                                <td><input type="text" th:field="*{user.username}"/></td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td><input type="text" th:field="*{user.password}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <button type="submit">Save changes</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+</body>
+</html>

@@ -44,6 +44,11 @@
 
                     <p></p><br>
 
+                    <div th:class="text-center" th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy')}"></div>
+
+                    <div th:class="text-center" th:text="${#dates.format(#dates.createNow(), 'HH:mm')}"></div>
+                    <p></p>
+
                     <div th:class="text-center" th:text="${adminMessage}"></div>
 
                     <p></p><br>
