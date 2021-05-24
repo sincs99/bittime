@@ -297,6 +297,18 @@ public class AdminController {
         return "/admin/profileView";
     }
 
+    //    todo: edit profile function
+//    @RequestMapping("/editProfile/{id}")
+//    public String changeProfile(@PathVariable(name = "id") int id, Model model) {
+//        System.out.println("Method got called");
+//        Optional<User> i = userService.findUserById(id);
+//        System.out.println("User gefunden:"+i);
+//        userService.changeName(id);
+//
+//        return "redirect:/admin/profileView";
+//    }
+
+
     /**
      * @author Dominic
      */
