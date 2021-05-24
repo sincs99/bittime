@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -160,7 +161,7 @@ public class AdminController {
         }else {
             model.addAttribute("listUser", listUser);
         }
-
+        model.addAttribute("searchStringVal", searchString);
 
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -305,37 +306,69 @@ public class AdminController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+
+        model.addAttribute("user", user);
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/profileView";
     }
 
-    //    todo: edit profile function
-//    @RequestMapping("/editProfile/{id}")
-//    public String changeProfile(@PathVariable(name = "id") int id, Model model) {
-//        System.out.println("Method got called");
-//        Optional<User> i = userService.findUserById(id);
-//        System.out.println("User gefunden:"+i);
-//        userService.changeName(id);
-//
-//        return "redirect:/admin/profileView";
-//    }
+    @PostMapping("/profileView")
+    public String updateProfileView(Model model, @ModelAttribute User updatedUser, String currentPw, String newPw1, String newPw2) {
 
+        User user = assignUser(model);
+
+        if(!userService.matchesPassword(currentPw, user)) {
+            model.addAttribute("errorMsg", "The entered password is incorrect.");
+        } else if(!Objects.equals(newPw1, newPw2)) {
+            model.addAttribute("errorMsg", "New password does not match.");
+        } else if(updatedUser.getName() == null || updatedUser.getName().equals("") ||
+                updatedUser.getLastName() == null || updatedUser.getLastName().equals("") ||
+                //updatedUser.getUserName() == null || updatedUser.getUserName().equals("") ||
+                updatedUser.getEmail() == null || updatedUser.getEmail().equals("")) {
+            model.addAttribute("errorMsg", "Name, last name and email can't be empty.");
+        } else {
+            // Username cannot be changed because it is stored in security context.
+            // Securitz context cannot be updated with new username. Would require logout.
+            //user.setUserName(updatedUser.getUserName());
+            user.setEmail(updatedUser.getEmail());
+            user.setName(updatedUser.getName());
+            user.setLastName(updatedUser.getLastName());
+            user.setStreet(updatedUser.getStreet());
+            user.setCity(updatedUser.getCity());
+            user.setState(updatedUser.getState());
+            if(newPw1 != null && newPw1.length() > 0) {
+                user.setPassword(userService.encodePassword(newPw1));
+            }
+            userRepo.save(user);
+
+            return profileView(model);
+        }
+
+        // Only get here in error cases
+        // Do not delegate to profileView method because we show back changes
+        // to user along with errors
+        model.addAttribute("user", updatedUser);
+        return "/admin/profileView";
+    }
 
     /**
      * @author Dominic
      */
     @GetMapping("/vacationManagement")
-    public String vacationManagement(Model model) {
+    public String vacationManagement(Model model, String searchString) {
         //list, vacationRepo
         User user = assignUser(model);
         //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         //User user = userService.findUserByUserName(auth.getName());
 
-        List<Vacation> listVacation = vacationRepo.findAll();
-//        Vacation v = new Vacation();
-//        v.setUser(user);
-        // listVacation.add(v);
-        model.addAttribute("listVacation", listVacation);
+        List<Vacation> v;
+        if (searchString != null){
+            v = vacationRepo.findByKeyword(searchString);
+        }else {
+            v = vacationRepo.findAll();
+        }
+        model.addAttribute("listVacation", v);
+        model.addAttribute("searchStringVal", searchString);
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/vacationManagement";
     }
@@ -344,7 +377,8 @@ public class AdminController {
      * @author Dominic
      */
     @PostMapping("/vacationManagement")
-    public String acceptOrDeclineVacation(@RequestParam int vacation_id, @RequestParam String result, Model model) {
+    public String acceptOrDeclineVacation(@RequestParam int vacation_id, @RequestParam String result,
+                                          @RequestParam String searchString, Model model) {
         vacationRepo.findById(vacation_id).ifPresent(vacation -> {
                     if (vacation.getAcceptState() == 0) {
                         vacation.setAcceptState("accept".equals(result) ? 1 : -1);
@@ -352,7 +386,7 @@ public class AdminController {
                     }
                 }
         );
-        return vacationManagement(model);
+        return "redirect:/admin/vacationManagement?searchString=" + searchString;
     }
 
     /**

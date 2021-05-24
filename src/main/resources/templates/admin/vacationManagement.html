@@ -51,6 +51,7 @@
 
             <form th:action="@{/admin/vacationManagement}" method="get">
                 Search: <input id="txtSearch" type="text" name="searchString"  size="50"
+                               th:value="${searchStringVal}"
                                required/>
                 &nbsp;
                 <input type="submit" value="Search"/>
@@ -86,6 +87,7 @@
 
                                 <form method="post" action="#" th:action="@{/admin/vacationManagement}">
                                     <input type="hidden" name="vacation_id" th:value="${vacation.id}"/>
+                                    <input type="hidden" name="searchString" th:value="${searchStringVal}" />
                                     <button name="result" value="accept">accept</button>
                                     <button name="result" value="decline">decline</button>
                                 </form>
