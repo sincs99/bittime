@@ -44,9 +44,19 @@
             <p></p>
             <p>Search vacation request</p>
 
-            <form>
-                <input type="text" name="userName">
-                <input type="submit">
+            <script type="text/javascript">
+                function showTable() {
+                    window.location = "[[@{/admin/vacationManagement}]]";
+                }
+            </script>
+
+            <form th:action="@{/admin/vacationManagement}" method="get">
+                Search: <input id="txtSearch" type="text" name="searchString"  size="50"
+                               required/>
+                &nbsp;
+                <input type="submit" value="Search"/>
+                &nbsp;
+                <input type="button" value="ShowAll" id="btnClear" onclick="showTable()"/>
             </form>
 
             <table class="table table-striped table-bordered">

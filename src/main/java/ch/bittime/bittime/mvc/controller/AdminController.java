@@ -10,6 +10,8 @@ import ch.bittime.bittime.login.repository.TimeRecordRepo;
 import ch.bittime.bittime.login.repository.UserRepo;
 import ch.bittime.bittime.login.repository.VacationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -74,6 +76,8 @@ public class AdminController {
 
         return "redirect:/admin/userPanel";
     }
+
+
 
     @RequestMapping("/activateUser/{id}")
     public String activateUser(@PathVariable(name = "id") int id, Model model) {
@@ -146,10 +150,18 @@ public class AdminController {
     }
 
     @GetMapping("/userPanel")
-    public String listUser(Model model) {
+    public String listUser(Model model, String searchString) {
         List<User> listUser = userRepo.findAll();
-        model.addAttribute("listUser", listUser);
+
         System.out.println(listUser);
+
+        if (searchString != null){
+            model.addAttribute("listUser", userService.findByKeyword(searchString));
+        }else {
+            model.addAttribute("listUser", listUser);
+        }
+
+
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());

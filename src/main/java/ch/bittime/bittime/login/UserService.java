@@ -4,22 +4,28 @@ package ch.bittime.bittime.login;
 import ch.bittime.bittime.login.repository.RoleRepo;
 import ch.bittime.bittime.login.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 /**
  * @author Pascal
- * test master
+ *
  */
+
 @Service
 @Transactional
+
 public class UserService {
 
+    @Autowired
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -77,6 +83,15 @@ public class UserService {
         status = u.get().getActive();
 
         System.out.println(status);
+    }
+
+
+    public List<User> findByKeyword(String searchString) {
+
+
+        return userRepo.findByKeyword(searchString);
+
+
     }
 }
 
