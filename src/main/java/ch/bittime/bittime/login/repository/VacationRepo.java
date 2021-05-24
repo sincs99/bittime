@@ -15,6 +15,9 @@ import java.util.List;
 @Repository
 public interface VacationRepo extends JpaRepository<Vacation, Integer> {
 
-
+    @Query("SELECT v FROM Vacation v WHERE v.user.name LIKE %?1%"
+    //        + " OR v.user.email LIKE %?1%"
+            + " OR v.user.lastName LIKE %?1%")
+    List<Vacation> findByKeyword(@Param("searchString") String searchString);
 
 }

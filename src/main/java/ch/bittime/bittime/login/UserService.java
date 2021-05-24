@@ -57,6 +57,14 @@ public class UserService {
         return userRepo.save(user);
     }
 
+    public boolean matchesPassword(String pw, User user) {
+        return bCryptPasswordEncoder.matches(pw, user.getPassword());
+    }
+
+    public String encodePassword(String pw) {
+        return bCryptPasswordEncoder.encode(pw);
+    }
+
     public void deleteUser(int id) {
         userRepo.deleteById(id);
     }
