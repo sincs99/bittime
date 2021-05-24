@@ -79,6 +79,7 @@ public class UserService {
         System.out.println(status);
     }
 
+    //todo: edit profile functions
 //    public void changeName(int id) {
 //        Optional<User> u = userRepo.findById(id);
 //        String name = u.get().getName();
@@ -86,6 +87,7 @@ public class UserService {
 //        String newName = variable;
 //        u.get().setName(newName);
 //    }
+
 }
 
 
