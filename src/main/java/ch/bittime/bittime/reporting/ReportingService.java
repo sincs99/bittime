@@ -39,7 +39,7 @@ public class ReportingService {
         outputStream.close();
     }
 
-    // v.1 - not working...
+    // v.1 - was not working...
 
 //    @Autowired
 //    SpringTemplateEngine templateEngine;
@@ -55,6 +55,5 @@ public class ReportingService {
 //
 //        outputStream.close();
 //    }
-
 
 }

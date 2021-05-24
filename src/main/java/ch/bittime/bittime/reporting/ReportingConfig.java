@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ReportingConfig {
 
-    // Bean doen't work, "HTTP Status 500 – Internal Server Error" at login when implemented...
+    // todo: Bean doen't work, "HTTP Status 500 – Internal Server Error" at login when implemented...
 
 //    @Bean
 //    public ClassLoaderTemplateResolver parseThymeleafTemplate() {
@@ -22,16 +22,5 @@ public class ReportingConfig {
 //        templateResolver.setOrder(1);
 //
 //        return templateResolver;
-
-
-    //       v.1 - didn't work...
-
-//        TemplateEngine templateEngine = new TemplateEngine();
-//        templateEngine.setTemplateResolver(templateResolver);
-//        Context context = new Context();
-//        context.setVariable("data", "data");
-//        return templateEngine.process("thymeleaf_template", context);
-
-//    }
 
 }

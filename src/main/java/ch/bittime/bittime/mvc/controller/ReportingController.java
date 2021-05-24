@@ -44,8 +44,9 @@ public class ReportingController {
 
     public String generatePdf(/*Model model */) /*throws IOException, DocumentException */ {
 
-        //reportingService.createPdf();
-        //System.out.println("here's the PDF ");
+//        todo: PDF functionality
+//        reportingService.createPdf();
+//        System.out.println("here's the PDF ");
 //        String htmlText = "Abc";
 //        ReportingService thymeleaf2Pdf = new ReportingService(htmlText);
 //        htmlText = thymeleaf2Pdf.parseThymeleafTemplate();
@@ -71,6 +72,7 @@ public class ReportingController {
 //        String html = thymeleaf2Pdf.parseThymeleafTemplate();
 //        thymeleaf2Pdf.generatePdfFromHtml(html);
         System.out.println("here's the PDF");
+
         /**
          * @author Dominic
          * Code taken from //https://www.baeldung.com/thymeleaf-generate-pdf
