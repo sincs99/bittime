@@ -30,14 +30,14 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 document.getElementById("Year").innerHTML = yyyy;
 
     try {
-        calendar(lLastM, fd, l, monthName, firstDay); //Dominic @ Robin arguments are not used
+        calendar();
     }catch{
 
     }
     fillHiddenInput(dd);
 
 
-function calendar(){ //no args
+function calendar(){
     document.getElementById("cMonthYear").innerHTML = monthName;
     if (fd == "Mon") {
 
@@ -216,7 +216,7 @@ function lastMonth() {
         lLastM = new Date(today.getFullYear() - yearc, today.getMonth()-count, 0).getDate();
         yyyy = today.getFullYear() - yearc;
     }
-     days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
      d = new Date();
      dayName = days[d.getDay()];
 
@@ -230,7 +230,7 @@ function lastMonth() {
      fd = firstDay.toString().substring(0, 3);
      today = dd + '/' + mm + '/' + yyyy;
      try {
-         calendar(lLastM, fd, l, monthName, firstDay);
+         calendar();
      }catch{
 
      }
@@ -279,25 +279,6 @@ function nextMonth() {
         yyyy = today.getFullYear() - yearc;
     }
 
-    days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; // Dominic @ Robin already defined above
-    d = new Date();
-    dayName = days[d.getDay()];
-
-    dd = String(today.getDate()).padStart(2, '0');
-    mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-
-
-    document.getElementById("Year").innerHTML = yyyy;
-
-
-    fd = firstDay.toString().substring(0, 3);
-
-    today = dd + '/' + mm + '/' + yyyy;
-    try {
-        calendar(lLastM, fd, l, monthName, firstDay);
-    }catch{
-
-    }
 
 
 }
@@ -320,16 +301,7 @@ function showDay(id) {
         document.getElementById("currentDay").innerHTML = document.getElementById(id).innerHTML + " / " + "Sunday";
     }
 
-// Dominic @ Robin suggestion:
-//         let currentDay = document.getElementById("currentDay");
-//         let monthDate = document.getElementById(id).innerHTML;
-//         let idNum = Number(id.substr(1));
-//
-//         const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-//
-//         let weekday = weekdays[idNum %7];
-//
-//         currentDay.innerHTML = monthDate + " / " + weekday;
+
     /**
      * @author Dominic
      */
