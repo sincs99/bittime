@@ -1,12 +1,11 @@
 package ch.bittime.bittime.login;
 
 
-import ch.bittime.bittime.login.repository.RoleRepo;
-import ch.bittime.bittime.login.repository.UserRepo;
+import ch.bittime.bittime.login.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,12 +27,18 @@ public class UserService {
     @Autowired
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+    private final VacationRepo vacationRepo;
+    private final SickdayRepo sickdayRepo;
+    private final TimeRecordRepo timeRecordRepo;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepo userRepo, RoleRepo roleRepo, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepo userRepo, RoleRepo roleRepo, VacationRepo vacationRepo, SickdayRepo sickdayRepo, TimeRecordRepo timeRecordRepo, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepo = userRepo;
         this.roleRepo = roleRepo;
+        this.vacationRepo = vacationRepo;
+        this.sickdayRepo = sickdayRepo;
+        this.timeRecordRepo = timeRecordRepo;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -69,9 +74,14 @@ public class UserService {
         return bCryptPasswordEncoder.encode(pw);
     }
 
-    public void deleteUser(int id) {
+
+
+    public void deleteUser( int id) {
+
         userRepo.deleteById(id);
+
     }
+
 
     public void deactivateUser(int id) {
         Optional<User> u = userRepo.findById(id);

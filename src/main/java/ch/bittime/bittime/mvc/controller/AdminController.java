@@ -45,6 +45,7 @@ public class AdminController {
 
         System.out.println("Request ok");
         Optional<User> i = userService.findUserById(id);
+
         System.out.println(i);
         String roles;
 
@@ -61,7 +62,7 @@ public class AdminController {
             System.out.println("ist Admin");
             model.addAttribute("deleteError", "You cannot delete an Admin");
             System.out.println("Admin kann nicht gelöscht werden");
-        }
+       }
 
         /* Dominic @ Pascal test if user has db table entries that are displayed in application...
         -> sonst error bei Report und vacation mgt im Falle von null Einträgen...
