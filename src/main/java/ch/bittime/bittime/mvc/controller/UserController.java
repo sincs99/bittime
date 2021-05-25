@@ -115,6 +115,10 @@ public class UserController {
         return "/user/profileView";
     }
 
+    /**
+     * @author Dominic, Andre
+     */
+
     @PostMapping("/user/profileView")
     public String updateProfileView(Model model, @ModelAttribute User updatedUser, String currentPw, String newPw1, String newPw2) {
 

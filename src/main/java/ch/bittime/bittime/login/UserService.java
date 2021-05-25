@@ -56,11 +56,15 @@ public class UserService {
         user.setRoles(new HashSet<UserRole>(Arrays.asList(userRole)));
         return userRepo.save(user);
     }
-
+    /**
+     * @author Dominic, Andre
+     */
     public boolean matchesPassword(String pw, User user) {
         return bCryptPasswordEncoder.matches(pw, user.getPassword());
     }
-
+    /**
+     * @author Dominic, Andre
+     */
     public String encodePassword(String pw) {
         return bCryptPasswordEncoder.encode(pw);
     }

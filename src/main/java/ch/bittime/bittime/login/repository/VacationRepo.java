@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @author Dominic
+ * @author Dominic, Robin
  */
 @Repository
 public interface VacationRepo extends JpaRepository<Vacation, Integer> {

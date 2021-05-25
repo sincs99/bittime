@@ -36,6 +36,11 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    /**
+     * @author Dominic, Andre
+     * street, city, state
+     */
+
     @Column(name = "street")
     private String street;
 
