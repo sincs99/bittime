@@ -156,6 +156,12 @@ public class AdminController {
 
         System.out.println(listUser);
 
+        /**
+         * @author Robin If statement
+         *
+         */
+
+
         if (searchString != null){
             model.addAttribute("listUser", userService.findByKeyword(searchString));
         }else {
