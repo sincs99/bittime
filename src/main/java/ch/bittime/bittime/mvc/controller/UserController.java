@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Objects;
+
 /**
  * @author Andre, Dominic
  */
@@ -108,7 +110,47 @@ public class UserController {
     public String profileView(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("user", user);
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        return "/user/profileView";
+    }
+
+    @PostMapping("/user/profileView")
+    public String updateProfileView(Model model, @ModelAttribute User updatedUser, String currentPw, String newPw1, String newPw2) {
+
+        User user = assignUser(model);
+
+        if(!userService.matchesPassword(currentPw, user)) {
+            model.addAttribute("errorMsg", "The entered password is incorrect.");
+        } else if(!Objects.equals(newPw1, newPw2)) {
+            model.addAttribute("errorMsg", "New password does not match.");
+        } else if(updatedUser.getName() == null || updatedUser.getName().equals("") ||
+                updatedUser.getLastName() == null || updatedUser.getLastName().equals("") ||
+                //updatedUser.getUserName() == null || updatedUser.getUserName().equals("") ||
+                updatedUser.getEmail() == null || updatedUser.getEmail().equals("")) {
+            model.addAttribute("errorMsg", "Name, last name and email can't be empty.");
+        } else {
+            // Username cannot be changed because it is stored in security context.
+            // Securitz context cannot be updated with new username. Would require logout.
+            //user.setUserName(updatedUser.getUserName());
+            user.setEmail(updatedUser.getEmail());
+            user.setName(updatedUser.getName());
+            user.setLastName(updatedUser.getLastName());
+            user.setStreet(updatedUser.getStreet());
+            user.setCity(updatedUser.getCity());
+            user.setState(updatedUser.getState());
+            if(newPw1 != null && newPw1.length() > 0) {
+                user.setPassword(userService.encodePassword(newPw1));
+            }
+            userRepo.save(user);
+
+            return profileView(model);
+        }
+
+        // Only get here in error cases
+        // Do not delegate to profileView method because we show back changes
+        // to user along with errors
+        model.addAttribute("user", updatedUser);
         return "/user/profileView";
     }
 
