@@ -317,7 +317,9 @@ public class AdminController {
         model.addAttribute("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         return "/admin/profileView";
     }
-
+    /**
+     * @author Dominic, Andre
+     */
     @PostMapping("/profileView")
     public String updateProfileView(Model model, @ModelAttribute User updatedUser, String currentPw, String newPw1, String newPw2) {
 

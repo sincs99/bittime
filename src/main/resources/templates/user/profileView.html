@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta name="author" content="Andre">
+    <meta name="author" content="Andre, Dominic">
     <!-- thanks to: todo https://www.codeply.com/go/hEdsU3Wsty/bootstrap-4-user-profile-template-->
 </head>
 
@@ -38,81 +38,96 @@
             </div>
 
             <div class="row my-2">
-                <div class="col-lg-4 order-lg-1 text-center">
-                    <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-                    <h6 class="mt-2">Upload a different photo</h6>
-                    <label class="custom-file">
-                        <input type="file" id="file" class="custom-file-input">
-                        <span class="custom-file-control">Choose file</span>
-                    </label>
-                </div>
-                <div class="col-lg-8 order-lg-2">
-                    <div class="tab-pane" id="edit">
-                        <form role="form">
+                <form method="post" action="#" th:action="@{/admin/profileView}">
+                    <!--<div class="col-lg-4 order-lg-1 text-center">
+                        <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 
-                            <div class="form-group row">
+                        <h6 class="mt-2">Upload a different photo</h6>
+                        <label class="custom-file">
+                            <input type="file" id="file" class="custom-file-input">
+                            <span class="custom-file-control">Choose file</span>
+                        </label>
+
+                    </div>-->
+                    <div class="col-lg-8 order-lg-2">
+                        <div class="tab-pane" id="edit">
                             <span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy')}"></span>
                             <span>,</span>
                             <span th:text="${#dates.format(#dates.createNow(), 'HH:mm')}"></span>
-                            <p></p>
-                            </div>
+                            <span style="color: red;" th:utext="${errorMsg}"></span>
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">First name</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="" placeholder="First name">
+                                    <input class="form-control" type="text" name="name" th:value="${user.name}"
+                                           placeholder="First name">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="" placeholder="Last name">
+                                    <input class="form-control" type="text" name="lastName" th:value="${user.lastName}"
+                                           placeholder="Last name">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="" placeholder="example@gmail.com">
+                                    <input class="form-control" type="text" name="email" th:value="${user.email}"
+                                           placeholder="example@gmail.com">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Address</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="" placeholder="Street">
+                                    <input class="form-control" type="text" name="street" th:value="${user.street}"
+                                           placeholder="Street">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                 <div class="col-lg-6">
-                                    <input class="form-control" type="text" value="" placeholder="City">
+                                    <input class="form-control" type="text" name="city" th:value="${user.city}"
+                                           placeholder="City">
                                 </div>
                                 <div class="col-lg-3">
-                                    <input class="form-control" type="text" value="" placeholder="State">
+                                    <input class="form-control" type="text" name="state" th:value="${user.state}"
+                                           placeholder="State">
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="" placeholder="Username">
+                                    <input class="form-control" type="text" name="userName" th:value="${user.userName}" placeholder="Username">
+                                </div>
+                            </div> -->
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Current Password</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="password" name="currentPw" value=""
+                                           placeholder="Current Password">
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                                <label class="col-lg-3 col-form-label form-control-label">New password</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="" placeholder="Password">
+                                    <input class="form-control" type="password" name="newPw1" value=""
+                                           placeholder="New Password">
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
+                                <label class="col-lg-3 col-form-label form-control-label">Confirm new password</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="" placeholder="Password">
+                                    <input class="form-control" type="password" name="newPw2" value=""
+                                           placeholder="Confirm new Password">
                                 </div>
                             </div>
 
@@ -121,21 +136,18 @@
                                 <div class="col-lg-9">
                                     <input type="reset" class="btn btn-secondary" value="Cancel">
                                     <button type="submit" class="btn btn-primary">Save changes</button>
-
-<!--                                    todo: profile edit page-->
-<!--                                    <a href="/editProfile">Edit Profile</a>-->
+                                    <!--                                    -->
+                                    <!--                                    <a href="/editProfile">Edit Profile</a>-->
 
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                </form>
+
             </div>
         </div>
     </div>
-
-</div>
-</div>
 
 </div>
 </body>
