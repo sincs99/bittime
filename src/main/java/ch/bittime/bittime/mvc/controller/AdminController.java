@@ -349,7 +349,6 @@ public class AdminController {
                 user.setPassword(userService.encodePassword(newPw1));
             }
             userRepo.save(user);
-
             return profileView(model);
         }
 

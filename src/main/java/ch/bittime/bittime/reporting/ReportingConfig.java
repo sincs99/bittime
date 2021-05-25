@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ReportingConfig {
 
-    // todo: Bean doen't work, "HTTP Status 500 – Internal Server Error" at login when implemented...
+    // todo: Bean doesn't work, "HTTP Status 500 – Internal Server Error" at login when implemented...
 
 //    @Bean
 //    public ClassLoaderTemplateResolver parseThymeleafTemplate() {

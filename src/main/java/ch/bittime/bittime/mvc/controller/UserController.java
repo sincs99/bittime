@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.Objects;
 
 /**
- * @author Andre, Dominic
+ * @author Andre
  */
 @Controller
 public class UserController {
@@ -147,7 +147,6 @@ public class UserController {
                 user.setPassword(userService.encodePassword(newPw1));
             }
             userRepo.save(user);
-
             return profileView(model);
         }
 
