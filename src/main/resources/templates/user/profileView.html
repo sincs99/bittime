@@ -60,7 +60,7 @@
                                 <label class="col-lg-3 col-form-label form-control-label">First name</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" type="text" name="name" th:value="${user.name}"
-                                           placeholder="First name">
+                                           placeholder="First name" required>
                                 </div>
                             </div>
 
@@ -68,15 +68,15 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" type="text" name="lastName" th:value="${user.lastName}"
-                                           placeholder="Last name">
+                                           placeholder="Last name" required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" name="email" th:value="${user.email}"
-                                           placeholder="example@gmail.com">
+                                    <input class="form-control" type="email" name="email" th:value="${user.email}"
+                                           placeholder="example@gmail.com" required>
                                 </div>
                             </div>
 
@@ -110,15 +110,15 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Current Password</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="password" name="currentPw" value=""
-                                           placeholder="Current Password">
+                                    <input class="form-control" type="password" name="currentPw"
+                                           placeholder="Current Password" required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">New password</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="password" name="newPw1" value=""
+                                    <input class="form-control" type="password" name="newPw1"
                                            placeholder="New Password">
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Confirm new password</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="password" name="newPw2" value=""
+                                    <input class="form-control" type="password" name="newPw2"
                                            placeholder="Confirm new Password">
                                 </div>
                             </div>
