@@ -169,9 +169,7 @@ function calendar(){
         }
     }
 }
-var s = lastDay.toString();
 //document.getElementById("currentDay").innerHTML = dayName;
-
 //document.getElementById("cMonthYear").innerHTML = dd + "/" + mm + "/" + yyyy;
 
 
@@ -209,7 +207,7 @@ function lastMonth() {
         l = new Date(today.getFullYear()  - yearc, today.getMonth() - count, 0).getDate();
 
 
-            monthName = monthNames[today.getMonth() - count];
+        monthName = monthNames[today.getMonth() - count];
         firstDay = new Date(today.getFullYear()  - yearc, today.getMonth() -count, 1);
 
         l = new Date(today.getFullYear()  - yearc, today.getMonth() - cc, 0).getDate();
@@ -217,25 +215,9 @@ function lastMonth() {
         yyyy = today.getFullYear() - yearc;
     }
 
-     d = new Date();
-     dayName = days[d.getDay()];
-
-     dd = String(today.getDate()).padStart(2, '0');
-     mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-
-
-
-     document.getElementById("Year").innerHTML = yyyy;
-
-     fd = firstDay.toString().substring(0, 3);
-     today = dd + '/' + mm + '/' + yyyy;
-     try {
-         calendar();
-     }catch{
-
-     }
-
+    rebuildCalendar();
 }
+
 function nextMonth() {
     count--;
     cc = count+1;
@@ -279,8 +261,26 @@ function nextMonth() {
         yyyy = today.getFullYear() - yearc;
     }
 
+    rebuildCalendar();
+}
 
+function rebuildCalendar() {
+    d = new Date();
+    dayName = days[d.getDay()];
 
+    dd = String(today.getDate()).padStart(2, '0');
+    mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+
+    document.getElementById("Year").innerHTML = yyyy;
+
+    fd = firstDay.toString().substring(0, 3);
+
+    today = dd + '/' + mm + '/' + yyyy;
+    try {
+        calendar();
+    } catch{
+
+    }
 }
 
 function showDay(id) {
