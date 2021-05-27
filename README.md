@@ -78,7 +78,7 @@ Users without an DB entry can get deleted without Problems.
 | Pascal Konezciny | WIVZ 2.51 IT-Projekt | pascal.konezciny@students.fhnw.ch
 | André Kaufmann | WIVZ 2.51 IT-Projekt | andre.kaufmann@students.fhnw.ch
 | Dominic Richner	 | WITZ IT-Projekt | dominic.richner@students.fhnw.ch
-| Robin Weis | WIVZ 2.51 IT-Projekt | a robin.weis@students.fhnw.ch
+| Robin Weis | WIVZ 2.51 IT-Projekt | robin.weis@students.fhnw.ch
 
 
 
