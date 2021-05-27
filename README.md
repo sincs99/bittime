@@ -55,7 +55,7 @@ Please Note that we still have a Bug -> Do not delete a User with a Vacation, Si
 Users without an DB entry can get deleted without Problems.
 
 
-##Framework
+## Framework
 ----------------------------------
 
 >> spring-boot-starter-data-jpa
@@ -71,13 +71,16 @@ Users without an DB entry can get deleted without Problems.
 
 ----------------------------------
 
-##Developer
+## Developer
 ----------------------------------
+| Name | Subject | Email
+| ------ | ------ | -------|
+| Pascal Konezciny | WIVZ 2.51 IT-Projekt | pascal.konezciny@students.fhnw.ch
+| André Kaufmann | WIVZ 2.51 IT-Projekt | andre.kaufmann@students.fhnw.ch
+| Dominic Richner	 | WITZ IT-Projekt | dominic.richner@students.fhnw.ch
+| Robin Weis | WIVZ 2.51 IT-Projekt | a robin.weis@students.fhnw.ch
 
-Pascal Konezciny	pascal.konezciny@students.fhnw.ch
-André Kaufmann		andre.kaufmann@students.fhnw.ch
-Dominic Richner		dominic.richner@students.fhnw.ch
-Robin Weis		    robin.weis@students.fhnw.ch
+
 
 ----------------------------------
 
