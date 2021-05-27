@@ -54,7 +54,7 @@ Have fun!
 Please Note that we still have a Bug -> Do not delete a User with a Vacation, Sick or Timerecording entry. 
 Users without an DB entry can get deleted without Problems.
 
-
+----------------------------------
 ## Framework
 ----------------------------------
 
