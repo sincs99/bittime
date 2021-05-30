@@ -50,9 +50,12 @@ PW: user
 
 Have fun!
 
-
 Please Note that we still have a Bug -> Do not delete a User with a Vacation, Sick or Timerecording entry. 
 Users without an DB entry can get deleted without Problems.
+
+The DB itself is running on a VPS hosted by Pascal.
+In the midterm meeting with Lukas we got the permission to do so and it was easier for all team members to work on the project without a locale instance.
+
 
 ----------------------------------
 ## Framework
